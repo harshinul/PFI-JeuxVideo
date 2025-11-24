@@ -32,7 +32,7 @@ public class Movement : MonoBehaviour
 
     void MovementCharacter()
     {
-        Vector3 direction = characControl.transform.forward * move.y + characControl.transform.right * move.x;
+        Vector3 direction = mainCamera.transform.forward * move.y + mainCamera.transform.right * move.x;
 
         if (direction.magnitude > 0)
         {
