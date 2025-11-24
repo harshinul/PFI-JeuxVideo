@@ -72,7 +72,7 @@ public class CamRaycast : MonoBehaviour
         Vector3 dir = player.transform.position - origin;
         RaycastHit hit;
 
-        float radius = 0.5f; // thickness of the ray
+        float radius = 0.5f;
 
         if (Physics.SphereCast(origin, radius, dir, out hit))
         {
