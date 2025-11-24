@@ -4,7 +4,6 @@ using UnityEngine.InputSystem;
 public class Movement : MonoBehaviour
 {
     [SerializeField] float walkSpeed;
-    [SerializeField] GameObject perso;
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask ground;
 
@@ -33,7 +32,7 @@ public class Movement : MonoBehaviour
 
     void MovementCharacter()
     {
-        Vector3 direction = characControl.transform.forward * move.y + characControl.transform.right * move.x;
+        Vector3 direction = mainCamera.transform.forward * move.y + mainCamera.transform.right * move.x;
 
         if (direction.magnitude > 0)
         {
@@ -59,7 +58,7 @@ public class Movement : MonoBehaviour
             if(direction != Vector3.zero)
             {
                 Quaternion lookRotation = Quaternion.LookRotation(direction);
-                perso.transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
+                transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
             }
         }
     }
@@ -78,7 +77,7 @@ public class Movement : MonoBehaviour
             if (direction.sqrMagnitude > 0.001f)
             {
                 Quaternion lookRotation = Quaternion.LookRotation(direction);
-                perso.transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
+                transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
             }
         }
     }
