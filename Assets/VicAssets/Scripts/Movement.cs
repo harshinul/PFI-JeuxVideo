@@ -20,7 +20,14 @@ public class Movement : MonoBehaviour
     void Update()
     {
         MovementCharacter();
-        if(Input.GetMouseButton(1))
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            RotateCharacterToMouse();
+            return;
+        }
+
+        if (Input.GetMouseButton(1))
             RotationCharacter();
     }
 
@@ -50,6 +57,25 @@ public class Movement : MonoBehaviour
             direction.y = 0f;
 
             if(direction != Vector3.zero)
+            {
+                Quaternion lookRotation = Quaternion.LookRotation(direction);
+                perso.transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
+            }
+        }
+    }
+
+    void RotateCharacterToMouse()
+    {
+        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 100f, ground))
+        {
+            Vector3 targetPosition = hit.point;
+
+            Vector3 direction = targetPosition - transform.position;
+            direction.y = 0f;
+
+            if (direction.sqrMagnitude > 0.001f)
             {
                 Quaternion lookRotation = Quaternion.LookRotation(direction);
                 perso.transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
