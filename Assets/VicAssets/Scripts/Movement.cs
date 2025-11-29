@@ -3,14 +3,19 @@ using UnityEngine.InputSystem;
 
 public class Movement : MonoBehaviour
 {
+    // speed
     [SerializeField] float walkSpeed;
-    [SerializeField] GameObject perso;
+    [SerializeField] float rotationSpeed = 10f;
+
+    // camera
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask ground;
 
     CharacterController characControl;
 
+    // input
     Vector2 move = Vector2.zero;
+    public Vector3 direction = Vector3.zero; // public for debug
 
     void Start()
     {
@@ -27,13 +32,14 @@ public class Movement : MonoBehaviour
             return;
         }
 
-        if (Input.GetMouseButton(1))
             RotationCharacter();
+        
+
     }
 
     void MovementCharacter()
     {
-        Vector3 direction = characControl.transform.forward * move.y + characControl.transform.right * move.x;
+        direction = mainCamera.transform.forward * move.y + mainCamera.transform.right * move.x;
 
         if (direction.magnitude > 0)
         {
@@ -47,6 +53,12 @@ public class Movement : MonoBehaviour
 
     void RotationCharacter()
     {
+        if (!Input.GetMouseButton(1))
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation , targetRotation, rotationSpeed* Time.deltaTime);
+            return;
+        }
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
         if(Physics.Raycast(ray, out RaycastHit hit, 10000000f, ground))
@@ -59,7 +71,7 @@ public class Movement : MonoBehaviour
             if(direction != Vector3.zero)
             {
                 Quaternion lookRotation = Quaternion.LookRotation(direction);
-                perso.transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
+                transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
             }
         }
     }
@@ -78,7 +90,7 @@ public class Movement : MonoBehaviour
             if (direction.sqrMagnitude > 0.001f)
             {
                 Quaternion lookRotation = Quaternion.LookRotation(direction);
-                perso.transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
+                transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
             }
         }
     }
