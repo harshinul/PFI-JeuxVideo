@@ -70,21 +70,19 @@ public class CamRaycast : MonoBehaviour
     void CastRay(Vector3 origin)
     {
         Vector3 dir = player.transform.position - origin;
-        RaycastHit hit;
+        float radius = 0.5f;
 
-        float radius = 0.5f; // thickness of the ray
+        RaycastHit[] hits = Physics.SphereCastAll(origin, radius, dir, dir.magnitude);
 
-        if (Physics.SphereCast(origin, radius, dir, out hit))
+        foreach (RaycastHit hit in hits)
         {
             if (hit.collider.gameObject == player)
-                return;
+                continue;
 
             MurTransparent wall = hit.collider.GetComponent<MurTransparent>();
 
             if (wall != null && !wallsHitThisFrame.Contains(wall))
-            {
                 wallsHitThisFrame.Add(wall);
-            }
         }
     }
 }

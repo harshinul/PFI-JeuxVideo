@@ -61,7 +61,7 @@ public class Movement : MonoBehaviour
         }
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if(Physics.Raycast(ray, out RaycastHit hit, 100f, ground))
+        if(Physics.Raycast(ray, out RaycastHit hit, 10000000f, ground))
         {
             Vector3 targetPosition = hit.point;
 
