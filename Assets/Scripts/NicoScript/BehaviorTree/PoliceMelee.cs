@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Patrol : BehaviorTree
+public class PoliceMelee : BehaviorTree
 {
     [SerializeField] Transform[] targets;
     Interrupt interrupt;
@@ -30,7 +30,7 @@ public class Patrol : BehaviorTree
         Sequence patrolSequence = new Sequence(new Node[] { goTo1, wait2, goTo2, wait2, goTo3, wait2, goTo4, wait2 }, null , this);
 
         //*************************************** Root Node *************************************//
-        root = new Selector(new Node[] { patrolSequence, }, null, this);
+        root = new Selector(new Node[] { patrolSequence }, null, this);
     }
 
     private void OnDisable()
