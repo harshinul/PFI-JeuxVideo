@@ -5,35 +5,42 @@ public class Movement : MonoBehaviour
 {
     // speed
     [SerializeField] float walkSpeed;
+    [SerializeField] float runSpeed;
+    public float currentSpeed; //public pour debug
     [SerializeField] float rotationSpeed = 10f;
+    bool wantsToRun = false;
 
     // camera
     [SerializeField] Camera mainCamera;
     [SerializeField] LayerMask ground;
 
+
+    //components
     CharacterController characControl;
+    PlayerAnimationComponent animComp;
 
     // input
     Vector2 move = Vector2.zero;
-    public Vector3 direction = Vector3.zero; // public for debug
+    Vector3 direction = Vector3.zero;
+
+    // state
+    public MovementState movementState = MovementState.Idle;
 
     void Start()
     {
         characControl = GetComponent<CharacterController>();
+        animComp = GetComponent<PlayerAnimationComponent>();
+        currentSpeed = walkSpeed;
+
     }
 
     void Update()
     {
         MovementCharacter();
 
-        if (Input.GetMouseButtonDown(1))
-        {
-            RotateCharacterToMouse();
-            return;
-        }
+        RotationCharacter();
 
-            RotationCharacter();
-        
+        HandleAnimation();
 
     }
 
@@ -48,17 +55,40 @@ public class Movement : MonoBehaviour
         }
 
         if (characControl != null)
-            characControl.Move(direction * walkSpeed * Time.deltaTime);
+        {
+            characControl.Move(direction * currentSpeed * Time.deltaTime);
+
+            // gestion etat de deplacement
+            if (direction.magnitude == 0)// pas de deplacement
+            {
+                movementState = MovementState.Idle;
+            }
+            else
+            {
+                if (wantsToRun)
+                {
+                    movementState = MovementState.Running;
+                }
+                else
+                {
+                    movementState = MovementState.Walking;
+                }
+            }
+        }
     }
 
     void RotationCharacter()
     {
-        if (!Input.GetMouseButton(1))
+        if (!Input.GetMouseButton(1)) // rotation vers la direction de deplacement
         {
+            if (direction == Vector3.zero)
+                return;
             Quaternion targetRotation = Quaternion.LookRotation(direction);
             transform.rotation = Quaternion.Slerp(transform.rotation , targetRotation, rotationSpeed* Time.deltaTime);
             return;
         }
+
+        // rotation vers la souris
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
         if(Physics.Raycast(ray, out RaycastHit hit, 10000000f, ground))
@@ -76,22 +106,22 @@ public class Movement : MonoBehaviour
         }
     }
 
-    void RotateCharacterToMouse()
+    void HandleAnimation()
     {
-        Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
-
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f, ground))
+        switch(movementState)
         {
-            Vector3 targetPosition = hit.point;
-
-            Vector3 direction = targetPosition - transform.position;
-            direction.y = 0f;
-
-            if (direction.sqrMagnitude > 0.001f)
-            {
-                Quaternion lookRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Euler(0f, lookRotation.eulerAngles.y, 0f);
-            }
+            case MovementState.Idle:
+                animComp.StopWalking();
+                animComp.StopRunning();
+                break;
+            case MovementState.Walking:
+                animComp.StartWalking();
+                animComp.StopRunning();
+                break;
+            case MovementState.Running:
+                animComp.StopWalking();
+                animComp.StartRunning();
+                break;
         }
     }
 
@@ -99,4 +129,25 @@ public class Movement : MonoBehaviour
     {
         move = context.ReadValue<Vector2>();
     }
+
+    public void InputRun(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            wantsToRun = true;
+            currentSpeed = runSpeed;
+        }
+        else if (context.canceled)
+        {
+            wantsToRun = false;
+            currentSpeed = walkSpeed;
+        }
+    }
+}
+
+public enum MovementState
+{
+    Idle,
+    Walking,
+    Running
 }
