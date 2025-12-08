@@ -39,6 +39,7 @@ public class Interrupt
                         lastInterruptTime = Time.time;
                         BT.Interupt();
                     }
+                    Debug.Log("Condition fulfilled !");
                     UpdateState();
                     break;
                 }
@@ -54,6 +55,7 @@ public class Interrupt
         for (int i = 0; i < conditions.Length; i++)
         {
             conditionState[i] = conditions[i].Evaluate();
+
         }
     }
 
