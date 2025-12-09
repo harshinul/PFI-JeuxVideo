@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Experimental.GlobalIllumination;
-
 public class HourDisplay : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI hourText;
     [SerializeField] private Light cycleJour;
+    [SerializeField] Color dayLightColor = Color.white;
+    [SerializeField] Color dawnDuskColor = new Color(1f, 0.55f, 0.25f);
 
     private int currentHour;
     private int currentMinutes;
@@ -30,13 +30,19 @@ public class HourDisplay : MonoBehaviour
 
         cycleJour.transform.rotation = Quaternion.Euler(rotation - 90, 170, 0);
 
-        if (totalHours >= 6f && totalHours <= 18f)
+        if (totalHours < 8f)
         {
-            cycleJour.gameObject.SetActive(true);
+            float t = Mathf.InverseLerp(6f, 8f, totalHours);
+            cycleJour.color = Color.Lerp(dawnDuskColor, dayLightColor, t);
+        }
+        else if (totalHours > 16f)
+        {
+            float t = Mathf.InverseLerp(16f, 18f, totalHours);
+            cycleJour.color = Color.Lerp(dayLightColor, dawnDuskColor, t);
         }
         else
         {
-            cycleJour.gameObject.SetActive(false);
+            cycleJour.color = dayLightColor;
         }
     }
 

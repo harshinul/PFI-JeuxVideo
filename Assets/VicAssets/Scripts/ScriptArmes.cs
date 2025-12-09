@@ -5,12 +5,14 @@ using UnityEngine.InputSystem;
 public class ScriptArmes : MonoBehaviour
 {
     public RawImage imageUI;
+    [SerializeField] float zoom = 1.1f;
 
-    int posX = 0;
-    int posY = 0;
+    float posX = -0.02f;
+    float posY = -0.04f;
 
     const int nbreDeColonne = 4;
     const int nbreDeRows = 10;
+    bool doOnce = true;
 
     void Start()
     {
@@ -19,18 +21,26 @@ public class ScriptArmes : MonoBehaviour
 
     void UpdateUV()
     {
+        if (doOnce)
+        {
+            posX = 0;
+            posY = 0;
+            doOnce = false;
+        }
+
         float tileW = 1f / nbreDeColonne;
         float tileH = 1f / nbreDeRows;
 
         float x = posX * tileW;
         float y = 1f - tileH - posY * tileH;
 
-        imageUI.uvRect = new Rect(
-            x,
-            y,
-            tileW,
-            tileH
-        );
+        float w = tileW * zoom;
+        float h = tileH * zoom;
+
+        x -= (w - tileW) * 0.5f;
+        y -= (h - tileH) * 0.5f;
+
+        imageUI.uvRect = new Rect(x, y, tileW, tileH);
     }
 
     public void OnScroll(InputAction.CallbackContext context)
@@ -40,7 +50,7 @@ public class ScriptArmes : MonoBehaviour
         if (!context.performed) 
             return;
 
-        if (scroll.y > 0)
+        if (scroll.y < 0)
         {
             posX++;
             if (posX >= nbreDeColonne)
@@ -49,7 +59,7 @@ public class ScriptArmes : MonoBehaviour
                 posY = (posY + 1) % nbreDeRows;
             }
         }
-        else if (scroll.y < 0)
+        else if (scroll.y > 0)
         {
             posX--;
             if (posX < 0)
