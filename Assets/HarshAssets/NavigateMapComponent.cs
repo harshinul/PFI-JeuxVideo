@@ -3,7 +3,7 @@ using UnityEngine;
 public class NavigateMapComponent : MonoBehaviour
 {
     [SerializeField] Camera mainCamera;
-    [SerializeField] LayerMask locationMask;
+    [SerializeField] LayerMask groundMask;
 
     void Update()
     {
@@ -11,10 +11,12 @@ public class NavigateMapComponent : MonoBehaviour
         {
             Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, locationMask))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
             {
-                hit.collider.GetComponent<cubeTile>()?.SetDestination();
+                //MapManager.Instance.SetDestination(hit.point);
+                MapManager.Instance.test(hit.point);
             }
         }
     }
+
 }

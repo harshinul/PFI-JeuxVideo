@@ -28,7 +28,7 @@ public class GraphMap : MonoBehaviour
     void Start()
     {
         int[,] adjacencyMatrix = CreateMatrix();
-        graph = new(adjacencyMatrix, matrix);
+        //graph = new(adjacencyMatrix, matrix);
 
         ResetColor();
 
@@ -72,8 +72,8 @@ public class GraphMap : MonoBehaviour
 public class GraphHarsh // seulement AStar et list de HexNode pour heuristic
 {
     int[,] matriceAdjacence;
-    List<CubeNode> matrix;
-    public GraphHarsh(int[,] matriceAdjacence, List<CubeNode> matrix)
+    List<LocationNode> matrix;
+    public GraphHarsh(int[,] matriceAdjacence, List<LocationNode> matrix)
     {
         this.matriceAdjacence = matriceAdjacence;
         this.matrix = matrix;
