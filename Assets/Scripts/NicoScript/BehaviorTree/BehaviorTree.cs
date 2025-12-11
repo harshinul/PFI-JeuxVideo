@@ -9,10 +9,13 @@ public abstract class BehaviorTree : MonoBehaviour
 
     protected abstract void InitializeTree();
 
+    public Animator Animator { get; private set; }
+
     void Start()
     {
         InitializeTree();
         EvaluateTree();
+        Animator = GetComponent<Animator>();
     }
 
     void Update()

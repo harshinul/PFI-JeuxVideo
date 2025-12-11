@@ -22,7 +22,7 @@ public class PoliceRanged : BehaviorTree
 
         //************************************* Nodes *************************************//
         GoToPlayer chasePlayer = new GoToPlayer(agent, player.transform, 50f, null, this);
-        ShootingNode rangedAttack = new ShootingNode( player.transform, transform.Find("FirePoint"), 200f, 20f, new Conditions[] {shootingCondition}, this);
+        //ShootingNode rangedAttack = new ShootingNode( player.transform, transform.Find("FirePoint"), 200f, 20f, new Conditions[] {shootingCondition}, this);
 
         //*************************************** Sequences *************************************//
         Sequence rangedSequence = new Sequence(new Node[] {  }, new Conditions[] {  }, this);
