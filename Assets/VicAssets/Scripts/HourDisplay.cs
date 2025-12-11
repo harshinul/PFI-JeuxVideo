@@ -8,6 +8,7 @@ public class HourDisplay : MonoBehaviour
     [SerializeField] private Light cycleJour;
     [SerializeField] Color dayLightColor = Color.white;
     [SerializeField] Color dawnDuskColor = new Color(1f, 0.55f, 0.25f);
+    [SerializeField] private Light flashLight;
 
     private int currentHour;
     private int currentMinutes;
@@ -25,23 +26,29 @@ public class HourDisplay : MonoBehaviour
     {
         hourText.text = $"{currentHour:00}:{currentMinutes:00}";
 
-        float totalHours = currentHour + currentMinutes / 60;
-        float rotation = (totalHours / 24) * 360;
+        float totalHours = currentHour + currentMinutes / 60f;
 
-        cycleJour.transform.rotation = Quaternion.Euler(rotation - 90, 170, 0);
+        cycleJour.transform.rotation = Quaternion.Euler((totalHours / 24) * 360 - 90, 170, 0);
 
-        if (totalHours < 8f)
+        if (totalHours < 8f && totalHours >= 6f)
         {
             float t = Mathf.InverseLerp(6f, 8f, totalHours);
             cycleJour.color = Color.Lerp(dawnDuskColor, dayLightColor, t);
         }
-        else if (totalHours > 16f)
+        else if (totalHours >= 16f && totalHours < 20f)
         {
-            float t = Mathf.InverseLerp(16f, 18f, totalHours);
+            float t = Mathf.InverseLerp(16f, 20f, totalHours);
             cycleJour.color = Color.Lerp(dayLightColor, dawnDuskColor, t);
+        }
+        else if (totalHours >= 20f || totalHours < 6f)
+        {
+            cycleJour.gameObject.SetActive(false);
+            flashLight.gameObject.SetActive(true);
         }
         else
         {
+            flashLight.gameObject.SetActive(false);
+            cycleJour.gameObject.SetActive(true);
             cycleJour.color = dayLightColor;
         }
     }
