@@ -6,9 +6,10 @@ public class HourDisplay : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI hourText;
     [SerializeField] private Light cycleJour;
-    [SerializeField] Color dayLightColor = Color.white;
-    [SerializeField] Color dawnDuskColor = new Color(1f, 0.55f, 0.25f);
     [SerializeField] private Light flashLight;
+
+    Color dayLightColor = new Color(153f / 255f, 153f / 255f, 153f / 255f);
+    Color dawnDuskColor = new Color(0, 0, 0);
 
     private int currentHour;
     private int currentMinutes;
@@ -44,12 +45,16 @@ public class HourDisplay : MonoBehaviour
         {
             cycleJour.gameObject.SetActive(false);
             flashLight.gameObject.SetActive(true);
+            RenderSettings.ambientLight = dawnDuskColor;
+            RenderSettings.ambientIntensity = 0;
         }
         else
         {
             flashLight.gameObject.SetActive(false);
             cycleJour.gameObject.SetActive(true);
             cycleJour.color = dayLightColor;
+            RenderSettings.ambientLight = dayLightColor;
+            RenderSettings.ambientIntensity = 1;
         }
     }
 
