@@ -16,6 +16,7 @@ public class Selector : Node
     public override void ExecuteAction()
     {
         base.ExecuteAction();
+        index = 0;
         children[index].ExecuteAction();
     }
     public override void FinishAction(bool result)

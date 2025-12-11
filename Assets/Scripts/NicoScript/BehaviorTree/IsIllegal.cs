@@ -2,19 +2,16 @@ using UnityEngine;
 
 public class IsIllegal : Conditions
 {
-    PlayerComponent player;
+    GameObject player;
     public IsIllegal(GameObject player, bool reverseCondition = false)
     {
-        this.player = player.GetComponent<PlayerComponent>();
+        this.player = player;
     }
 
     public override bool Evaluate()
     {
-        if (player == null)
-        {
-            Debug.LogWarning("PlayerComponent not found on the player GameObject.");
-            return false;
-        }
-        return player.isWanted;
+        bool playerComponent = player.GetComponent<PlayerComponent>().isWanted;
+
+        return playerComponent;
     }
 }

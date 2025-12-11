@@ -40,7 +40,7 @@ public class Movement : MonoBehaviour
 
         RotationCharacter();
 
-        HandleAnimation();
+        //HandleAnimation();
 
     }
 
@@ -106,24 +106,24 @@ public class Movement : MonoBehaviour
         }
     }
 
-    void HandleAnimation()
-    {
-        switch(movementState)
-        {
-            case MovementState.Idle:
-                animComp.StopWalking();
-                animComp.StopRunning();
-                break;
-            case MovementState.Walking:
-                animComp.StartWalking();
-                animComp.StopRunning();
-                break;
-            case MovementState.Running:
-                animComp.StopWalking();
-                animComp.StartRunning();
-                break;
-        }
-    }
+    //void HandleAnimation()
+    //{
+    //    switch(movementState)
+    //    {
+    //        case MovementState.Idle:
+    //            animComp.StopWalking();
+    //            animComp.StopRunning();
+    //            break;
+    //        case MovementState.Walking:
+    //            animComp.StartWalking();
+    //            animComp.StopRunning();
+    //            break;
+    //        case MovementState.Running:
+    //            animComp.StopWalking();
+    //            animComp.StartRunning();
+    //            break;
+    //    }
+    //}
 
     public void InputMove(InputAction.CallbackContext context)
     {
