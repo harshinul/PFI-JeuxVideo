@@ -15,6 +15,15 @@ public abstract class BehaviorTree : MonoBehaviour
     {
         InitializeTree();
         EvaluateTree();
+    }
+
+    private void Awake()
+    {
+        OnEnable();
+    }
+
+    private void OnEnable()
+    {
         Animator = GetComponent<Animator>();
     }
 

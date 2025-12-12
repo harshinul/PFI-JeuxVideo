@@ -1,38 +1,40 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class HangingAround : BehaviorTree
 {
-    [SerializeField] Transform[] targets;
+    Transform[] targets;
+    GameObject[] POI;
 
     AllInterrupt allInterrupt;
 
+    GameObject npc;
     GameObject player;
 
     protected override void InitializeTree()
     {
+        npc = this.gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
 
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
 
         //************************************* Conditions *************************************//
-        Conditions afraidCondition = new WithinRange(agent.transform, player, 250f);
-        //Conditions isPanicking = new 
-
-
+        Conditions isPanicking = new IsAfraid(npc);
 
         //************************************* Interrupt *************************************//
-        allInterrupt = new AllInterrupt(new Conditions[] {  }, this);
+        allInterrupt = new AllInterrupt(new Conditions[] { isPanicking }, this);
 
         //************************************* Nodes *************************************//
         GoToTargetNPC goToRandom = new GoToTargetNPC(agent, targets, 4f, null, this);
         WaitNPC wait = new WaitNPC(Random.Range(1, 10), null, this);
+        GoToTargetPanic goToPanic = new GoToTargetPanic(agent, targets, player.transform, 4f, null, this);
 
         //*************************************** Sequences *************************************//
         Sequence hangingSequence = new Sequence(new Node[] { goToRandom, wait }, null, this);
-        //Sequence panicSequence = new Sequence(new Node[] {  }, new Conditions[] { legalCondition }, this);
+        Sequence panicSequence = new Sequence(new Node[] { goToPanic }, new Conditions[] { isPanicking }, this);
         //*************************************** Root Node *************************************//
-        root = new Selector(new Node[] { hangingSequence }, null, this);
+        root = new Selector(new Node[] { panicSequence, hangingSequence }, null, this);
     }
 
     private void OnDisable()
@@ -43,6 +45,16 @@ public class HangingAround : BehaviorTree
 
     private void OnEnable()
     {
+        POI = GameObject.FindGameObjectsWithTag("POI");
+        List<Transform> poiList = new List<Transform>();
+
+        foreach (GameObject poi in POI)
+        {
+            poiList.Add(poi.transform);
+        }
+
+        targets = poiList.ToArray();
+
         if (allInterrupt != null)
             allInterrupt.Start();
     }

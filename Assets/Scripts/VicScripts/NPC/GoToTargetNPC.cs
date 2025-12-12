@@ -20,6 +20,7 @@ public class GoToTargetNPC : Node
     {
         targetPos = targets[Random.Range(0, targets.Length)];
         agent.SetDestination(targetPos.position);
+        agent.stoppingDistance = Random.Range(1, 10);
         base.ExecuteAction();
     }
 

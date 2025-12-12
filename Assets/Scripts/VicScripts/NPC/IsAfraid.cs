@@ -2,16 +2,14 @@ using UnityEngine;
 
 public class IsAfraid : Conditions
 {
-    GameObject player;
-    public IsAfraid(GameObject player, bool reverseCondition = false)
+    GameObject npc;
+    public IsAfraid(GameObject npc, bool reverseCondition = false)
     {
-        this.player = player;
+        this.npc = npc;
     }
 
     public override bool Evaluate()
     {
-        bool playerComponent = player.GetComponent<PlayerComponent>().isWanted;
-
-        return playerComponent;
+        return npc.GetComponent<NpcComponent>().isAfraid;
     }
 }
