@@ -103,6 +103,8 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {    
                     "name": "Scroll",
                     "type": "Value",
                     "id": "5b272a14-3bec-4f4e-8920-e014c8f85a74",
@@ -520,23 +522,28 @@
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
-                {
-                    "name": "",
-                    "id": "2c665e19-6a45-43b7-8fea-0df8a99b5841",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Reload",
-                    "id": "89d36a3a-4a69-42d7-b62c-007c5f771648",
-                    "path": "<Mouse>/scroll",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Scroll",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
+{
+  "name": "",
+  "id": "2c665e19-6a45-43b7-8fea-0df8a99b5841",
+  "path": "<Keyboard>/r",
+  "interactions": "",
+  "processors": "",
+  "groups": "",
+  "action": "Reload",
+  "isComposite": false,
+  "isPartOfComposite": false
+},
+{
+  "name": "",
+  "id": "89d36a3a-4a69-42d7-b62c-007c5f771648",
+  "path": "<Mouse>/scroll",
+  "interactions": "",
+  "processors": "",
+  "groups": "",
+  "action": "Scroll",
+  "isComposite": false,
+  "isPartOfComposite": false
+}
             ]
         },
         {
