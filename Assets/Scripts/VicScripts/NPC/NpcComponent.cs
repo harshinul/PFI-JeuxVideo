@@ -9,7 +9,6 @@ public class NpcComponent : MonoBehaviour
     Transform[] targets;
     GameObject[] POI;
 
-    GameObject npc;
     GameObject player;
 
     float distance;
@@ -19,8 +18,6 @@ public class NpcComponent : MonoBehaviour
     private void OnEnable()
     {
         isAfraid = false;
-        npc = this.gameObject;
-        player = GameObject.FindGameObjectWithTag("Player");
         POI = GameObject.FindGameObjectsWithTag("POI");
         List<Transform> poiList = new List<Transform>();
 
@@ -33,14 +30,13 @@ public class NpcComponent : MonoBehaviour
 
         transform.position = targets[Random.Range(0, targets.Length)].transform.position;
     }
+
     public void OnClickAfraid()
     {
-        if (npc != null)
-        {
-            distance = Vector3.Distance(npc.transform.position, player.transform.position);
-        }
+        player = GameObject.FindGameObjectWithTag("Player");
+        distance = Vector3.Distance(transform.position, player.transform.position);
 
-        if (distance <= 250)
+        if (distance <= 100)
         {
             isAfraid = true;
         }

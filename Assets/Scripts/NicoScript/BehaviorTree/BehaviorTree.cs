@@ -9,22 +9,11 @@ public abstract class BehaviorTree : MonoBehaviour
 
     protected abstract void InitializeTree();
 
-    public Animator Animator { get; private set; }
 
-    void Start()
+    void Awake()
     {
         InitializeTree();
         EvaluateTree();
-    }
-
-    private void Awake()
-    {
-        OnEnable();
-    }
-
-    private void OnEnable()
-    {
-        Animator = GetComponent<Animator>();
     }
 
     void Update()

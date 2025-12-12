@@ -4,10 +4,12 @@ public class WaitNPC : Node
 {
     float secondsToWait;
     float timer;
+    Animator animator;
 
-    public WaitNPC(float secondsToWait, Conditions[] condition, BehaviorTree BT) : base(condition, BT)
+    public WaitNPC(float secondsToWait, Animator animator, Conditions[] condition, BehaviorTree BT) : base(condition, BT)
     {
         this.secondsToWait = secondsToWait;
+        this.animator = animator;
     }
 
     public override void ExecuteAction()
@@ -15,14 +17,14 @@ public class WaitNPC : Node
         
         timer = 0;
         base.ExecuteAction();
-        BT.Animator.SetBool("isRelaxing", true);
+        animator.SetBool("isRelaxing", true);
     }
     public override void Tick(float deltaTime)
     {
         timer += deltaTime;
         if (timer >= secondsToWait)
         {
-            BT.Animator.SetBool("isRelaxing", false);
+            animator.SetBool("isRelaxing", false);
             FinishAction(true);
         }
     }

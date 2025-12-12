@@ -11,11 +11,22 @@ public class HangingAround : BehaviorTree
 
     GameObject npc;
     GameObject player;
+    Animator animator;
 
     protected override void InitializeTree()
     {
         npc = this.gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
+
+        POI = GameObject.FindGameObjectsWithTag("POI");
+        List<Transform> poiList = new List<Transform>();
+
+        foreach (GameObject poi in POI)
+        {
+            poiList.Add(poi.transform);
+        }
+
+        targets = poiList.ToArray();
 
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
 
@@ -27,8 +38,8 @@ public class HangingAround : BehaviorTree
 
         //************************************* Nodes *************************************//
         GoToTargetNPC goToRandom = new GoToTargetNPC(agent, targets, 4f, null, this);
-        WaitNPC wait = new WaitNPC(Random.Range(1, 10), null, this);
-        GoToTargetPanic goToPanic = new GoToTargetPanic(agent, targets, player.transform, 4f, null, this);
+        WaitNPC wait = new WaitNPC(Random.Range(1, 10), animator, null, this);
+        GoToTargetPanic goToPanic = new GoToTargetPanic(agent, targets, player.transform, 4f, animator, null, this);
 
         //*************************************** Sequences *************************************//
         Sequence hangingSequence = new Sequence(new Node[] { goToRandom, wait }, null, this);
@@ -36,6 +47,7 @@ public class HangingAround : BehaviorTree
         //*************************************** Root Node *************************************//
         root = new Selector(new Node[] { panicSequence, hangingSequence }, null, this);
     }
+
 
     private void OnDisable()
     {
@@ -45,30 +57,23 @@ public class HangingAround : BehaviorTree
 
     private void OnEnable()
     {
-        POI = GameObject.FindGameObjectsWithTag("POI");
-        List<Transform> poiList = new List<Transform>();
-
-        foreach (GameObject poi in POI)
-        {
-            poiList.Add(poi.transform);
-        }
-
-        targets = poiList.ToArray();
-
+        this.enabled = true;
+        InitializeTree();
+        EvaluateTree();
+        animator = GetComponent<Animator>();
         if (allInterrupt != null)
             allInterrupt.Start();
     }
+    //private void OnDrawGizmos()
+    //{
 
-    private void OnDrawGizmos()
-    {
+    //    Vector3 pos = transform.position;
 
-        Vector3 pos = transform.position;
+    //    // Zone ou ils entendent le fusil
+    //    Gizmos.color = Color.green;
+    //    Gizmos.DrawWireSphere(pos, 250f);
 
-        // Zone ou ils entendent le fusil
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(pos, 250f);
-
-        if (player != null)
-            Gizmos.DrawLine(pos, player.transform.position);
-    }
+    //    if (player != null)
+    //        Gizmos.DrawLine(pos, player.transform.position);
+    //}
 }

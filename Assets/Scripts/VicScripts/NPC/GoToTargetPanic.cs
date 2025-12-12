@@ -9,14 +9,15 @@ public class GoToTargetPanic : Node
     NavMeshAgent agent;
     Transform player;
     float timer;
-
-    public GoToTargetPanic(NavMeshAgent agent, Transform[] targets, Transform player, float stoppingDistance, Conditions[] conditions, BehaviorTree BT)
+    Animator animator;
+    public GoToTargetPanic(NavMeshAgent agent, Transform[] targets, Transform player, float stoppingDistance, Animator animator, Conditions[] conditions, BehaviorTree BT)
         : base(conditions, BT)
     {
         this.agent = agent;
         this.targets = targets;
         this.player = player;
         this.stoppingDistance = stoppingDistance;
+        this.animator = animator;
     }
 
     public override void ExecuteAction()
@@ -26,7 +27,7 @@ public class GoToTargetPanic : Node
         targetPos = FindFarthestTarget();
         agent.speed = agent.speed * 2;
         agent.SetDestination(targetPos.position);
-        BT.Animator.SetBool("isAfraid", true);
+        animator.SetBool("isAfraid", true);
         base.ExecuteAction();
     }
 
@@ -64,7 +65,7 @@ public class GoToTargetPanic : Node
 
     public override void FinishAction(bool result)
     {
-        BT.Animator.SetBool("isAfraid", false);
+        animator.SetBool("isAfraid", false);
         BT.GetComponent<NpcComponent>().isAfraid = false;
         agent.SetDestination(agent.transform.position);
         agent.stoppingDistance = Random.Range(1, 10);
@@ -73,7 +74,7 @@ public class GoToTargetPanic : Node
 
     public override void Interrupt()
     {
-        BT.Animator.SetBool("isAfraid", false);
+        animator.SetBool("isAfraid", false);
         BT.GetComponent<NpcComponent>().isAfraid = false;
         agent.SetDestination(agent.transform.position);
         base.Interrupt();

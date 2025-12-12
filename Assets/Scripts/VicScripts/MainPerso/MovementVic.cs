@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Movement : MonoBehaviour
+public class MovementVic : MonoBehaviour
 {
     // speed
     [SerializeField] float walkSpeed;
