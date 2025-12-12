@@ -1,33 +1,41 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class Sequence : Node
 {
     Node[] children;
-    int index = 0;
-    public Sequence(Node[] Children, Conditions[] condition, BehaviorTree BT) : base(condition, BT)
+    int index;
+    public Sequence(Node[] Children, Conditions[] conditions, BehaviorTree BT) : base(conditions, BT)
     {
         this.children = Children;
-        foreach (Node n in children)
+        foreach (var item in Children)
         {
-            n.SetParent(this);
+            item.SetParent(this);
         }
     }
+
     public override void ExecuteAction()
     {
-        base.ExecuteAction();
-        children[index].ExecuteAction();
+        //base.EvaluateAction();
+        index = 0;
+        if (EvaluateConditions())
+        {
+            children[index].ExecuteAction();
+        }
+        else
+        {
+            FinishAction(false);
+        }
     }
+
+
     public override void FinishAction(bool result)
     {
         if (!result)
         {
-            index = 0;
             base.FinishAction(false);
         }
         else if (index == children.Length - 1)
         {
-            index = 0;
             base.FinishAction(true);
         }
         else

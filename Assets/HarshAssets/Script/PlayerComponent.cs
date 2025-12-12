@@ -20,6 +20,8 @@ public class PlayerComponent : MonoBehaviour
     bool isShooting = false;
     float elapseTime = 0;
 
+    public bool isWanted = false;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -44,6 +46,11 @@ public class PlayerComponent : MonoBehaviour
             elapseTime = 0;
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isWanted = true;
+            Debug.Log("ATTENTION: Player is now WANTED!");
+        }
         //ChangeAnimationForDirection();
     }
     //public void Shoot()

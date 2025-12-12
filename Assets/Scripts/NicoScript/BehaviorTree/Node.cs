@@ -42,7 +42,7 @@ public abstract class Node
         if (!EvaluateConditions())
         {
             FinishAction(false);
-            return;
+           return;
         }
 
         BT.activeNode = this;
@@ -58,7 +58,7 @@ public abstract class Node
         if (parent != null)
             parent.FinishAction(result);
         else
-            BT.EvaluateTree();
+            BT.OnTreeFinished();
     }
 
     virtual public void Interrupt()

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class WithinRange : Conditions
@@ -5,7 +6,6 @@ public class WithinRange : Conditions
     Transform self;
     GameObject target;
     float range;
-
     public WithinRange(Transform self, GameObject target, float range, bool reverseCondition = false)
     {
         this.self = self;
@@ -16,8 +16,10 @@ public class WithinRange : Conditions
 
     public override bool Evaluate()
     {
-        float distance = Vector3.Distance(self.position, target.transform.position);
-        bool inRange = distance <= range;
-        return CheckForReverse(inRange);
+            float distance = Vector3.Distance(self.position, target.transform.position);
+            //Debug.Log("Distance to target: " + distance);
+            bool inRange = distance <= range;
+            return CheckForReverse(inRange);
+        
     }
 }

@@ -98,7 +98,7 @@ public class Movement : MonoBehaviour
         // rotation vers la souris
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if(Physics.Raycast(ray, out RaycastHit hit, 100f, ground))
+        if(Physics.Raycast(ray, out RaycastHit hit, 10000000f, ground))
         {
             Vector3 targetPosition = hit.point;
 
@@ -113,7 +113,7 @@ public class Movement : MonoBehaviour
         }
     }
 
-    void HandlePlayerLogic()// gestion d'animation, de mécanique, de visuel 
+    void HandlePlayerLogic()// gestion d'animation, de mï¿½canique, de visuel 
     {
         switch(movementState)
         {

@@ -1,25 +1,21 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using UnityEditor;
 using UnityEngine;
 
 public class Interrupt
 {
     Conditions[] conditions;
-    BehaviorTree BT;
-    bool[] conditionState;
+    BehaviorTree behaviorTree;
+    bool[] conditionsState;
 
     CancellationTokenSource cts;
 
-    float cooldown;
-    float lastInterruptTime = -10f;
-
-    public Interrupt(Conditions[] conditions, BehaviorTree BT)
+    public Interrupt(Conditions[] conditions, BehaviorTree behaviorTree)
     {
+        this.behaviorTree = behaviorTree;
         this.conditions = conditions;
-        this.BT = BT;
-        conditionState = new bool[conditions.Length];
+        conditionsState = new bool[conditions.Length];
 
         Start();
     }
@@ -28,22 +24,14 @@ public class Interrupt
     {
         while (!token.IsCancellationRequested)
         {
-            for (int index = 0; index < conditions.Length; index++)
+            for (int index = 0; index < conditions.Length; ++index)
             {
-                bool current = conditions[index].Evaluate();
-
-                if (!conditionState[index] && current)
+                if (conditions[index].Evaluate() != conditionsState[index])
                 {
-                    if (Time.time - lastInterruptTime >= cooldown)
-                    {
-                        lastInterruptTime = Time.time;
-                        BT.Interupt();
-                    }
+                    behaviorTree.Interupt();
                     UpdateState();
                     break;
                 }
-
-                conditionState[index] = current;
             }
             await Task.Delay(100);
         }
@@ -51,9 +39,9 @@ public class Interrupt
 
     private void UpdateState()
     {
-        for (int i = 0; i < conditions.Length; i++)
+        for (int index = 0; index < conditions.Length; ++index)
         {
-            conditionState[i] = conditions[i].Evaluate();
+            conditionsState[index] = conditions[index].Evaluate();
         }
     }
 
