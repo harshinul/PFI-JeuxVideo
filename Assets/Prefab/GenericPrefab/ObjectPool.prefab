@@ -46,7 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectsToPool:
   - {fileID: 7014869346392438577, guid: a4ee40c253a4e1146af420450440e39a, type: 3}
-  - {fileID: 919132149155446097, guid: df0af03ca4de49d48912d857104cdfab, type: 3}
+  - {fileID: 6152012165266093810, guid: ec0581e8aa214204b9f01884e77f846c, type: 3}
   - {fileID: 1066657660462757561, guid: 51b0dde5e7f07824f8d5c7b82d74ee86, type: 3}
   - {fileID: 5170853228683479613, guid: 37b58603251a1eb47a595d3a255c1239, type: 3}
   quantityToPool: 05000000140000003200000064000000
