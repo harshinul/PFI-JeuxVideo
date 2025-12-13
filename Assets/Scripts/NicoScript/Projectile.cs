@@ -9,17 +9,28 @@ public class Projectile : MonoBehaviour
 
     [SerializeField] bool addBulletSpread = true;
 
-    private Vector3 BulletSpread = new Vector3(0.1f, 0.1f, 0.1f);
+    public Vector3 BulletSpread = new Vector3(0.01f, 0.01f, 0.1f);
+
+    Vector3 direction;
+
+    TrailRenderer trail;
+
+
 
     void Start()
     {
-        
+
+    }
+
+    private void OnEnable()
+    {
+        direction = GetDirection();
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += GetDirection() * speed * Time.deltaTime;
+        transform.position += direction * speed * Time.deltaTime;
     }
 
     private Vector3 GetDirection()
@@ -37,19 +48,16 @@ public class Projectile : MonoBehaviour
         return direction;
     }
 
-    private IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
+    private void OnTriggerEnter(Collider other)
     {
-        float time = 0;
-        Vector3 startPosition = trail.transform.position;
-
-        while (time < 1)
+        if(other.CompareTag("Player"))
         {
-            trail.transform.position = Vector3.Lerp(startPosition, hit.point, time);
-            time += Time.deltaTime / trail.time;
-            yield return null;
+            var health = other.GetComponent<HealthComponent>();
+            if (health != null)
+            {
+                health.TakeDamage(damage);
+            }
+            gameObject.SetActive(false);
         }
-        trail.transform.position = hit.point;
-
-        Destroy(trail.gameObject, trail.time);
     }
 }

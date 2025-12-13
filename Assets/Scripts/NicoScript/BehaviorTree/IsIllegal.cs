@@ -10,7 +10,7 @@ public class IsIllegal : Conditions
 
     public override bool Evaluate()
     {
-        bool playerComponent = player.GetComponent<PlayerComponent>().isWanted;
+        bool playerComponent = player.GetComponent<Movement>().isWanted;
 
         return playerComponent;
     }

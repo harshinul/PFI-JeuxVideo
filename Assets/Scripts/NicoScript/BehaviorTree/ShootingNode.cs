@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.UI.GridLayoutGroup;
 using UnityEngine.AI;
+using UnityEngine.ProBuilder;
 
 public class ShootingNode : Node
 {
@@ -14,7 +15,8 @@ public class ShootingNode : Node
 
     Transform firePoint;
 
-    private float shootingDelay = 1.5f;
+
+    private float shootingDelay = .5f;
 
     //*******************Not in constructor*****************//
 
@@ -22,7 +24,7 @@ public class ShootingNode : Node
 
 
 
-    public ShootingNode(GameObject bulletPrefab, GameObject owner, Transform target, Transform firePoint, Conditions[] conditions, BehaviorTree BT) : base(conditions, BT)
+    public ShootingNode(GameObject bulletPrefab, GameObject owner, Transform target, Transform firePoint, Conditions[] conditions, BehaviorTree tree) : base(conditions, tree)
     {
         this.bulletPrefab = bulletPrefab;
         this.owner = owner;
@@ -52,24 +54,28 @@ public class ShootingNode : Node
 
     public override void Tick(float deltaTime)
     {
-        Vector3 to = target.position - owner.transform.position;
-        to.y = 0f;
-        if (to.sqrMagnitude > 0.001f)
+        Vector3 RotationToTarget = target.position - owner.transform.position;
+        RotationToTarget.y = 0f;
+        if (RotationToTarget.sqrMagnitude > 0.001f)
         {
-            owner.transform.rotation = Quaternion.Slerp(owner.transform.rotation, Quaternion.LookRotation(to), 10f * deltaTime);
+            owner.transform.rotation = Quaternion.Slerp(owner.transform.rotation, Quaternion.LookRotation(RotationToTarget), 10f * deltaTime);
         }
 
         lastShootTime -= deltaTime;
+
+        Vector3 dirToTarget = (target.position - firePoint.position).normalized;
+        dirToTarget.y += .05f;
 
         if (lastShootTime <= 0f)
         {
             var projectile = ObjectPool.objectPoolInstance.GetPooledObject(bulletPrefab);
             projectile.transform.position = firePoint.position;
-            projectile.transform.rotation = firePoint.rotation;
+            projectile.transform.rotation = Quaternion.LookRotation(dirToTarget);
             projectile.SetActive(true);
 
             lastShootTime = shootingDelay;
             FinishAction(true);
         }
     }
+
 }

@@ -19,7 +19,10 @@ TagManager:
   - 
   - 
   - NotOnMap
-  - OnMap
+  - OnlyMap
+  - Player
+  - Ennemy
+  - 
   - 
   - 
   - 
