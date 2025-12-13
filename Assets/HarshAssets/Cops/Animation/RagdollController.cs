@@ -6,8 +6,11 @@ public class RagdollController : MonoBehaviour
 {
     Rigidbody[] rigidbodies;
     Collider[] colliders;
+    Collider bodyCollider;
     [SerializeField] Rigidbody centerOfBody;
     Animator animator;
+
+    public bool isRagdollActive = false;
 
     void Awake()
     {
@@ -19,9 +22,16 @@ public class RagdollController : MonoBehaviour
         DisableRagdoll();
     }
 
+    private void Update()
+    {
+        if(isRagdollActive)
+        {
+            EnableRagdoll(Vector3.zero);
+        }
+    }
     Collider[] OnlyRagdollColliders()
     {
-        Collider collider = GetComponent<Collider>();
+        bodyCollider = GetComponent<Collider>();
         List<Collider> onlyRagdoll = new List<Collider>();
         bool found = false;
 
@@ -31,7 +41,7 @@ public class RagdollController : MonoBehaviour
             {
                 onlyRagdoll.Add(colliders[i]);
             }
-            else if (colliders[i] != collider)
+            else if (colliders[i] != bodyCollider)
             {
                 onlyRagdoll.Add(colliders[i]);
                 found = true;
@@ -41,44 +51,24 @@ public class RagdollController : MonoBehaviour
         return onlyRagdoll.ToArray();
     }
 
-    public void EnableRagdoll()
+
+    public void EnableRagdoll(Vector3 force)
     {
         animator.enabled = false;
 
-        foreach (var rb in rigidbodies)
-            rb.isKinematic = false;
+        foreach (var rbe in rigidbodies)
+            rbe.isKinematic = false;
 
         foreach (var col in colliders)
             col.enabled = true;
-    }
 
-    public void EnableRagdoll(Vector3 force, Vector3 hitPoint)
-    {
-        EnableRagdoll();
+        int randomIndex = Random.Range(0, 2);
 
-        //Rigidbody rb = GetClosestRigidbody(hitPoint);
+        if (randomIndex == 0)
+            force = Vector3.zero;
         Rigidbody rb = centerOfBody;
         rb.AddForce(force, ForceMode.Impulse);
-    }
-    Rigidbody GetClosestRigidbody(Vector3 hitPoint)
-    {
-        Rigidbody[] rbs = GetComponentsInChildren<Rigidbody>();
-
-        Rigidbody closest = null;
-        float minDistance = Mathf.Infinity;
-
-        foreach (var rb in rbs)
-        {
-            float dist = Vector3.Distance(rb.worldCenterOfMass, hitPoint);
-
-            if (dist < minDistance)
-            {
-                minDistance = dist;
-                closest = rb;
-            }
-        }
-
-        return closest;
+        //bodyCollider.enabled = false;
     }
 
     void DisableRagdoll()

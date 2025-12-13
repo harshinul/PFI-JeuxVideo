@@ -79,7 +79,7 @@ public class BaseballBat : Weapon
         foreach (Collider hit in hits)
         {
             Vector3 direction = (hit.transform.position - transform.position).normalized;
-            hit.gameObject.GetComponent<RagdollController>()?.EnableRagdoll(direction * attackForce, hit.transform.position);
+            hit.gameObject.GetComponent<RagdollController>()?.EnableRagdoll(direction * attackForce);
             Debug.Log("Baseball Bat hit NPC via OverlapSphere");
         }
     }
