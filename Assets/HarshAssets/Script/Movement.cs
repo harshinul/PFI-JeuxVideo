@@ -4,11 +4,11 @@ using UnityEngine.InputSystem;
 public class Movement : MonoBehaviour
 {
     // speed
-    [SerializeField] float walkSpeed;
-    [SerializeField] float runSpeed;
+    [SerializeField] float baseWalkSpeed;
+    float walkSpeed; //public pour changer la vitesse en fontion de l'arme
+    [SerializeField] float baseRunSpeed;
     public float currentSpeed; //public pour debug
     [SerializeField] float rotationSpeed = 10f;
-    bool wantsToRun = false;
 
     // camera
     [SerializeField] Camera mainCamera;
@@ -18,6 +18,11 @@ public class Movement : MonoBehaviour
     //components
     CharacterController characControl;
     PlayerAnimationComponent animComp;
+    PlayerAttackComponent attackComp;
+
+    //bool
+    bool wantsToRun = false;
+    public bool canRun = true;
 
     // input
     Vector2 move = Vector2.zero;
@@ -30,6 +35,8 @@ public class Movement : MonoBehaviour
     {
         characControl = GetComponent<CharacterController>();
         animComp = GetComponent<PlayerAnimationComponent>();
+        attackComp = GetComponent<PlayerAttackComponent>();
+        walkSpeed = baseWalkSpeed;
         currentSpeed = walkSpeed;
 
     }
@@ -40,7 +47,7 @@ public class Movement : MonoBehaviour
 
         RotationCharacter();
 
-        //HandleAnimation();
+        HandlePlayerLogic();
 
     }
 
@@ -91,7 +98,7 @@ public class Movement : MonoBehaviour
         // rotation vers la souris
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
-        if(Physics.Raycast(ray, out RaycastHit hit, 10000000f, ground))
+        if(Physics.Raycast(ray, out RaycastHit hit, 100f, ground))
         {
             Vector3 targetPosition = hit.point;
 
@@ -106,24 +113,40 @@ public class Movement : MonoBehaviour
         }
     }
 
-    //void HandleAnimation()
-    //{
-    //    switch(movementState)
-    //    {
-    //        case MovementState.Idle:
-    //            animComp.StopWalking();
-    //            animComp.StopRunning();
-    //            break;
-    //        case MovementState.Walking:
-    //            animComp.StartWalking();
-    //            animComp.StopRunning();
-    //            break;
-    //        case MovementState.Running:
-    //            animComp.StopWalking();
-    //            animComp.StartRunning();
-    //            break;
-    //    }
-    //}
+    void HandlePlayerLogic()// gestion d'animation, de mécanique, de visuel 
+    {
+        switch(movementState)
+        {
+            case MovementState.Idle:
+                animComp.StopWalking();
+                animComp.StopRunning();
+                attackComp.ShowWeapon();
+                attackComp.canAttack = true;
+                attackComp.canReload = true;
+                break;
+            case MovementState.Walking:
+                animComp.StartWalking();
+                animComp.StopRunning();
+                attackComp.ShowWeapon();
+                attackComp.canAttack = true;
+                attackComp.canReload = true;
+                currentSpeed = walkSpeed;
+                break;
+            case MovementState.Running:
+                animComp.StopWalking();
+                animComp.StartRunning();
+                attackComp.HideWeapon();
+                attackComp.canAttack = false;
+                attackComp.canReload = false;
+                currentSpeed = baseRunSpeed;
+                break;
+        }
+    }
+
+    public void SetWalkSpeed(float? newSpeed)
+    {
+        walkSpeed = newSpeed ?? baseWalkSpeed;
+    }
 
     public void InputMove(InputAction.CallbackContext context)
     {
@@ -132,15 +155,15 @@ public class Movement : MonoBehaviour
 
     public void InputRun(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (!canRun) return;
+        if (context.performed)
         {
             wantsToRun = true;
-            currentSpeed = runSpeed;
+            
         }
         else if (context.canceled)
         {
             wantsToRun = false;
-            currentSpeed = walkSpeed;
         }
     }
 }
