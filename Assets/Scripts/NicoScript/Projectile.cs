@@ -52,13 +52,12 @@ public class Projectile : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
-            //var health = other.GetComponent<HealthComponent>();
-            //if (health != null)
-            //{
-            //    health.TakeDamage(damage);
-            //}
-            //gameObject.SetActive(false);
-            Debug.Log("Player hit by projectile");
+            var health = other.GetComponent<HealthComponent>();
+            if (health != null)
+            {
+                health.TakeDamage(damage);
+            }
+            gameObject.SetActive(false);
         }
     }
 }
