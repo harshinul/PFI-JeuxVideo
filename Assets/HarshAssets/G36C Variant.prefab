@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4303566082908053864}
   - component: {fileID: 4926802672159761332}
   - component: {fileID: 1305740533839665337}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Optic_I (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 9141272908142935538}
   - component: {fileID: 7313998871060354928}
   - component: {fileID: 8833484071853224592}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AR_D_BarrelGuard_Rail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 6723880704545920455}
   - component: {fileID: 2165220632078458139}
   - component: {fileID: 406903539489109096}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AR_D_Receiver_Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -270,7 +270,7 @@ GameObject:
   - component: {fileID: 2776441598022097113}
   - component: {fileID: 8248341107709440808}
   - component: {fileID: 362881328664175142}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AR_D_Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 3729303405712570212}
   - component: {fileID: 3969975820028040920}
   - component: {fileID: 9122858222127733244}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AR_D_BarrelGuard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -442,7 +442,7 @@ GameObject:
   - component: {fileID: 8661273826584304056}
   - component: {fileID: 4529451906095189883}
   - component: {fileID: 6991512613192943175}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Muzzle_Suppressor_D
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -528,7 +528,7 @@ GameObject:
   - component: {fileID: 2093595570358878058}
   - component: {fileID: 4639098828274855336}
   - component: {fileID: 7515049589570527534}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Optic_I
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,7 +615,7 @@ GameObject:
   - component: {fileID: 3690487624083753470}
   - component: {fileID: 450417349179739421}
   - component: {fileID: 7757326172032267029}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AR_D_Stock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -701,7 +701,7 @@ GameObject:
   - component: {fileID: 175781090513899530}
   - component: {fileID: 8635098922545458442}
   - component: {fileID: 1460837087427152190}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AR_D_Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -787,7 +787,7 @@ GameObject:
   - component: {fileID: 5425421497894835867}
   - component: {fileID: 3034617296232968497}
   - component: {fileID: 8956436325727101717}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AR_D_Bolt_Part
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -873,7 +873,7 @@ GameObject:
   - component: {fileID: 6952513500816618057}
   - component: {fileID: 6466706554392715266}
   - component: {fileID: 5804776903528440927}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AR_D_Receiver_Up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -959,7 +959,7 @@ GameObject:
   - component: {fileID: 6244888884306185688}
   - component: {fileID: 7855192146636127892}
   - component: {fileID: 3534909582554988566}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AR_D_Rail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1043,7 +1043,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5908758572345951839}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Firepoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1076,7 +1076,7 @@ GameObject:
   - component: {fileID: 2900284964313694909}
   - component: {fileID: 7876626506289759794}
   - component: {fileID: 2580721542958830359}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AR_D_Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1162,7 +1162,7 @@ GameObject:
   - component: {fileID: 6481339206762639580}
   - component: {fileID: 2107402244972073072}
   - component: {fileID: 6488106610004439664}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: AR_D_Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1249,7 +1249,7 @@ GameObject:
   - component: {fileID: 735835980801613545}
   - component: {fileID: 6304813266705854649}
   - component: {fileID: 716944392051028874}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Optic_I_Lens
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1334,7 +1334,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4499792151177569710}
   - component: {fileID: 282521498590925979}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: G36C Variant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1385,7 +1385,8 @@ MonoBehaviour:
   walkingSpeed: 0
   attackDelay: 0.3
   weaponName: 3
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 6152012165266093810, guid: ec0581e8aa214204b9f01884e77f846c, type: 3}
+  firePoint: {fileID: 5908758572345951839}
   ammoInMagazine: 0
   ammoBank: 72
   magazineSize: 24
@@ -1400,7 +1401,7 @@ GameObject:
   - component: {fileID: 1319334775686434208}
   - component: {fileID: 1988315504958240692}
   - component: {fileID: 1590112980514480784}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Optic_I_Lens
   m_TagString: Untagged
   m_Icon: {fileID: 0}

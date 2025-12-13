@@ -4,6 +4,7 @@ using UnityEngine;
 public class Pistol : Weapon
 {
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] Transform firePoint;
 
     public int ammoInMagazine; //public pour debug
     public int ammoBank = 36; //public pour debug
@@ -37,27 +38,24 @@ public class Pistol : Weapon
 
     IEnumerator ReloadCouroutine()
     {
-        if (ammoBank >= 12)
-        {
-            playerAttackComponent.canReload = false;
-            playerAttackComponent.canAttack = false;
-            yield return new WaitForSeconds(2f);
+        playerAttackComponent.canReload = false;
+        movement.canRun = false;
+        yield return new WaitForSeconds(2f);
 
+        if (ammoBank >= 12) // full reload
+        {
             ammoBank -= magazineSize - ammoInMagazine;
             ammoInMagazine = magazineSize;
 
         }
-        else
+        else // partial reload
         {
-            playerAttackComponent.canReload = false;
-            playerAttackComponent.canAttack = false;
-            yield return new WaitForSeconds(2f);
             ammoInMagazine += ammoBank;
             ammoBank = 0;
         }
 
         playerAttackComponent.canReload = true;
-        playerAttackComponent.canAttack = true;
+        movement.canRun = true;
 
     }
 
@@ -66,6 +64,10 @@ public class Pistol : Weapon
         if (ammoInMagazine <= 0)
             return;
         Debug.Log("Pistol Attack");
+        var projectile = ObjectPool.objectPoolInstance.GetPooledObject(bulletPrefab);
+        projectile.transform.position = firePoint.position;
+        projectile.transform.rotation = firePoint.rotation;
+        projectile.SetActive(true);
         ammoInMagazine--;
 
     }
