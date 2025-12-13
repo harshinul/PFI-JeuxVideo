@@ -14,6 +14,7 @@ public class ShootingNode : Node
 
     Transform firePoint;
 
+
     private float shootingDelay = 1.5f;
 
     //*******************Not in constructor*****************//
@@ -22,7 +23,7 @@ public class ShootingNode : Node
 
 
 
-    public ShootingNode(GameObject bulletPrefab, GameObject owner, Transform target, Transform firePoint, Conditions[] conditions, BehaviorTree BT) : base(conditions, BT)
+    public ShootingNode(GameObject bulletPrefab, GameObject owner, Transform target, Transform firePoint, Conditions[] conditions, BehaviorTree tree) : base(conditions, tree)
     {
         this.bulletPrefab = bulletPrefab;
         this.owner = owner;
@@ -72,4 +73,5 @@ public class ShootingNode : Node
             FinishAction(true);
         }
     }
+
 }

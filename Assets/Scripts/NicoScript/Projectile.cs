@@ -11,15 +11,22 @@ public class Projectile : MonoBehaviour
 
     private Vector3 BulletSpread = new Vector3(0.1f, 0.1f, 0.1f);
 
+    Vector3 direction;
+
+    TrailRenderer trail;
+
+
+
     void Start()
     {
-        
+        direction = GetDirection();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.position += GetDirection() * speed * Time.deltaTime;
+        transform.position += direction * speed * Time.deltaTime;
     }
 
     private Vector3 GetDirection()
