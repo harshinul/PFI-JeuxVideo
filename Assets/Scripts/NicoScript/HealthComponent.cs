@@ -52,7 +52,7 @@ public class HealthComponent : MonoBehaviour
         if (health <= 0)
         {
             isDead = true;
-
+            Debug.Log("Player is Dead!");
         }
         Debug.Log($"Player Health: {health}");
         UpdateHealthUI();

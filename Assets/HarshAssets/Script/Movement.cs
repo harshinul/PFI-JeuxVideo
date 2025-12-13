@@ -23,6 +23,7 @@ public class Movement : MonoBehaviour
     //bool
     bool wantsToRun = false;
     public bool canRun = true;
+    public bool isWanted = false;
 
     // input
     Vector2 move = Vector2.zero;
@@ -49,6 +50,11 @@ public class Movement : MonoBehaviour
 
         HandlePlayerLogic();
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isWanted = true;
+            Debug.Log("ATTENTION: Player is now WANTED!");
+        }
     }
 
     void MovementCharacter()
