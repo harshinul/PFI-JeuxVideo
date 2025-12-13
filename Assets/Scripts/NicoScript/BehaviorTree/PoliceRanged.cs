@@ -9,21 +9,23 @@ public class PoliceRanged : BehaviorTree
 
     GameObject player;
 
-    float angleVision = 60f;
+    float angleVision = 150f;
     protected override void InitializeTree()
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
 
+        LayerMask mask = LayerMask.GetMask("Default");
+
         //************************************* Conditions *************************************//
         Conditions shootingCondition = new WithinRange(agent.transform, player, 300f);
         Conditions rangedConditionInversed = new WithinRange(agent.transform, player, 300f,true);
         Conditions chaseInterruptCondition = new WithinRange(agent.transform, player, 200f);
-        Conditions hasVision = new HasVision(agent.transform, player, angleVision);
+        Conditions hasVision = new HasVision(agent.transform, player, angleVision,mask);
 
         //************************************* Interrupt *************************************//
-        Interrupt interrupt = new Interrupt(new Conditions[] {rangedConditionInversed,chaseInterruptCondition }, this);
+        Interrupt interrupt = new Interrupt(new Conditions[] {rangedConditionInversed,chaseInterruptCondition, hasVision }, this);
 
         //************************************* Nodes *************************************//
         GoToPlayer chasePlayer = new GoToPlayer(agent, player.transform, 10f, null, this);
