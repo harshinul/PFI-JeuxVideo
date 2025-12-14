@@ -6,8 +6,9 @@ public class MeleeAttack : Node
     GameObject attackObject;
     GameObject owner;
     Transform target;
+    CopsAnimationComponent anim;
 
-    private float attackDuration = 1f;
+    private float attackDuration = 0f;
     private float attackTimer = 0f;
     private bool isAttacking = false;
     private float attackRange;
@@ -15,8 +16,9 @@ public class MeleeAttack : Node
 
     public float damage = 10f;
 
-    public MeleeAttack(GameObject owner, GameObject attackObject, Transform target, float attackRange, NavMeshAgent agent, Conditions[] conditions, BehaviorTree BT) : base(conditions, BT)
+    public MeleeAttack(CopsAnimationComponent anim, GameObject owner, GameObject attackObject, Transform target, float attackRange,NavMeshAgent agent, Conditions[] conditions, BehaviorTree BT) : base(conditions, BT)
     {
+        this.anim = anim;
         this.attackObject = attackObject;
         this.owner = owner;
         this.target = target;
@@ -39,7 +41,7 @@ public class MeleeAttack : Node
         }
         base.ExecuteAction();
 
-        attackObject.SetActive(true);
+        //attackObject.SetActive(true);
     }
 
     public override void Tick(float deltaTime)
@@ -58,15 +60,17 @@ public class MeleeAttack : Node
 
         if (attackTimer <= 0f)
         {
+            anim.StartAttacking(); //play attack animation
+
             isAttacking = false;
-            attackObject.SetActive(false);
+            //attackObject.SetActive(false);
             FinishAction(true);
         }
     }
     public override void FinishAction(bool result)
     {
         isAttacking = false;
-        attackObject.SetActive(false);
+        //attackObject.SetActive(false);
 
         agent.isStopped = false;
 

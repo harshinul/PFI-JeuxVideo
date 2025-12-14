@@ -12,11 +12,14 @@ public class PoliceSecurity : BehaviorTree
     GameObject player;
 
     Transform playerTransform;
+
+    CopsAnimationComponent animComp;
     protected override void InitializeTree()
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        animComp = GetComponent<CopsAnimationComponent>();
 
         //************************************* Conditions *************************************//
         Conditions meleeCondition = new WithinRange(agent.transform, player, 15f);
@@ -39,7 +42,7 @@ public class PoliceSecurity : BehaviorTree
         GoToPlayer chasePlayer = new GoToPlayer(agent, player.transform, 15f, new Conditions[] { chaseCondition }, this);
         Wait wait = new Wait(1, null, this);
 
-        MeleeAttack meleeAttack = new MeleeAttack(this.gameObject, meleeObject, player.transform, 15f, agent, new Conditions[] { meleeCondition }, this);
+        MeleeAttack meleeAttack = new MeleeAttack(animComp, this.gameObject, meleeObject, player.transform, 15f, agent, new Conditions[] { meleeCondition }, this);
 
         //*************************************** Sequences *************************************//
         Sequence patrolSequence = new Sequence(new Node[] { goTo1, wait, goTo2, wait, goTo3, wait, goTo4, wait },null, this);

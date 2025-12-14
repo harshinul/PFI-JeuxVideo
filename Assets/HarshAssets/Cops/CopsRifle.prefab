@@ -318,6 +318,15 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1254403252897968, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7349725918776417208}
+    - targetCorrespondingSourceObject: {fileID: 1254403252897968, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4576419274190448587}
+    - targetCorrespondingSourceObject: {fileID: 1254403252897968, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7373102273179977884}
+    - targetCorrespondingSourceObject: {fileID: 1254403252897968, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -4459017483250166651}
     - targetCorrespondingSourceObject: {fileID: 1615034882017306, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3244683804869922584}
@@ -898,6 +907,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centerOfBody: {fileID: 7349725918776417208}
+  isRagdollActive: 0
 --- !u!54 &7349725918776417208
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -925,6 +935,51 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &4576419274190448587
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563778733789750478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f5477f6ef37dcd4285da35b1473edac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletPrefab: {fileID: 1066657660462757561, guid: 51b0dde5e7f07824f8d5c7b82d74ee86, type: 3}
+  firePoint: {fileID: 7813722375366318867}
+--- !u!114 &7373102273179977884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563778733789750478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dfd93849a43e314ab8c3111272b4cdd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedToWalk: 3
+--- !u!114 &-4459017483250166651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1563778733789750478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ea968afbc62f134dbe417cd79f4a99b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canDropCollectables: 1
+  startHealth: 50
+  collectableMoneyPrefab: {fileID: 3180745797301891250, guid: 2d8acea726e3517418c27829f081c892, type: 3}
+  collectableAmmoPrefab: {fileID: 6370764775388150225, guid: ea99e1f78d567fd43a874e5fceb5fcc2, type: 3}
+  chanceToDropMoney: 80
+  chanceToDropAmmo: 10
 --- !u!1 &1563820380231188246 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1146787047953256, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}
@@ -1741,5 +1796,10 @@ PrefabInstance:
 --- !u!4 &3141649018375342622 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 236092342690922239, guid: 3739e009c85974247b8e1965a6002140, type: 3}
+  m_PrefabInstance: {fileID: 2945254783801341153}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7813722375366318867 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4949542332010901490, guid: 3739e009c85974247b8e1965a6002140, type: 3}
   m_PrefabInstance: {fileID: 2945254783801341153}
   m_PrefabAsset: {fileID: 0}
