@@ -28,13 +28,10 @@ public class PoliceRanged : BehaviorTree
         Interrupt interrupt = new Interrupt(new Conditions[] {rangedConditionInversed,chaseInterruptCondition, hasVision }, this);
 
         //************************************* Nodes *************************************//
-<<<<<<< HEAD
-        GoToPlayer chasePlayer = new GoToPlayer(agent, player.transform, 50f, null, this);
+        //GoToPlayer chasePlayer = new GoToPlayer(agent, player.transform, 50f, null, this);
         //ShootingNode rangedAttack = new ShootingNode( player.transform, transform.Find("FirePoint"), 200f, 20f, new Conditions[] {shootingCondition}, this);
-=======
         GoToPlayer chasePlayer = new GoToPlayer(agent, player.transform, 10f, null, this);
         ShootingNode rangedAttack = new ShootingNode(bulletPrefab,this.gameObject, player.transform,firePoint, new Conditions[] {shootingCondition,hasVision}, this);
->>>>>>> origin/BrancheNico
 
         //*************************************** Sequences *************************************//
         //*************************************** Root Node *************************************//
