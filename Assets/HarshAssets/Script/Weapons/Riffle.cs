@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Riffle : Weapon
@@ -6,13 +7,14 @@ public class Riffle : Weapon
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firePoint;
 
-    public int ammoInMagazine; //public pour debug
+    int ammoInMagazine; 
     public int ammoBank = 72; //public pour debug
     public int magazineSize = 24; //public pour debug
     public Riffle()
     {
         weaponName = WeaponName.Riffle;
         attackParameterName = "isRiffleShooting";
+        ammoInMagazine = magazineSize;
     }
 
     void Start()
@@ -24,6 +26,8 @@ public class Riffle : Weapon
     {
         base.Equip();
         playerAnimationComponent.EquipRiffle();
+        playerAttackComponent.ammoDisplay.enabled = true;
+        playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
     }
 
     public override void Reload()
@@ -37,6 +41,7 @@ public class Riffle : Weapon
     IEnumerator ReloadCouroutine()
     {
         playerAttackComponent.canReload = false; // Lock player actions
+        movement.canRun = false;
         yield return new WaitForSeconds(2f);
 
         if (ammoBank >= 12) // full reload
@@ -51,7 +56,9 @@ public class Riffle : Weapon
             ammoBank = 0;
         }
 
+        playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
         playerAttackComponent.canReload = true; // Unlock player actions
+        movement.canRun = true;
 
     }
 
@@ -65,6 +72,6 @@ public class Riffle : Weapon
         projectile.transform.rotation = firePoint.rotation;
         projectile.SetActive(true);
         ammoInMagazine--;
-
+        playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
     }
 }

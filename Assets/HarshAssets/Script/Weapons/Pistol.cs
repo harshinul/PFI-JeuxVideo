@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Pistol : Weapon
@@ -6,7 +7,8 @@ public class Pistol : Weapon
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firePoint;
 
-    public int ammoInMagazine; //public pour debug
+
+    int ammoInMagazine; 
     public int ammoBank = 36; //public pour debug
     public int magazineSize = 12; //public pour debug
 
@@ -26,6 +28,8 @@ public class Pistol : Weapon
     {
         base.Equip();
         playerAnimationComponent.EquipPistol();
+        playerAttackComponent.ammoDisplay.enabled = true;
+        playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
     }
 
     public override void Reload()
@@ -54,6 +58,7 @@ public class Pistol : Weapon
             ammoBank = 0;
         }
 
+        playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
         playerAttackComponent.canReload = true;
         movement.canRun = true;
 
@@ -69,6 +74,7 @@ public class Pistol : Weapon
         projectile.transform.rotation = firePoint.rotation;
         projectile.SetActive(true);
         ammoInMagazine--;
+        playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
 
     }
 

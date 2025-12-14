@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using NUnit.Framework;
+using TMPro;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
@@ -36,6 +37,7 @@ public class BaseballBat : Weapon
     {
         base.Equip();
         playerAnimationComponent.EquipBaseballBat();
+        playerAttackComponent.ammoDisplay.enabled = false;
     }
 
     public override void Reload()
@@ -48,7 +50,7 @@ public class BaseballBat : Weapon
         playerAttackComponent.canAttack = false;
         playerAttackComponent.canSwitchWeapon = false;
         movement.canRun = false;
-        StartCoroutine(StopAttackAfterDelay(2.2f));
+        StartCoroutine(StopAttackAfterDelay(attackDuration));
     }
     IEnumerator StopAttackAfterDelay(float delay)
     {
