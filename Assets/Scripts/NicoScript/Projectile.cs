@@ -76,12 +76,9 @@ public class Projectile : MonoBehaviour
             var health = other.GetComponent<NPCHealthComponent>();
             if (health != null)
             {
-<<<<<<< HEAD
                 health.TakeDamage(damage, Vector3.zero);
-=======
-                health.TakeDamage(damage);
                 
->>>>>>> parent of be1f36d (Change security mall tree et loop mort et menu)
+                
             }
             gameObject.SetActive(false);
         }
