@@ -1,17 +1,13 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-public class MoneyInteractable : MonoBehaviour
+public class AmmoInteractable : MonoBehaviour
 {
-
-    [SerializeField] GameObject moneyPrefab;
+    [SerializeField] GameObject ammoPrefab;
 
     float time = 0;
     float height;
     float lastHeight = 0;
     float initialHeight;
-
-    int randomMoneyAmount;
     void Start()
     {
         initialHeight = transform.position.y + 4f;
@@ -19,7 +15,6 @@ public class MoneyInteractable : MonoBehaviour
 
     private void OnEnable()
     {
-        randomMoneyAmount = Random.Range(20, 101);
     }
     void Update()
     {
@@ -35,7 +30,7 @@ public class MoneyInteractable : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Picked up money: " + randomMoneyAmount);
+            Debug.Log("Ammo picked up! ");
         }
     }
 }
