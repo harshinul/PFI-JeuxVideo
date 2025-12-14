@@ -47,6 +47,9 @@ public class ObjectPool : MonoBehaviour
                 if (obj.CompareTag("NPC"))
                     obj.SetActive(true);
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of be1f36d (Change security mall tree et loop mort et menu)
+=======
 >>>>>>> parent of be1f36d (Change security mall tree et loop mort et menu)
 =======
 >>>>>>> parent of be1f36d (Change security mall tree et loop mort et menu)

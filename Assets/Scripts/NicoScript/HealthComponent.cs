@@ -53,7 +53,10 @@ public class HealthComponent : MonoBehaviour
         {
             isDead = true;
             Debug.Log("Player is Dead!");
+<<<<<<< HEAD
             HighScoreScript.Instance.SetHighScore(MoneyScript.Instance.moneyAmount);
+=======
+>>>>>>> parent of be1f36d (Change security mall tree et loop mort et menu)
         }
         Debug.Log($"Player Health: {health}");
         UpdateHealthUI();
