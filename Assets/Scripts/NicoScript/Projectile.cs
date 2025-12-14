@@ -65,20 +65,20 @@ public class Projectile : MonoBehaviour
             }
             gameObject.SetActive(false);
         }
+
         if(other.CompareTag("Environment"))
         {
             gameObject.SetActive(false);
         }
-        if(other.CompareTag("Enemy"))
+
+        if (other.CompareTag("NPC"))
         {
-            var health = other.GetComponent<EnnemyHealth>();
+            var health = other.GetComponent<NPCHealthComponent>();
             if (health != null)
             {
-                health.TakeDamage(damage);
-                
+                health.TakeDamage(damage, Vector3.zero);
             }
-
+            gameObject.SetActive(false);
         }
     }
-
 }
