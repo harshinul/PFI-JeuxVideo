@@ -7,8 +7,11 @@ TagManager:
   - CashRegister
   - NPC
   - POI
+<<<<<<< HEAD
   - Environment
   - CenterOfBodyPlayer
+=======
+>>>>>>> parent of be1f36d (Change security mall tree et loop mort et menu)
   layers:
   - Default
   - TransparentFX
@@ -24,6 +27,9 @@ TagManager:
   - OnlyMap
   - Player
   - Ennemy
+  - 
+  - 
+  - 
   - 
   - 
   - 
