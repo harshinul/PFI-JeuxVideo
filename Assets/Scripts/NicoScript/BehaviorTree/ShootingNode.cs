@@ -2,6 +2,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEngine.UI.GridLayoutGroup;
 using UnityEngine.AI;
+using UnityEngine.ProBuilder;
 
 public class ShootingNode : Node
 {
@@ -13,47 +14,36 @@ public class ShootingNode : Node
     Transform target;
 
     Transform firePoint;
-    
-    private float shootingDelay = 0.5f;
 
-    private ParticleSystem shootingParticle;
 
-    private TrailRenderer bulletTrail;
+    private float shootingDelay = .5f;
 
     //*******************Not in constructor*****************//
-    private bool addBulletSpread = false;
 
-    private Vector3 BulletSpread  = new Vector3(0.1f,0.1f,0.1f);
-
-    private float lastShootTime;
+    private float lastShootTime = 0f;
 
 
 
-    public ShootingNode(GameObject bulletPrefab,GameObject owner, Transform target, Transform firePoint, ParticleSystem shootingParticle, TrailRenderer bulletTrail, Conditions[] conditions, BehaviorTree BT) : base(conditions, BT)
+    public ShootingNode(GameObject bulletPrefab, GameObject owner, Transform target, Transform firePoint, Conditions[] conditions, BehaviorTree tree) : base(conditions, tree)
     {
         this.bulletPrefab = bulletPrefab;
         this.owner = owner;
         this.target = target;
         this.firePoint = firePoint;
-        this.shootingParticle = shootingParticle;
-        this.bulletTrail = bulletTrail;
     }
 
     public override void ExecuteAction()
     {
-        if (Time.deltaTime > shootingDelay)
+        if (Time.time < lastShootTime)
         {
             FinishAction(false);
             return;
         }
 
-        lastShootTime = Time.time + shootingDelay;
-
         base.ExecuteAction();
 
-        var projectile = ObjectPool.objectPoolInstance.GetPooledObject(bulletPrefab);
-
         var agent = owner.GetComponent<NavMeshAgent>();
+
         if (agent)
         {
             agent.isStopped = true;
@@ -61,4 +51,31 @@ public class ShootingNode : Node
         }
 
     }
+
+    public override void Tick(float deltaTime)
+    {
+        Vector3 RotationToTarget = target.position - owner.transform.position;
+        RotationToTarget.y = 0f;
+        if (RotationToTarget.sqrMagnitude > 0.001f)
+        {
+            owner.transform.rotation = Quaternion.Slerp(owner.transform.rotation, Quaternion.LookRotation(RotationToTarget), 10f * deltaTime);
+        }
+
+        lastShootTime -= deltaTime;
+
+        Vector3 dirToTarget = (target.position - firePoint.position).normalized;
+        dirToTarget.y += .05f;
+
+        if (lastShootTime <= 0f)
+        {
+            var projectile = ObjectPool.objectPoolInstance.GetPooledObject(bulletPrefab);
+            projectile.transform.position = firePoint.position;
+            projectile.transform.rotation = Quaternion.LookRotation(dirToTarget);
+            projectile.SetActive(true);
+
+            lastShootTime = shootingDelay;
+            FinishAction(true);
+        }
+    }
+
 }

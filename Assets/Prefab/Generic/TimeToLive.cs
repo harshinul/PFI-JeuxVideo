@@ -2,7 +2,8 @@ using UnityEngine;
 
 public class TimeToLive : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField] float timeToLive = 5f;
+    public float timer = 0f;
     void Start()
     {
         
@@ -11,6 +12,12 @@ public class TimeToLive : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timer += Time.deltaTime;
+        if (timer >= timeToLive)
+        {
+            gameObject.SetActive(false);
+            timer = 0f;
+        }
+
     }
 }
