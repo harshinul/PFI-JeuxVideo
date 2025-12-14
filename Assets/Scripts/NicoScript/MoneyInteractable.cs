@@ -35,7 +35,8 @@ public class MoneyInteractable : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Picked up money: " + randomMoneyAmount);
+            MoneyScript.Instance.AddMoney(randomMoneyAmount);
+            gameObject.SetActive(false);
         }
     }
 }

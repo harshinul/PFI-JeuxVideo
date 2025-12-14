@@ -13,7 +13,7 @@ public class SceneLoader : MonoBehaviour
     }
     public void LoadMainScene()
     {
-        SceneManager.LoadScene("NewMap");
+        SceneManager.LoadScene("MapTestNico");
     }
 
     public void LoadCredits()

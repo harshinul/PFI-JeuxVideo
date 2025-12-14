@@ -4,8 +4,18 @@ using UnityEngine.UI;
 
 public class HighScoreScript : MonoBehaviour
 {
-    PlayerPrefs highScore;
+
+    public static HighScoreScript Instance;
+
+    private const string highScoreKey = "HighScore";
     [SerializeField] TextMeshProUGUI highScoreText;
+
+    private void Awake()
+    {
+        Instance = this;
+
+        DontDestroyOnLoad(gameObject);
+    }
 
     void Start()
     {
@@ -20,16 +30,24 @@ public class HighScoreScript : MonoBehaviour
 
     public void ShowHighScore()
     {
-        int score = PlayerPrefs.GetInt("HighScore", 0);
+        int score = PlayerPrefs.GetInt(highScoreKey, 0);
         highScoreText.text = "High Score: " + score;
     }
 
-    public void SetHighScore(int score)
+    public void SetHighScore(int newScore)
     {
-        if (score > PlayerPrefs.GetInt("HighScore", 0))
+        int currentHighScore = PlayerPrefs.GetInt(highScoreKey, 0);
+        if (newScore > currentHighScore)
         {
-            PlayerPrefs.SetInt("HighScore", score);
+            PlayerPrefs.SetInt(highScoreKey, newScore);
             PlayerPrefs.Save();
         }
+    }
+    public void ResetHighScore()
+    {
+        PlayerPrefs.DeleteKey(highScoreKey);
+        PlayerPrefs.Save();
+        Debug.Log(highScoreKey);
+        ShowHighScore();
     }
 }

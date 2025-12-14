@@ -3,8 +3,15 @@ using UnityEngine;
 
 public class MoneyScript : MonoBehaviour
 {
+    public static MoneyScript Instance;
+
     [SerializeField] TextMeshProUGUI moneyText;
-    private int moneyAmount = 0;
+    public int moneyAmount { get; private set; } = 0;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
     void Start()
     {
         moneyText.text = "$" + moneyAmount.ToString("D9");
@@ -19,6 +26,11 @@ public class MoneyScript : MonoBehaviour
     public void AddMoney(int amount)
     {
         moneyAmount += amount;
+        UpdateUI();
+    }
+
+    public void UpdateUI()
+    {
         moneyText.text = "$" + moneyAmount.ToString("D9");
     }
 }
