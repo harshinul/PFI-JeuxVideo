@@ -19,14 +19,14 @@ public class RangedAttackBurst : Node
     //*******************Not in constructor*****************//
     private float timeBetweenShots = 0.1f;
 
-    private float burstCooldown = 0.8f;
+    private float burstCooldown = 2.4f;
 
     private int bulletsLeftInBurst;
-    private float shotTimer;
-    private float burstCooldownTimer;
+    private float shotTimer = 0f;
+    private float burstCooldownTimer = 0f;
     private bool isBursting;
 
-    public RangedAttackBurst(GameObject bulletPrefab, GameObject owner, Transform target, Transform firePoint,int bulletPerBurst, Conditions[] conditions, BehaviorTree tree) : base(conditions, tree)
+    public RangedAttackBurst(GameObject bulletPrefab, GameObject owner, Transform target, Transform firePoint, int bulletPerBurst, Conditions[] conditions, BehaviorTree tree) : base(conditions, tree)
     {
         this.bulletPrefab = bulletPrefab;
         this.owner = owner;
@@ -37,17 +37,17 @@ public class RangedAttackBurst : Node
 
     public override void ExecuteAction()
     {
-        if (burstCooldownTimer > 0f)
+        if (Time.time < burstCooldownTimer)
         {
             FinishAction(false);
             return;
         }
 
-        base.ExecuteAction();
-
         bulletsLeftInBurst = bulletsPerBurst;
         shotTimer = 0f;
         isBursting = true;
+
+        base.ExecuteAction();
 
         var agent = owner.GetComponent<NavMeshAgent>();
         if (agent)
@@ -65,31 +65,26 @@ public class RangedAttackBurst : Node
 
         if (rotationToTarget.sqrMagnitude > 0.001f)
         {
-            owner.transform.rotation = Quaternion.Slerp(
-                owner.transform.rotation,
-                Quaternion.LookRotation(rotationToTarget),
-                10f * deltaTime
-            );
+            owner.transform.rotation = Quaternion.Slerp(owner.transform.rotation, Quaternion.LookRotation(rotationToTarget), 10f * deltaTime);
         }
-        if (!isBursting)
-        {
-            burstCooldownTimer -= deltaTime;
-            return;
-        }
+
+        burstCooldownTimer -= deltaTime;
 
         shotTimer -= deltaTime;
-
-        if (shotTimer <= 0f && bulletsLeftInBurst > 0)
+        if (burstCooldownTimer <= 0f)
         {
-            FireProjectile();
-            bulletsLeftInBurst--;
-            shotTimer = timeBetweenShots;
-        }
-        if (bulletsLeftInBurst <= 0)
-        {
-            isBursting = false;
-            burstCooldownTimer = burstCooldown;
-            FinishAction(true);
+            if (shotTimer <= 0f && bulletsLeftInBurst > 0)
+            {
+                FireProjectile();
+                bulletsLeftInBurst--;
+                shotTimer = timeBetweenShots;
+            }
+            if (bulletsLeftInBurst <= 0)
+            {
+                isBursting = false;
+                burstCooldownTimer = burstCooldown;
+                FinishAction(true);
+            }
         }
     }
 

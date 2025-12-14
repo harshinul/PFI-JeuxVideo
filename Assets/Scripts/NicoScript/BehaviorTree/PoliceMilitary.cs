@@ -29,7 +29,7 @@ public class PoliceMilitary : BehaviorTree
 
         //************************************* Nodes *************************************//
         GoToPlayer chasePlayer = new GoToPlayer(agent, player.transform, 10f, null, this);
-        ShootingNode rangedAttack = new ShootingNode(bulletPrefab, this.gameObject, player.transform, firePoint, new Conditions[] { shootingCondition, hasVision }, this);
+        RangedAttackBurst rangedAttack = new RangedAttackBurst(bulletPrefab, this.gameObject, player.transform, firePoint, 3, new Conditions[] { shootingCondition, hasVision }, this);
 
         //*************************************** Sequences *************************************//
         //*************************************** Root Node *************************************//
