@@ -106,7 +106,7 @@ public class Movement : MonoBehaviour
 
     void RotationCharacter()
     {
-        if (!Input.GetMouseButton(1)) // rotation vers la direction de deplacement
+        if (!Input.GetMouseButton(1) || movementState == MovementState.Running) // rotation vers la direction de deplacement
         {
             if (direction == Vector3.zero)
                 return;
