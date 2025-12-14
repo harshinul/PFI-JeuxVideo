@@ -7,7 +7,7 @@ public class MoneyScript : MonoBehaviour
     private int moneyAmount = 0;
     void Start()
     {
-        moneyText.text = "Money: " + moneyAmount;
+        moneyText.text = "$" + moneyAmount.ToString("D9");
     }
 
     // Update is called once per frame
@@ -19,6 +19,6 @@ public class MoneyScript : MonoBehaviour
     public void AddMoney(int amount)
     {
         moneyAmount += amount;
-        moneyText.text = "Money: " + moneyAmount;
+        moneyText.text = "$" + moneyAmount.ToString("D9");
     }
 }
