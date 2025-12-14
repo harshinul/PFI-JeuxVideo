@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,6 +7,9 @@ public class PlayerAttackComponent : MonoBehaviour
 {
     //GameObject Weapon Models
     [SerializeField] List<Weapon> weapons;
+
+    //UI
+    public TextMeshProUGUI ammoDisplay;
 
     // Current Weapon
     public int currentWeaponIndex = 0; //public pour debug
@@ -23,6 +27,7 @@ public class PlayerAttackComponent : MonoBehaviour
     public bool wantsToAttack;
     public bool canSwitchWeapon;
     public bool canReload;
+    public bool isReloading;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -40,7 +45,10 @@ public class PlayerAttackComponent : MonoBehaviour
         attackDelay = 0.5f;
         currentWeaponIndex = 0;
         canAttack = true;
+        canReload = true;
         canSwitchWeapon = true;
+        isReloading = false;
+        ammoDisplay.enabled = false;
         FirstWeaponsAction();
     }
 
@@ -53,7 +61,7 @@ public class PlayerAttackComponent : MonoBehaviour
     void Attack()
     {
         elapsedTime += Time.deltaTime;
-        if (wantsToAttack && canAttack && elapsedTime > attackDelay && currentWeapon != null)
+        if (currentWeapon != null && movement.movementState != MovementState.Running && wantsToAttack && canAttack && !isReloading && elapsedTime > attackDelay)
         {
             elapsedTime = 0f;
             currentWeapon.Attack();
@@ -78,6 +86,7 @@ public class PlayerAttackComponent : MonoBehaviour
         if (currentWeaponIndex == weaponList.Count - 1)
         {
             currentWeaponIndex = 0; // Reset to no weapon
+            ammoDisplay.enabled = false;
             movement.SetWalkSpeed(null);
             playerAnimationComponent.EquipNone();
         }

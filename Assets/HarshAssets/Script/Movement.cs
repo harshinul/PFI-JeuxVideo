@@ -1,3 +1,4 @@
+using Unity.Android.Gradle.Manifest;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,10 @@ public class Movement : MonoBehaviour
     [SerializeField] float baseRunSpeed;
     public float currentSpeed; //public pour debug
     [SerializeField] float rotationSpeed = 10f;
+
+    // gravity
+    [SerializeField] float gravity = -9.81f;
+    Vector3 velocity;
 
     // camera
     [SerializeField] Camera mainCamera;
@@ -69,7 +74,16 @@ public class Movement : MonoBehaviour
 
         if (characControl != null)
         {
-            characControl.Move(direction * currentSpeed * Time.deltaTime);
+            if (characControl.isGrounded && velocity.y < 0)
+            {
+
+                velocity.y = -1f; // Garde le joueur collé au sol
+            }
+
+            velocity.y += gravity * Time.deltaTime; //Gravité tire vers le bas
+
+            characControl.Move(velocity * Time.deltaTime);
+            characControl.Move((direction * currentSpeed + velocity) * Time.deltaTime);
 
             // gestion etat de deplacement
             if (direction.magnitude == 0)// pas de deplacement
@@ -92,7 +106,7 @@ public class Movement : MonoBehaviour
 
     void RotationCharacter()
     {
-        if (!Input.GetMouseButton(1)) // rotation vers la direction de deplacement
+        if (!Input.GetMouseButton(1) || movementState == MovementState.Running) // rotation vers la direction de deplacement
         {
             if (direction == Vector3.zero)
                 return;
@@ -100,6 +114,9 @@ public class Movement : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation , targetRotation, rotationSpeed* Time.deltaTime);
             return;
         }
+
+        if(movementState == MovementState.Running) // rotation bloquée en courant
+            return;
 
         // rotation vers la souris
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
@@ -127,23 +144,17 @@ public class Movement : MonoBehaviour
                 animComp.StopWalking();
                 animComp.StopRunning();
                 attackComp.ShowWeapon();
-                attackComp.canAttack = true;
-                attackComp.canReload = true;
                 break;
             case MovementState.Walking:
                 animComp.StartWalking();
                 animComp.StopRunning();
                 attackComp.ShowWeapon();
-                attackComp.canAttack = true;
-                attackComp.canReload = true;
                 currentSpeed = walkSpeed;
                 break;
             case MovementState.Running:
                 animComp.StopWalking();
                 animComp.StartRunning();
                 attackComp.HideWeapon();
-                attackComp.canAttack = false;
-                attackComp.canReload = false;
                 currentSpeed = baseRunSpeed;
                 break;
         }
