@@ -9,7 +9,9 @@ public class OnDeath : MonoBehaviour
     [SerializeField] GameObject wasted;
     [SerializeField] float wobbleSpeed = 2f;
     [SerializeField] float wobbleAmount = 5f;
+    [SerializeField] AudioClip deathSound;
 
+    AudioSource mainAudioSource;
 
     private Camera cameraDeath;
     private Camera cameraMain;
@@ -25,13 +27,16 @@ public class OnDeath : MonoBehaviour
         volume = cameraDeath.gameObject.GetComponent<Volume>();
         originalRot = cameraDeath.transform.rotation;
         cameraDeath.gameObject.SetActive(false);
+        mainAudioSource = FindFirstObjectByType<AudioSource>();
     }
 
     void Update()
     {
         clickDeath();
         if (isDead)
+        {
             Wobble();
+        }
     }
 
     void clickDeath()
@@ -44,6 +49,7 @@ public class OnDeath : MonoBehaviour
             StartCoroutine(WastedImage());
             StartCoroutine(SlowMo());
             isDead = true;
+            startDeathMusic();
         }
     }
 
@@ -56,6 +62,12 @@ public class OnDeath : MonoBehaviour
         Quaternion targetRot = originalRot * Quaternion.Euler(x, 0f, 15f);
 
         cameraDeath.transform.rotation = Quaternion.Lerp(cameraDeath.transform.rotation, targetRot, Time.deltaTime * 2f);
+    }
+
+    void startDeathMusic()
+    {
+        mainAudioSource.Stop();
+        SFXManager.Instance.PlaySFX(deathSound, transform, 1);
     }
 
     IEnumerator DeathIn()
@@ -73,7 +85,7 @@ public class OnDeath : MonoBehaviour
 
     IEnumerator WastedImage()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.45f);
 
         wasted.gameObject.SetActive(true);
     }
