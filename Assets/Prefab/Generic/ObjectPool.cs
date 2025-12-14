@@ -38,11 +38,8 @@ public class ObjectPool : MonoBehaviour
                 pool.Add(obj);
                 //if (obj.CompareTag("NPC"))
                 //    obj.SetActive(true);
-<<<<<<< HEAD
                 //if (obj.CompareTag("Cops"))
                 //    obj.SetActive(true);
-=======
->>>>>>> parent of 567fc06 (Merge branch 'BestBranchEver(fuck-youuuu)' into BackupHarsh)
             }
         }
     }

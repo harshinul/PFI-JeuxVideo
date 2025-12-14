@@ -13,7 +13,7 @@ public class SceneLoader : MonoBehaviour
     }
     public void LoadMainScene()
     {
-        SceneManager.LoadScene("Map");
+        SceneManager.LoadScene("NewMap");
     }
 
     public void LoadCredits()
