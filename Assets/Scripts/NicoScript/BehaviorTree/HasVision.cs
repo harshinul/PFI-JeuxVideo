@@ -24,13 +24,15 @@ public class HasVision : Conditions
         if (angleToTarget > angleView)
         {
             return CheckForReverse(false);
+
         }
 
-        if (Physics.Raycast(self.position, directionToTarget, out RaycastHit hit,10000,mask))
+        if (Physics.Raycast(self.position, directionToTarget, out RaycastHit hit, 10000, mask))
         {
             if (hit.collider.gameObject != target)
             {
                 return CheckForReverse(false);
+
             }
         }
 

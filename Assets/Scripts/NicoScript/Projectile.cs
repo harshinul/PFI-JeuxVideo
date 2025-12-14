@@ -25,12 +25,18 @@ public class Projectile : MonoBehaviour
     private void OnEnable()
     {
         direction = GetDirection();
+        trail = GetComponent<TrailRenderer>();
+        if (trail != null)
+        {
+            trail.Clear();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
         transform.position += direction * speed * Time.deltaTime;
+
     }
 
     private Vector3 GetDirection()

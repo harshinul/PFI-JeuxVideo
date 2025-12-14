@@ -1,16 +1,50 @@
 using UnityEngine;
+using UnityEngine.AI;
 
-public class PoliceMilitary : MonoBehaviour
+public class PoliceMilitary : BehaviorTree
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] GameObject bulletPrefab;
 
-    // Update is called once per frame
-    void Update()
+    [SerializeField] Transform firePoint;
+
+    GameObject player;
+
+    float angleVision = 150f;
+    protected override void InitializeTree()
     {
-        
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+
+        LayerMask mask = LayerMask.GetMask("Default");
+
+        //************************************* Conditions *************************************//
+        Conditions shootingCondition = new WithinRange(agent.transform, player, 300f);
+        Conditions rangedConditionInversed = new WithinRange(agent.transform, player, 300f, true);
+        Conditions chaseInterruptCondition = new WithinRange(agent.transform, player, 200f);
+        Conditions hasVision = new HasVision(agent.transform, player, angleVision, mask);
+
+        //************************************* Interrupt *************************************//
+        Interrupt interrupt = new Interrupt(new Conditions[] { rangedConditionInversed, chaseInterruptCondition, hasVision }, this);
+
+        //************************************* Nodes *************************************//
+        GoToPlayer chasePlayer = new GoToPlayer(agent, player.transform, 10f, null, this);
+        RangedAttackBurst rangedAttack = new RangedAttackBurst(bulletPrefab, this.gameObject, player.transform, firePoint, 3, new Conditions[] { shootingCondition, hasVision }, this);
+
+        //*************************************** Sequences *************************************//
+        //*************************************** Root Node *************************************//
+        root = new Selector(new Node[] { rangedAttack, chasePlayer }, null, this);
+    }
+    private void OnDrawGizmos()
+    {
+
+        Vector3 pos = transform.position;
+
+        // Melee zone
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(pos, 300f);
+
+        if (player != null)
+            Gizmos.DrawLine(pos, player.transform.position);
     }
 }
