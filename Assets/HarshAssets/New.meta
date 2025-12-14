@@ -1,6 +1,10 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/HarshAssets/New.meta
 guid: f3d96bbb37909964f8450da6035cd4e6
 folderAsset: yes
+========
+guid: 93a6d99a467934042a4f698b9d05ae9e
+>>>>>>>> BestBranchEver(fuck-youuuu):Assets/HarshAssets/Map.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
