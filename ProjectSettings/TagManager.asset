@@ -7,7 +7,7 @@ TagManager:
   - CashRegister
   - NPC
   - POI
-  - Environment
+  - Cops
   layers:
   - Default
   - TransparentFX
