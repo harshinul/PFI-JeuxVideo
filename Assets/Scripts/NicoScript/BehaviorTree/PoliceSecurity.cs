@@ -1,54 +1,55 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class PoliceSecurity : BehaviorTree
 {
-    [SerializeField] Transform[] targets;
+    Transform[] targets;
+    GameObject[] POI;
 
     AllInterrupt allInterrupt;
 
-    [SerializeField]GameObject meleeObject;
-
+    GameObject cops;
     GameObject player;
-
-    Transform playerTransform;
 
     CopsAnimationComponent animComp;
     protected override void InitializeTree()
     {
+        cops = this.gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
+
+        POI = GameObject.FindGameObjectsWithTag("POI");
+        List<Transform> poiList = new List<Transform>();
+
+        foreach (GameObject poi in POI)
+        {
+            poiList.Add(poi.transform);
+        }
+
+        targets = poiList.ToArray();
 
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
         animComp = GetComponent<CopsAnimationComponent>();
 
         //************************************* Conditions *************************************//
-        Conditions meleeCondition = new WithinRange(agent.transform, player, 15f);
-        Conditions chaseCondition = new WithinRange(agent.transform, player, 200f);
-       Conditions chaseConditionInterrupt = new WithinRange(agent.transform, player, 190f);
 
         Conditions legalCondition = new IsIllegal(player);
         Conditions legalConditionInversed = new IsIllegal(player,true);
-
-        Conditions chaseConditionInversed = new WithinRange(agent.transform, player, 200f, true);
+        Conditions isPanicking = new IsAfraid(cops);
 
         //************************************* Interrupt *************************************//
-        allInterrupt = new AllInterrupt(new Conditions[] { chaseConditionInterrupt,legalCondition,legalConditionInversed }, this);
+        allInterrupt = new AllInterrupt(new Conditions[] { legalCondition,legalConditionInversed }, this);
 
         //************************************* Nodes *************************************//
-        GoToTarget goTo1 = new GoToTarget(agent, targets[0], 4f, null, this);
-        GoToTarget goTo2 = new GoToTarget(agent, targets[1], 4f, null, this);
-        GoToTarget goTo3 = new GoToTarget(agent, targets[2], 4f, null, this);
-        GoToTarget goTo4 = new GoToTarget(agent, targets[3], 4f, null, this);
-        GoToPlayer chasePlayer = new GoToPlayer(agent, player.transform, 15f, new Conditions[] { chaseCondition }, this);
+        GoToTarget goTo = new GoToTarget(agent, targets, 4f, null, this);
+        GoToTargetPanicCops panic = new GoToTargetPanicCops(agent, targets, player.transform, 15f, null, this);
         Wait wait = new Wait(1, null, this);
 
-        MeleeAttack meleeAttack = new MeleeAttack(animComp, this.gameObject, meleeObject, player.transform, 15f, agent, new Conditions[] { meleeCondition }, this);
-
         //*************************************** Sequences *************************************//
-        Sequence patrolSequence = new Sequence(new Node[] { goTo1, wait, goTo2, wait, goTo3, wait, goTo4, wait },null, this);
-        Sequence meleeSequence = new Sequence(new Node[] { chasePlayer,meleeAttack }, new Conditions[] { legalCondition }, this);
+        Sequence patrolSequence = new Sequence(new Node[] { goTo, wait },null, this);
+        Sequence panicSequence = new Sequence(new Node[] { panic }, new Conditions[] {isPanicking}, this);
         //*************************************** Root Node *************************************//
-        root = new Selector(new Node[] { meleeSequence, patrolSequence}, null, this);
+        root = new Selector(new Node[] { panicSequence, patrolSequence}, null, this);
     }
 
     private void OnDisable()
@@ -59,7 +60,10 @@ public class PoliceSecurity : BehaviorTree
 
     private void OnEnable()
     {
-        if(allInterrupt != null)
+        this.enabled = true;
+        InitializeTree();
+        EvaluateTree();
+        if (allInterrupt != null)
             allInterrupt.Start();
     }
 

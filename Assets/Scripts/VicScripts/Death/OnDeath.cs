@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
+using UnityEngine.UI;
 
 public class OnDeath : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class OnDeath : MonoBehaviour
     [SerializeField] float wobbleSpeed = 2f;
     [SerializeField] float wobbleAmount = 5f;
     [SerializeField] AudioClip deathSound;
+    [SerializeField] Image background;
 
     AudioSource mainAudioSource;
 
@@ -30,16 +32,15 @@ public class OnDeath : MonoBehaviour
         mainAudioSource = FindFirstObjectByType<AudioSource>();
     }
 
-    void Update()
+    private void Update()
     {
+        //TEST
         clickDeath();
         if (isDead)
-        {
             Wobble();
-        }
     }
 
-    void clickDeath()
+    public void clickDeath()
     {
         if (Input.GetKeyDown(KeyCode.M))
         {
@@ -48,8 +49,8 @@ public class OnDeath : MonoBehaviour
             StartCoroutine(DeathIn());
             StartCoroutine(WastedImage());
             StartCoroutine(SlowMo());
-            isDead = true;
             startDeathMusic();
+            isDead = true;
         }
     }
 
@@ -87,7 +88,17 @@ public class OnDeath : MonoBehaviour
     {
         yield return new WaitForSeconds(0.45f);
 
-        wasted.gameObject.SetActive(true);
+        wasted.SetActive(true);
+
+        yield return new WaitForSecondsRealtime(2f);
+
+        background.gameObject.SetActive(true);
+        Time.timeScale = 1;
+        FindFirstObjectByType<FadeInNOut>().StartFadeIn();
+
+        yield return new WaitForSecondsRealtime(2f);
+
+        FindFirstObjectByType<SceneLoader>().LoadMainMenu();
     }
 
     IEnumerator SlowMo()
