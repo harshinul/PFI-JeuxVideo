@@ -40,13 +40,31 @@ public class ScriptMusic : MonoBehaviour
         }
     }
 
-    void Start()
+    public void Start()
     {
-        StartCoroutine(FadeTo(0f));
+        StartCoroutine(FadeTo(0));
+    }
+
+    public void SetBackground(Image newBackground)
+    {
+        background = newBackground;
+    }
+
+    public void StartFade()
+    {
+        if (background == null) return;
+
+        background.gameObject.SetActive(true);
+
+        var c = background.color;
+        background.color = new Color(c.r, c.g, c.b, 1f);
+
+        StartCoroutine(FadeTo(0));
     }
 
     IEnumerator FadeTo(float targetAlpha)
     {
+        yield return new WaitForSeconds(0.5f);
         Color c = background.color;
         float startAlpha = c.a;
         float t = 0f;
@@ -63,17 +81,17 @@ public class ScriptMusic : MonoBehaviour
         background.gameObject.SetActive(false);
     }
 
-    public void PlayMusic(AudioClip newClip, float fadeDuration = -1f)
+    public void PlayMusic(float volume, AudioClip newClip, float fadeDuration = -1f)
     {
         if (newClip == null) return;
 
         if (audioSource.isPlaying && audioSource.clip == newClip) return;
 
         if (fadeRoutine != null) StopCoroutine(fadeRoutine);
-        fadeRoutine = StartCoroutine(Crossfade(newClip, fadeDuration));
+        fadeRoutine = StartCoroutine(Crossfade(volume, newClip, fadeDuration));
     }
 
-    private IEnumerator Crossfade(AudioClip newClip, float duration)
+    private IEnumerator Crossfade(float volume, AudioClip newClip, float duration)
     {
         float half = Mathf.Max(0.01f, duration * 0.5f);
 
@@ -92,6 +110,7 @@ public class ScriptMusic : MonoBehaviour
         audioSource.Stop();
         audioSource.clip = newClip;
         audioSource.Play();
+        audioSource.volume = volume;
 
         float t2 = 0f;
         while (t2 < half)
@@ -104,4 +123,6 @@ public class ScriptMusic : MonoBehaviour
         audioSource.volume = volume;
         fadeRoutine = null;
     }
+
+
 }
