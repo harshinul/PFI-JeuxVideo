@@ -26,6 +26,7 @@ public class GoToTargetPanic : Node
         timer = 0;
         targetPos = FindFarthestTarget();
         agent.speed = agent.speed * 2;
+        agent.angularSpeed = agent.angularSpeed * 2;
         agent.SetDestination(targetPos.position);
         animator.SetBool("isAfraid", true);
         base.ExecuteAction();
@@ -67,6 +68,8 @@ public class GoToTargetPanic : Node
     {
         animator.SetBool("isAfraid", false);
         BT.GetComponent<NpcComponent>().isAfraid = false;
+        agent.speed = agent.speed / 2;
+        agent.angularSpeed = agent.angularSpeed / 2;
         agent.SetDestination(agent.transform.position);
         agent.stoppingDistance = Random.Range(1, 10);
         base.FinishAction(result);
@@ -76,6 +79,8 @@ public class GoToTargetPanic : Node
     {
         animator.SetBool("isAfraid", false);
         BT.GetComponent<NpcComponent>().isAfraid = false;
+        agent.speed = agent.speed / 2;
+        agent.angularSpeed = agent.angularSpeed / 2;
         agent.SetDestination(agent.transform.position);
         base.Interrupt();
     }
