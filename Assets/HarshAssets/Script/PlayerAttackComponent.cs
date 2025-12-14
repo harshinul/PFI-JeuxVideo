@@ -23,6 +23,7 @@ public class PlayerAttackComponent : MonoBehaviour
     //Components
     PlayerAnimationComponent playerAnimationComponent;
     Movement movement;
+    ReloadUiScript reloadUiScript;
 
     // bool
     public bool canAttack;
@@ -39,6 +40,7 @@ public class PlayerAttackComponent : MonoBehaviour
         // Get Components
         playerAnimationComponent = GetComponent<PlayerAnimationComponent>();
         movement = GetComponent<Movement>();
+        reloadUiScript = GetComponent<ReloadUiScript>();
     }
 
     void Start()
@@ -141,6 +143,11 @@ public class PlayerAttackComponent : MonoBehaviour
                 weaponsDisplay[i].enabled = false; // Hide other weapon UI
             }
         }
+    }
+
+    public void ReloadDisplay(float duration)
+    {
+        StartCoroutine(reloadUiScript.FillReloadBar(duration));
     }
 
     public void HideWeapon()

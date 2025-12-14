@@ -12,8 +12,6 @@ public class Riffle : Weapon
     public int magazineSize = 24; //public pour debug
     float reloadSpeed = 2f;
 
-    ReloadUiScript reloadUiScript;
-    Coroutine reloadUiCoroutine;
     public Riffle()
     {
         weaponName = WeaponName.Riffle;
@@ -24,8 +22,6 @@ public class Riffle : Weapon
     void Start()
     {
         ammoInMagazine = magazineSize;
-
-        reloadUiScript = GetComponent<ReloadUiScript>();
     }
 
     public override void Equip()
@@ -42,7 +38,7 @@ public class Riffle : Weapon
 
         StartCoroutine(ReloadCouroutine());
 
-        reloadUiCoroutine = StartCoroutine(reloadUiScript.FillReloadBar(reloadSpeed));
+        playerAttackComponent.ReloadDisplay(reloadSpeed);
 
     }
 
