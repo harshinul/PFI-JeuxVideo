@@ -38,6 +38,8 @@ public class ObjectPool : MonoBehaviour
                 pool.Add(obj);
                 if (obj.CompareTag("NPC"))
                     obj.SetActive(true);
+                if (obj.CompareTag("Cops"))
+                    obj.SetActive(true);
             }
         }
     }
