@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerAttackComponent : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerAttackComponent : MonoBehaviour
 
     //UI
     public TextMeshProUGUI ammoDisplay;
+    [SerializeField] Image weaponDisplay;
 
     // Current Weapon
     public int currentWeaponIndex = 0; //public pour debug
