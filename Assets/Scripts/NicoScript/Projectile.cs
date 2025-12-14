@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour
 
     public Vector3 BulletSpread = new Vector3(0.01f, 0.01f, 0.1f);
 
-    Vector3 direction;
+    Vector3 direction; 
 
     TrailRenderer trail;
 
@@ -46,7 +46,7 @@ public class Projectile : MonoBehaviour
         {
             direction += new Vector3(
                 Random.Range(-BulletSpread.x, BulletSpread.x),
-                Random.Range(-BulletSpread.y, BulletSpread.y),
+                direction.y,
                 Random.Range(-BulletSpread.z, BulletSpread.z)
             );
             direction.Normalize();
@@ -65,19 +65,20 @@ public class Projectile : MonoBehaviour
             }
             gameObject.SetActive(false);
         }
+
         if(other.CompareTag("Environment"))
         {
             gameObject.SetActive(false);
         }
-        if(other.CompareTag("Enemy"))
+
+        if (other.CompareTag("NPC"))
         {
-            var health = other.GetComponent<EnnemyHealth>();
+            var health = other.GetComponent<NPCHealthComponent>();
             if (health != null)
             {
-                health.TakeDamage(damage);
+                health.TakeDamage(damage, Vector3.zero);
             }
-
+            gameObject.SetActive(false);
         }
     }
-
 }
