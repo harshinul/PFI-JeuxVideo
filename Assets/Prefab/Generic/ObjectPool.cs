@@ -36,8 +36,10 @@ public class ObjectPool : MonoBehaviour
                 obj.name = objectsToPool[i].name;
                 obj.SetActive(false);
                 pool.Add(obj);
-                //if (obj.CompareTag("NPC"))
-                //    obj.SetActive(true);
+                if (obj.CompareTag("NPC"))
+                    obj.SetActive(true);
+                if (obj.CompareTag("Cops"))
+                    obj.SetActive(true);
             }
         }
     }
