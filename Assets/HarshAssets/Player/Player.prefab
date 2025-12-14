@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1192455548919369315
 RectTransform:
   m_ObjectHideFlags: 0
@@ -442,7 +442,10 @@ MonoBehaviour:
   - {fileID: 787533300419836662}
   - {fileID: 6840584903118558279}
   ammoDisplay: {fileID: 4373078333992524907}
-  weaponDisplay: {fileID: 0}
+  weaponsDisplay:
+  - {fileID: 6153498461216302674}
+  - {fileID: 5588277090107830133}
+  - {fileID: 1335009615968212809}
   currentWeaponIndex: 0
   weaponList: 00000000010000000200000003000000
   canAttack: 0
@@ -703,7 +706,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &4749288179765192004
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1125,10 +1128,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 6847852462727163696}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.1287939}
-  m_AnchorMax: {x: 1, y: 0.372}
-  m_AnchoredPosition: {x: 0.00021362305, y: -0.084999084}
-  m_SizeDelta: {x: -0.9580002, y: 0.92300034}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 0.27447024}
+  m_AnchoredPosition: {x: 0.00021362305, y: 0.29999924}
+  m_SizeDelta: {x: -0.9580002, y: -1.0769997}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3116516038630016908
 CanvasRenderer:
@@ -1676,7 +1679,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2488537851690022979
 RectTransform:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ public class PlayerAttackComponent : MonoBehaviour
 
     //UI
     public TextMeshProUGUI ammoDisplay;
-    [SerializeField] Image weaponDisplay;
+    [SerializeField] Image[] weaponsDisplay;
 
     // Current Weapon
     public int currentWeaponIndex = 0; //public pour debug
@@ -111,6 +111,8 @@ public class PlayerAttackComponent : MonoBehaviour
             }
         }
 
+        ChangeWeaponDisplay();
+
     }
 
     public void SetAttackDelay(float newDelay)
@@ -126,11 +128,26 @@ public class PlayerAttackComponent : MonoBehaviour
         }
     }
 
+    public void ChangeWeaponDisplay()
+    {
+        for (int i = 0; i < weaponsDisplay.Length; i++)
+        {
+            if (i == currentWeaponIndex - 1)
+            {
+                weaponsDisplay[i].enabled = true; // Show current weapon UI
+            }
+            else
+            {
+                weaponsDisplay[i].enabled = false; // Hide other weapon UI
+            }
+        }
+    }
+
     public void HideWeapon()
     {
         if (currentWeapon != null)
         {
-            currentWeapon.gameObject.SetActive(false);
+            currentWeapon.gameObject.SetActive(false);  
         }
     }
 
@@ -142,6 +159,11 @@ public class PlayerAttackComponent : MonoBehaviour
         foreach (var weapon in weapons) 
         {
             weapon.gameObject.SetActive(false); // Hide all weapons
+        }
+
+        foreach (var weapon in weaponsDisplay)
+        {
+            weapon.enabled = false; // Hide all weapon UI
         }
     }
 
