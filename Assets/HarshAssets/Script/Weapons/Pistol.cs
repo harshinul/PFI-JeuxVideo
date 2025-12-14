@@ -11,6 +11,7 @@ public class Pistol : Weapon
     int ammoInMagazine; 
     public int ammoBank = 36; //public pour debug
     public int magazineSize = 12; //public pour debug
+    public float reloadSpeed = 2f;
 
     public Pistol()
     {
@@ -38,13 +39,15 @@ public class Pistol : Weapon
 
         StartCoroutine(ReloadCouroutine());
 
+        playerAttackComponent.ReloadDisplay(reloadSpeed);
+
     }
 
     IEnumerator ReloadCouroutine()
     {
         playerAttackComponent.canReload = false;
         movement.canRun = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(reloadSpeed);
 
         if (ammoBank >= 12) // full reload
         {
@@ -72,6 +75,8 @@ public class Pistol : Weapon
         var projectile = ObjectPool.objectPoolInstance.GetPooledObject(bulletPrefab);
         projectile.transform.position = firePoint.position;
         projectile.transform.rotation = firePoint.rotation;
+        //projectile.transform.position = Vector3.zero;
+        //projectile.transform.rotation = Quaternion.identity;
         projectile.SetActive(true);
         ammoInMagazine--;
         playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;

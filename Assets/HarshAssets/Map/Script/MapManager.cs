@@ -20,6 +20,7 @@ public class MapManager : MonoBehaviour
 
     //Line Renderer
     [SerializeField] LineRenderer navigationLine;
+    [SerializeField] float widthLine;
 
     //Components
     //LocationComponent[] locations;
@@ -52,6 +53,8 @@ public class MapManager : MonoBehaviour
         disableLocationVisual();
         int[,] adjacencyMatrix = CreateMatrix();
         graph = new(adjacencyMatrix, matrix);
+        navigationLine.startWidth = widthLine;
+        navigationLine.endWidth = widthLine;
     }
 
     // Update is called once per frame
