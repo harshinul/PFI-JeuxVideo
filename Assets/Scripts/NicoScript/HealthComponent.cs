@@ -53,6 +53,7 @@ public class HealthComponent : MonoBehaviour
         {
             isDead = true;
             Debug.Log("Player is Dead!");
+            HighScoreScript.Instance.SetHighScore(MoneyScript.Instance.moneyAmount);
         }
         Debug.Log($"Player Health: {health}");
         UpdateHealthUI();
