@@ -107,6 +107,7 @@ MonoBehaviour:
   damage: 10
   addBulletSpread: 1
   BulletSpread: {x: 0.01, y: 0, z: 0.01}
+  direction: {x: 0, y: 0, z: 0}
 --- !u!114 &8205902181399483750
 MonoBehaviour:
   m_ObjectHideFlags: 0

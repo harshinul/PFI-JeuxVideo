@@ -72,6 +72,8 @@ public class Pistol : Weapon
         var projectile = ObjectPool.objectPoolInstance.GetPooledObject(bulletPrefab);
         projectile.transform.position = firePoint.position;
         projectile.transform.rotation = firePoint.rotation;
+        //projectile.transform.position = Vector3.zero;
+        //projectile.transform.rotation = Quaternion.identity;
         projectile.SetActive(true);
         ammoInMagazine--;
         playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
