@@ -9,11 +9,20 @@ public class NpcComponent : MonoBehaviour
     Transform[] targets;
     GameObject[] POI;
 
+    Vector3 npcPos;
     GameObject player;
 
     float distance;
 
     public bool isAfraid;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            OnClickAfraid();
+        }
+    }
 
     private void OnEnable()
     {
@@ -34,7 +43,9 @@ public class NpcComponent : MonoBehaviour
     public void OnClickAfraid()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        distance = Vector3.Distance(transform.position, player.transform.position);
+        npcPos = transform.position;
+        Debug.Log(npcPos);
+        distance = Vector3.Distance(npcPos, player.transform.position);
 
         if (distance <= 100)
         {

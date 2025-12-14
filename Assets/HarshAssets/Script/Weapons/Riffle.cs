@@ -10,6 +10,8 @@ public class Riffle : Weapon
     int ammoInMagazine; 
     public int ammoBank = 72; //public pour debug
     public int magazineSize = 24; //public pour debug
+    float reloadSpeed = 2f;
+
     public Riffle()
     {
         weaponName = WeaponName.Riffle;
@@ -36,13 +38,15 @@ public class Riffle : Weapon
 
         StartCoroutine(ReloadCouroutine());
 
+        playerAttackComponent.ReloadDisplay(reloadSpeed);
+
     }
 
     IEnumerator ReloadCouroutine()
     {
         playerAttackComponent.canReload = false; // Lock player actions
         movement.canRun = false;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(reloadSpeed);
 
         if (ammoBank >= 12) // full reload
         {

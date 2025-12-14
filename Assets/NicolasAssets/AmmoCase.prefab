@@ -11,7 +11,8 @@ GameObject:
   - component: {fileID: 5990438843208475499}
   - component: {fileID: 7245601268015279310}
   - component: {fileID: 4857550833115158532}
-  - component: {fileID: 3297882454056698032}
+  - component: {fileID: 4875796726499209662}
+  - component: {fileID: 2909518273267693009}
   m_Layer: 0
   m_Name: AmmoCase
   m_TagString: Untagged
@@ -87,7 +88,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &3297882454056698032
+--- !u!114 &4875796726499209662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -96,6 +97,28 @@ MonoBehaviour:
   m_GameObject: {fileID: 6370764775388150225}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e3efeafbe5870e44b9699a098a656ec, type: 3}
+  m_Script: {fileID: 11500000, guid: 3cfb77a76b3d6b645989f9cdbd8cf3d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ammoPrefab: {fileID: 6370764775388150225}
+--- !u!65 &2909518273267693009
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6370764775388150225}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.5353142, y: 0.37174222, z: 0.26034126}
+  m_Center: {x: 0, y: 0.18796082, z: -0.000000014901161}
