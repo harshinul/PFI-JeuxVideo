@@ -64,7 +64,7 @@ public class ShootingNode : Node
         lastShootTime -= deltaTime;
 
         Vector3 dirToTarget = (target.position - firePoint.position).normalized;
-        dirToTarget.y += .05f;
+        //dirToTarget.y += .13f;
 
         if (lastShootTime <= 0f)
         {
