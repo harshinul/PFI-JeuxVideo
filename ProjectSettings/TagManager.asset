@@ -5,7 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - CashRegister
-  - Environment
+  - NPC
+  - POI
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,10 @@ TagManager:
   - Ground
   - Water
   - UI
-  - location
+  - NPC
+  - 
+  - 
+  - 
   - NotOnMap
   - OnlyMap
   - Player

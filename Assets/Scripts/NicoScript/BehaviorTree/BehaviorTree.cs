@@ -9,7 +9,8 @@ public abstract class BehaviorTree : MonoBehaviour
 
     protected abstract void InitializeTree();
 
-    void Start()
+
+    void Awake()
     {
         InitializeTree();
         EvaluateTree();

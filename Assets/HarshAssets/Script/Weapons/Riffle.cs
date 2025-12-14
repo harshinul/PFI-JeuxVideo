@@ -1,17 +1,20 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 
 public class Riffle : Weapon
 {
     [SerializeField] GameObject bulletPrefab;
+    [SerializeField] Transform firePoint;
 
-    public int ammoInMagazine; //public pour debug
+    int ammoInMagazine; 
     public int ammoBank = 72; //public pour debug
     public int magazineSize = 24; //public pour debug
     public Riffle()
     {
         weaponName = WeaponName.Riffle;
         attackParameterName = "isRiffleShooting";
+        ammoInMagazine = magazineSize;
     }
 
     void Start()
@@ -23,6 +26,8 @@ public class Riffle : Weapon
     {
         base.Equip();
         playerAnimationComponent.EquipRiffle();
+        playerAttackComponent.ammoDisplay.enabled = true;
+        playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
     }
 
     public override void Reload()
@@ -35,27 +40,25 @@ public class Riffle : Weapon
 
     IEnumerator ReloadCouroutine()
     {
-        if (ammoBank >= 12)
-        {
-            playerAttackComponent.canReload = false;
-            playerAttackComponent.canAttack = false;
-            yield return new WaitForSeconds(2f);
+        playerAttackComponent.canReload = false; // Lock player actions
+        movement.canRun = false;
+        yield return new WaitForSeconds(2f);
 
+        if (ammoBank >= 12) // full reload
+        {
             ammoBank -= magazineSize - ammoInMagazine;
             ammoInMagazine = magazineSize;
 
         }
-        else
+        else // partial reload
         {
-            playerAttackComponent.canReload = false;
-            playerAttackComponent.canAttack = false;
-            yield return new WaitForSeconds(2f);
             ammoInMagazine += ammoBank;
             ammoBank = 0;
         }
 
-        playerAttackComponent.canReload = true;
-        playerAttackComponent.canAttack = true;
+        playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
+        playerAttackComponent.canReload = true; // Unlock player actions
+        movement.canRun = true;
 
     }
 
@@ -63,8 +66,12 @@ public class Riffle : Weapon
     {
         if (ammoInMagazine <= 0)
             return;
-        Debug.Log("Rifle Attack");
+        Debug.Log("Pistol Attack");
+        var projectile = ObjectPool.objectPoolInstance.GetPooledObject(bulletPrefab);
+        projectile.transform.position = firePoint.position;
+        projectile.transform.rotation = firePoint.rotation;
+        projectile.SetActive(true);
         ammoInMagazine--;
-
+        playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
     }
 }

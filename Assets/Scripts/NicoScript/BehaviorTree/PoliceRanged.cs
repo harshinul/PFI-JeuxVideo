@@ -7,6 +7,8 @@ public class PoliceRanged : BehaviorTree
 
     [SerializeField] Transform firePoint;
 
+    CopsAnimationComponent animationComponent;
+
     GameObject player;
 
     float angleVision = 150f;
@@ -14,6 +16,7 @@ public class PoliceRanged : BehaviorTree
     {
         player = GameObject.FindGameObjectWithTag("Player");
 
+        animationComponent = GetComponent<CopsAnimationComponent>();
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
 
         LayerMask mask = LayerMask.GetMask("Default");
