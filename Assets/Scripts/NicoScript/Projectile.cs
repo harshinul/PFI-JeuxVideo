@@ -81,6 +81,9 @@ public class Projectile : MonoBehaviour
                 
 =======
                 health.TakeDamage(damage);
+<<<<<<< HEAD
+>>>>>>> parent of be1f36d (Change security mall tree et loop mort et menu)
+=======
 >>>>>>> parent of be1f36d (Change security mall tree et loop mort et menu)
                 
             }
