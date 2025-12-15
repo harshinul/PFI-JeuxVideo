@@ -32,6 +32,8 @@ public class ObjectPool : MonoBehaviour
             for (int j = 0; j < quantityToPool[i]; j++)
             {
                 GameObject obj = GameObject.Instantiate(objectsToPool[i]);
+                obj.transform.parent = this.transform;
+                obj.transform.position = this.transform.position;
                 obj.name = objectsToPool[i].name;
                 obj.SetActive(false);
                 pool.Add(obj);

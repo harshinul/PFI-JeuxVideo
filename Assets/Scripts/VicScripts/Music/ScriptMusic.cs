@@ -14,6 +14,7 @@ public class ScriptMusic : MonoBehaviour
 
     private AudioSource audioSource;
     private Coroutine fadeRoutine;
+    bool doOnce = true;
 
     void Awake()
     {
@@ -65,6 +66,7 @@ public class ScriptMusic : MonoBehaviour
     IEnumerator FadeTo(float targetAlpha)
     {
         yield return new WaitForSeconds(0.5f);
+        
         Color c = background.color;
         float startAlpha = c.a;
         float t = 0f;
@@ -78,7 +80,12 @@ public class ScriptMusic : MonoBehaviour
         }
 
         background.color = new Color(c.r, c.g, c.b, targetAlpha);
-        background.gameObject.SetActive(false);
+        if (doOnce)
+        {
+            background.gameObject.SetActive(false);
+            doOnce = false;
+        }
+
     }
 
     public void PlayMusic(float volume, AudioClip newClip, float fadeDuration = -1f)

@@ -11,6 +11,10 @@ TagManager:
   - CenterOfBodyPlayer
   - Cops
   - Bullet
+  - MallCop
+  - CopsFirstWave
+  - CopsSecondWave
+  - CopsThirdWave
   layers:
   - Default
   - TransparentFX

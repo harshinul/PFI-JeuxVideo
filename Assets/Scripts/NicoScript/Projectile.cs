@@ -67,7 +67,7 @@ public class Projectile : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-        else if (other.CompareTag("Cops"))
+        else if (other.CompareTag("CopsFirstWave") || other.CompareTag("CopsSecondWave") || other.CompareTag("CopsThirdWave"))
         {
             var health = other.GetComponent<NPCHealthComponent>();
             if (health != null)
