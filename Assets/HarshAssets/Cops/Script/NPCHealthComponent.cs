@@ -26,6 +26,8 @@ public class NPCHealthComponent : MonoBehaviour
     private void OnEnable()
     {
         currentHealth = startHealth;
+        agent.enabled = true;
+        behaviorTree.enabled = true;
     }
     void Start()
     {
@@ -56,8 +58,7 @@ public class NPCHealthComponent : MonoBehaviour
         int randomNumber = Random.Range(0, 100);
         GameObject objectTodrop;
         agent.enabled = false;
-        if (behaviorTree != null)
-            behaviorTree.enabled = false;
+        behaviorTree.enabled = false;
         ragdollController.EnableRagdoll(force);
 
         if (randomNumber > chanceToDropMoney && canDropCollectables)

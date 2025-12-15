@@ -22,6 +22,12 @@ public class RagdollController : MonoBehaviour
         DisableRagdoll();
     }
 
+    private void OnEnable()
+    {
+        DisableRagdoll();
+    }
+
+
     private void Update()
     {
         if(isRagdollActive)
@@ -55,6 +61,7 @@ public class RagdollController : MonoBehaviour
     public void EnableRagdoll(Vector3 force)
     {
         animator.enabled = false;
+        bodyCollider.enabled = false;
 
         foreach (var rbe in rigidbodies)
             rbe.isKinematic = false;
@@ -73,6 +80,8 @@ public class RagdollController : MonoBehaviour
 
     void DisableRagdoll()
     {
+        animator.enabled = true;
+        bodyCollider.enabled = true;
         foreach (var rb in rigidbodies)
             rb.isKinematic = true;
 
