@@ -81,7 +81,7 @@ public class BaseballBat : Weapon
         foreach (Collider hit in hits)
         {
             Vector3 direction = (hit.transform.position - transform.position).normalized;
-            hit.gameObject.GetComponent<NPCHealthComponent>().TakeDamage(attackDamage, direction * attackForce);
+            hit.gameObject.GetComponent<NPCHealthComponent>()?.TakeDamage(attackDamage, direction * attackForce);
             Debug.Log("Baseball Bat hit NPC via OverlapSphere");
         }
     }

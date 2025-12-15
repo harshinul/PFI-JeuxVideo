@@ -2,6 +2,7 @@ using UnityEngine;
 
 public abstract class Weapon : MonoBehaviour
 {
+    public bool isEquipped = false;
     [SerializeField] float walkingSpeed;
     [SerializeField] float attackDelay;
     public WeaponName weaponName;
@@ -15,7 +16,10 @@ public abstract class Weapon : MonoBehaviour
     { 
         movement.SetWalkSpeed(walkingSpeed); 
         playerAttackComponent.SetAttackDelay(attackDelay);
+        isEquipped = true;
     }
+
+    public virtual void AddAmmo() { }
     public abstract void Attack();
     public virtual void Reload() { }
 

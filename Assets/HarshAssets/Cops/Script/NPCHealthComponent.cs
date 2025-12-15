@@ -66,11 +66,20 @@ public class NPCHealthComponent : MonoBehaviour
             }
 
             yield return new WaitForSeconds(0.1f);
-            objectTodrop.transform.position = lastPosition + Vector3.up * 0.5f;
+            objectTodrop.transform.position = lastPosition + Vector3.up * 0.5f; 
             objectTodrop.SetActive(true);
         }
 
         yield return new WaitForSeconds(5f);
         gameObject.SetActive(false);
     }
+
+    //private void OnTriggerEnter(Collider other)
+    //{ 
+    //    Debug.Log("Trigger entered");
+    //    if (other.CompareTag("Bullet"))
+    //    {
+    //        Debug.Log("Hit by bullet");
+    //    }
+    //}
 }

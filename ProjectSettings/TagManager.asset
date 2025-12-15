@@ -10,7 +10,7 @@ TagManager:
   - Environment
   - CenterOfBodyPlayer
   - Cops
-  - MallCop
+  - Bullet
   layers:
   - Default
   - TransparentFX

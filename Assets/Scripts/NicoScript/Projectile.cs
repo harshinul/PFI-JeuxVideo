@@ -15,8 +15,6 @@ public class Projectile : MonoBehaviour
 
     TrailRenderer trail;
 
-
-
     void Start()
     {
 
@@ -55,8 +53,8 @@ public class Projectile : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Player"))
+   {
+        if (other.CompareTag("Player"))
         {
             var health = other.GetComponent<HealthComponent>();
             if (health != null)
@@ -65,18 +63,29 @@ public class Projectile : MonoBehaviour
             }
             gameObject.SetActive(false);
         }
-        if(other.CompareTag("Environment"))
+        else if (other.CompareTag("Untagged"))
         {
             gameObject.SetActive(false);
         }
-        if(other.CompareTag("Enemy"))
+        else if (other.CompareTag("Cops"))
         {
-            var health = other.GetComponent<EnnemyHealth>();
+            var health = other.GetComponent<NPCHealthComponent>();
             if (health != null)
             {
-                health.TakeDamage(damage);
+                health.TakeDamage(damage, Vector3.zero);
             }
-
+        }
+        else if (other.CompareTag("NPC"))
+        {
+            var health = other.GetComponent<NPCHealthComponent>();
+            if (health != null)
+            {
+                health.TakeDamage(damage, Vector3.zero);
+            }
+        }
+        else
+        {
+            gameObject.SetActive(false);
         }
     }
 

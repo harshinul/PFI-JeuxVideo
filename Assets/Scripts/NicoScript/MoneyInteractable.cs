@@ -14,17 +14,13 @@ public class MoneyInteractable : MonoBehaviour
     int randomMoneyAmount;
     void Start()
     {
-        initialHeight = transform.position.y + 4f;
+        initialHeight = transform.position.y + 0.5f;
     }
 
-    private void OnEnable()
-    {
-        randomMoneyAmount = Random.Range(20, 101);
-    }
     void Update()
     {
         time += Time.deltaTime;
-        height = (4f * Mathf.Sin(time * 7)) + initialHeight;
+        height = (0.3f * Mathf.Sin(time * 0.5f)) + initialHeight;
         height -= lastHeight;
         transform.Translate(new Vector3(0, height, 0));
         transform.Rotate(new Vector3(0, -100, 0) * Time.deltaTime, Space.Self);
@@ -33,6 +29,7 @@ public class MoneyInteractable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        randomMoneyAmount = Random.Range(20, 101);
         if (other.gameObject.CompareTag("Player"))
         {
             MoneyScript.Instance.AddMoney(randomMoneyAmount);
