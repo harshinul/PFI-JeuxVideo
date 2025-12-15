@@ -10,6 +10,6 @@ public class IsAfraid : Conditions
 
     public override bool Evaluate()
     {
-        return npc.GetComponent<NpcComponent>().isAfraid;
+        return npc.GetComponent<NpcComponent>().isAfraidNpc;
     }
 }

@@ -67,7 +67,7 @@ public class GoToTargetPanic : Node
     public override void FinishAction(bool result)
     {
         animator.SetBool("isAfraid", false);
-        BT.GetComponent<NpcComponent>().isAfraid = false;
+        BT.GetComponent<NpcComponent>().isAfraidNpc = false;
         agent.speed = agent.speed / 2;
         agent.angularSpeed = agent.angularSpeed / 2;
         agent.SetDestination(agent.transform.position);
@@ -78,7 +78,7 @@ public class GoToTargetPanic : Node
     public override void Interrupt()
     {
         animator.SetBool("isAfraid", false);
-        BT.GetComponent<NpcComponent>().isAfraid = false;
+        BT.GetComponent<NpcComponent>().isAfraidNpc = false;
         agent.speed = agent.speed / 2;
         agent.angularSpeed = agent.angularSpeed / 2;
         agent.SetDestination(agent.transform.position);

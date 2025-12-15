@@ -9,24 +9,10 @@ public class NpcComponent : MonoBehaviour
     Transform[] targets;
     GameObject[] POI;
 
-    Vector3 npcPos;
-    GameObject player;
-
-    float distance;
-
-    public bool isAfraid;
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.H))
-        {
-            OnClickAfraid();
-        }
-    }
+    public bool isAfraidNpc;
 
     private void OnEnable()
     {
-        isAfraid = false;
         POI = GameObject.FindGameObjectsWithTag("POI");
         List<Transform> poiList = new List<Transform>();
 
@@ -38,18 +24,5 @@ public class NpcComponent : MonoBehaviour
         targets = poiList.ToArray();
 
         transform.position = targets[Random.Range(0, targets.Length)].transform.position;
-    }
-
-    public void OnClickAfraid()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        npcPos = transform.position;
-        Debug.Log(npcPos);
-        distance = Vector3.Distance(npcPos, player.transform.position);
-
-        if (distance <= 100)
-        {
-            isAfraid = true;
-        }
     }
 }

@@ -32,13 +32,10 @@ public class PoliceSecurity : BehaviorTree
         animComp = GetComponent<CopsAnimationComponent>();
 
         //************************************* Conditions *************************************//
-
-        Conditions legalCondition = new IsIllegal(player);
-        Conditions legalConditionInversed = new IsIllegal(player,true);
-        Conditions isPanicking = new IsAfraid(cops);
+        Conditions isPanicking = new IsAfraidSecurity(cops);
 
         //************************************* Interrupt *************************************//
-        allInterrupt = new AllInterrupt(new Conditions[] { legalCondition,legalConditionInversed }, this);
+        allInterrupt = new AllInterrupt(new Conditions[] { isPanicking }, this);
 
         //************************************* Nodes *************************************//
         GoToTarget goTo = new GoToTarget(agent, targets, 4f, null, this);

@@ -6,8 +6,8 @@ public class ObjectPool : MonoBehaviour
 {
     private List<GameObject> pool = new List<GameObject>();
 
-    [SerializeField] GameObject[] objectsToPool;
-    [SerializeField] int[] quantityToPool;
+    [SerializeField] public GameObject[] objectsToPool;
+    [SerializeField] public int[] quantityToPool;
 
     public static ObjectPool objectPoolInstance;
 
@@ -25,7 +25,6 @@ public class ObjectPool : MonoBehaviour
 
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         for (int i = 0; i < Mathf.Min(objectsToPool.Length, quantityToPool.Length); i++)
@@ -36,8 +35,30 @@ public class ObjectPool : MonoBehaviour
                 obj.name = objectsToPool[i].name;
                 obj.SetActive(false);
                 pool.Add(obj);
-                //if (obj.CompareTag("NPC"))
-                //    obj.SetActive(true);
+                if (obj.CompareTag("NPC"))
+                    obj.SetActive(true);
+                if (obj.CompareTag("MallCop"))
+                    obj.SetActive(true);
+                if (obj.CompareTag("CopsFirstWave"))
+                    GameManager.Instance.meleeCop = obj.gameObject;
+                if(obj.CompareTag("CopsSecondWave"))
+                    GameManager.Instance.pistolCop = obj.gameObject;
+                if(obj.CompareTag("CopsThirdWave"))
+                    GameManager.Instance.rifleCop = obj.gameObject;
+            }
+        }
+    }
+
+    public void ActivateFromPool(GameObject prefab, int amount)
+    {
+        int activated = 0;
+
+        for (int i = 0; i < pool.Count && activated < amount; i++)
+        {
+            if (pool[i].name == prefab.name && !pool[i].activeInHierarchy)
+            {
+                pool[i].SetActive(true);
+                activated++;
             }
         }
     }

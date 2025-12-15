@@ -35,6 +35,7 @@ public class NPCHealthComponent : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth <= 0)
         {
+            GameManager.Instance.WantedLevel(this.gameObject);
             Die(force,transform.position);
         }
     }
