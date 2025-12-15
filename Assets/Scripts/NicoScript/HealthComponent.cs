@@ -52,7 +52,7 @@ public class HealthComponent : MonoBehaviour
         if (health <= 0)
         {
             isDead = true;
-            OnDeath.Instance.clickDeath();
+            GetComponent<OnDeath>().clickDeath();
             Debug.Log("Player is Dead!");
             HighScoreScript.Instance.SetHighScore(MoneyScript.Instance.moneyAmount);
         }
