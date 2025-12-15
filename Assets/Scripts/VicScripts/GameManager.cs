@@ -105,6 +105,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator loopSpawn()
     {
+        Debug.Log($"LoopSpawn running. wastedCount={wastedCount}");
         while (true)
         {
             //if (wastedCount >= 1 && wastedCount < 10)
