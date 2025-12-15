@@ -33,6 +33,7 @@ public class PoliceSecurity : BehaviorTree
 
         //************************************* Conditions *************************************//
         Conditions isPanicking = new IsAfraidSecurity(cops);
+        Conditions isPlayerInRange = new IsPlayerWithinRange(this.transform, player.transform, 25f);
 
         //************************************* Interrupt *************************************//
         allInterrupt = new AllInterrupt(new Conditions[] { isPanicking }, this);
@@ -44,7 +45,7 @@ public class PoliceSecurity : BehaviorTree
 
         //*************************************** Sequences *************************************//
         Sequence patrolSequence = new Sequence(new Node[] { goTo, wait },null, this);
-        Sequence panicSequence = new Sequence(new Node[] { panic }, new Conditions[] { isPanicking }, this);
+        Sequence panicSequence = new Sequence(new Node[] { panic }, new Conditions[] { isPanicking, isPlayerInRange }, this);
         //*************************************** Root Node *************************************//
         root = new Selector(new Node[] { panicSequence, patrolSequence}, null, this);
     }

@@ -57,7 +57,7 @@ public class GoToTargetPanic : Node
         float distance = Vector3.Distance(player.transform.position, agent.transform.position);
         if(timer >= 10)
         {
-            if (distance > 250)
+            if (distance >= 25)
             {
                 FinishAction(true);
             }

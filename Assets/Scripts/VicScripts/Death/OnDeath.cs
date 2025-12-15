@@ -12,46 +12,34 @@ public class OnDeath : MonoBehaviour
     [SerializeField] float wobbleAmount = 5f;
     [SerializeField] AudioClip deathSound;
     [SerializeField] Image background;
+    [SerializeField] Camera deathCam;
 
     AudioSource mainAudioSource;
 
-    private Camera cameraDeath;
+    public static OnDeath Instance;
+
     private Camera cameraMain;
     private Volume volume;
 
     private Quaternion originalRot;
-
-    bool isDead = false;
     void Awake()
     {
-        cameraDeath = GameObject.FindGameObjectWithTag("DeathCam").GetComponent<Camera>();
         cameraMain = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        volume = cameraDeath.gameObject.GetComponent<Volume>();
-        originalRot = cameraDeath.transform.rotation;
-        cameraDeath.gameObject.SetActive(false);
+        volume = deathCam.gameObject.GetComponent<Volume>();
+        originalRot = deathCam.transform.rotation;
+        deathCam.gameObject.SetActive(false);
         mainAudioSource = FindFirstObjectByType<AudioSource>();
-    }
-
-    private void Update()
-    {
-        //TEST
-        clickDeath();
-        if (isDead)
-            Wobble();
     }
 
     public void clickDeath()
     {
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            cameraMain.gameObject.SetActive(false);
-            cameraDeath.gameObject.SetActive(true);
-            StartCoroutine(DeathIn());
-            StartCoroutine(WastedImage());
-            StartCoroutine(SlowMo());
-            startDeathMusic();
-            isDead = true;
-        }
+        cameraMain.gameObject.SetActive(false);
+        deathCam.gameObject.SetActive(true);
+         StartCoroutine(DeathIn());
+        StartCoroutine(WastedImage());
+        StartCoroutine(SlowMo());
+        startDeathMusic();
+        Wobble();
     }
 
     void Wobble()
@@ -62,7 +50,7 @@ public class OnDeath : MonoBehaviour
 
         Quaternion targetRot = originalRot * Quaternion.Euler(x, 0f, 15f);
 
-        cameraDeath.transform.rotation = Quaternion.Lerp(cameraDeath.transform.rotation, targetRot, Time.deltaTime * 2f);
+        deathCam.transform.rotation = Quaternion.Lerp(deathCam.transform.rotation, targetRot, Time.deltaTime * 2f);
     }
 
     void startDeathMusic()

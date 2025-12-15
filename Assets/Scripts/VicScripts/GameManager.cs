@@ -51,6 +51,7 @@ public class GameManager : MonoBehaviour
     }
     public void WantedLevel(GameObject npc)
     {
+        Debug.Log(wastedCount);
         if (npc.CompareTag("NPC"))
         {
             wastedCount += 2;
@@ -76,14 +77,14 @@ public class GameManager : MonoBehaviour
         distance = Vector3.Distance(copsPos, player.transform.position);
 
         //Fix pour la scale
-        if (distance <= 250)
+        if (distance <= 25)
         {
             if (doOnce)
             {
+                wastedCount += 1;
                 player.GetComponent<Movement>().isWanted = true;
                 doOnce = false;
             }
-            wastedCount += 1;
             Debug.Log(wastedCount);
             cop.GetComponent<CopsComponent>().isAfraidCops = true;
         }
@@ -96,7 +97,7 @@ public class GameManager : MonoBehaviour
         distance = Vector3.Distance(npcPos, player.transform.position);
 
         //Fix pour la scale
-        if (distance <= 250)
+        if (distance <= 25)
         {
             npc.GetComponent<NpcComponent>().isAfraidNpc = true;
         }
@@ -106,6 +107,8 @@ public class GameManager : MonoBehaviour
     {
         while (true)
         {
+            if (wastedCount >= 1 && wastedCount < 10)
+                ObjectPool.objectPoolInstance.ActivateFromPool(meleeCop, 1);
             if (wastedCount >= 10)
                 ObjectPool.objectPoolInstance.ActivateFromPool(meleeCop, ObjectPool.objectPoolInstance.quantityToPool[posMelee]);
             if(wastedCount >= 20)

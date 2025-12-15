@@ -33,6 +33,7 @@ public class NPCHealthComponent : MonoBehaviour
     public void TakeDamage(float damage, Vector3 force)
     {
         currentHealth -= damage;
+        Debug.Log(currentHealth);
         if (currentHealth <= 0)
         {
             GameManager.Instance.WantedLevel(this.gameObject);

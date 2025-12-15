@@ -33,7 +33,7 @@ public class HasVision : Conditions
 
             if (hit.collider.gameObject != target)
             {
-                Debug.Log("No Vision: Obstacle in the way");
+                //Debug.Log("No Vision: Obstacle in the way");
 
                 return CheckForReverse(false);
 
