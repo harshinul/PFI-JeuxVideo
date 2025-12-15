@@ -39,10 +39,4 @@ public class GoToPlayer : Node
         agent.SetDestination(agent.transform.position);
         base.FinishAction(result);
     }
-
-    public override void Interrupt()
-    {
-        agent.SetDestination(agent.transform.position);
-        base.Interrupt();
-    }
 }

@@ -22,6 +22,7 @@ public class GoToTargetPanicCops : Node
     {
         timer = 0;
         targetPos = FindFarthestTarget();
+       // targetPos.position = new Vector3(-173.57f, 62.9f, -90.6f);
         agent.speed = agent.speed * 2;
         agent.angularSpeed = agent.angularSpeed * 2;
         agent.SetDestination(targetPos.position);
