@@ -81,11 +81,11 @@ public class OnDeath : MonoBehaviour
         yield return new WaitForSecondsRealtime(2f);
 
         background.gameObject.SetActive(true);
-        Time.timeScale = 1;
         FindFirstObjectByType<FadeInNOut>().StartFadeIn();
 
         yield return new WaitForSecondsRealtime(2f);
 
+        Time.timeScale = 1;
         FindFirstObjectByType<SceneLoader>().LoadMainMenu();
     }
 

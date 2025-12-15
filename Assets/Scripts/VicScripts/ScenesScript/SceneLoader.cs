@@ -13,7 +13,7 @@ public class SceneLoader : MonoBehaviour
     }
     public void LoadMainScene()
     {
-        SceneManager.LoadScene("RealMap");
+        SceneManager.LoadScene("RealMapForReal");
     }
 
     public void LoadCredits()
