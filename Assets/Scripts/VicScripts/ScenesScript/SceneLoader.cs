@@ -8,11 +8,8 @@ public class SceneLoader : MonoBehaviour
 
     private void Start()
     {
-        if(ScriptMusic.Instance != null)
-        {
-            ScriptMusic.Instance.SetBackground(background);
-            ScriptMusic.Instance.StartFade();
-        }
+        ScriptMusic.Instance.SetBackground(background);
+        ScriptMusic.Instance.StartFade();
     }
     public void LoadMainScene()
     {
@@ -26,6 +23,6 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene("MenuPrincipal1");
+        SceneManager.LoadScene("MenuPrincipal");
     }
 }

@@ -9,9 +9,6 @@ TagManager:
   - POI
   - Environment
   - CenterOfBodyPlayer
-  - Cops
-  - DeathCam
-  - MallCop
   layers:
   - Default
   - TransparentFX

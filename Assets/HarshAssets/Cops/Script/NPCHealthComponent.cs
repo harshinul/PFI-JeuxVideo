@@ -12,16 +12,12 @@ public class NPCHealthComponent : MonoBehaviour
     [SerializeField] int chanceToDropAmmo;
     float currentHealth;
 
-    public float wastedCount = 0;
-
-    GameObject cops;
     RagdollController ragdollController;
     NavMeshAgent agent;
     BehaviorTree behaviorTree;
 
     void Awake()
     {
-        cops = this.gameObject;
         ragdollController = GetComponent<RagdollController>();
         agent = GetComponent<NavMeshAgent>();
         behaviorTree = GetComponent<BehaviorTree>();
@@ -40,22 +36,6 @@ public class NPCHealthComponent : MonoBehaviour
         if (currentHealth <= 0)
         {
             Die(force,transform.position);
-            if (cops.CompareTag("MallCop"))
-            {
-                wastedCount += 5;
-            }
-            else if (cops.CompareTag("CopsFirstWave"))
-            {
-                wastedCount += 10;
-            }
-            else if (cops.CompareTag("CopsSecondWave"))
-            {
-                wastedCount += 15;
-            }
-            else if (cops.CompareTag("CopsThirdWave"))
-            {
-                wastedCount += 20;
-            }
         }
     }
 

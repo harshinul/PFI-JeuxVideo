@@ -15,7 +15,6 @@ public class PoliceSecurity : BehaviorTree
     CopsAnimationComponent animComp;
     protected override void InitializeTree()
     {
-        this.enabled = true;
         cops = this.gameObject;
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -36,7 +35,7 @@ public class PoliceSecurity : BehaviorTree
 
         Conditions legalCondition = new IsIllegal(player);
         Conditions legalConditionInversed = new IsIllegal(player,true);
-        Conditions isPanicking = new IsAfraidCops(cops);
+        Conditions isPanicking = new IsAfraid(cops);
 
         //************************************* Interrupt *************************************//
         allInterrupt = new AllInterrupt(new Conditions[] { legalCondition,legalConditionInversed }, this);

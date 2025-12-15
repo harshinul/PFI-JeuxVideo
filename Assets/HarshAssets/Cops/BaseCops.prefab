@@ -14,23 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1254403252897968, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}
       propertyPath: m_TagString
-      value: MallCop
+      value: Cops
       objectReference: {fileID: 0}
     - target: {fileID: 4154021153174908, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}
       propertyPath: m_RootOrder
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4154021153174908, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 4154021153174908, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 4154021153174908, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4154021153174908, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}
       propertyPath: m_LocalPosition.x
@@ -162,12 +150,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1254403252897968, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3966680650914839625}
-    - targetCorrespondingSourceObject: {fileID: 1254403252897968, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -1245124614928648997}
-    - targetCorrespondingSourceObject: {fileID: 1254403252897968, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2386449394959092068}
   m_SourcePrefab: {fileID: 100100000, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}
 --- !u!1 &1563778733789750478 stripped
 GameObject:
@@ -207,10 +189,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 50
-  m_Acceleration: 100
+  m_Speed: 3.5
+  m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 1000
+  m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -244,34 +226,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isAfraid: 0
---- !u!114 &-1245124614928648997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1563778733789750478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 920a630a58921cf4c8f60d9035804037, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isAfraid: 0
---- !u!114 &2386449394959092068
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1563778733789750478}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ea968afbc62f134dbe417cd79f4a99b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  canDropCollectables: 1
-  startHealth: 50
-  collectableMoneyPrefab: {fileID: 3180745797301891250, guid: 2d8acea726e3517418c27829f081c892, type: 3}
-  collectableAmmoPrefab: {fileID: 6370764775388150225, guid: ea99e1f78d567fd43a874e5fceb5fcc2, type: 3}
-  chanceToDropMoney: 80
-  chanceToDropAmmo: 5
