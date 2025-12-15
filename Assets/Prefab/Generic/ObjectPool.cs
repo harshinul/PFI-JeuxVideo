@@ -25,7 +25,6 @@ public class ObjectPool : MonoBehaviour
 
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         for (int i = 0; i < Mathf.Min(objectsToPool.Length, quantityToPool.Length); i++)
@@ -36,8 +35,35 @@ public class ObjectPool : MonoBehaviour
                 obj.name = objectsToPool[i].name;
                 obj.SetActive(false);
                 pool.Add(obj);
-                //if (obj.CompareTag("NPC"))
-                //    obj.SetActive(true);
+                if (obj.CompareTag("NPC"))
+                    obj.SetActive(true);
+                if (obj.CompareTag("MallCop"))
+                    obj.SetActive(true);
+            }
+        }
+    }
+    public void SpawnFromPool(GameObject prefab, int count)
+    {
+        int activated = 0;
+
+        for (int i = 0; i < pool.Count && activated < count; i++)
+        {
+            if (pool[i].name == prefab.name && !pool[i].activeInHierarchy)
+            {
+                pool[i].SetActive(true);
+                activated++;
+            }
+        }
+    }
+
+
+    public void SpawnFirstWave()
+    {
+        for (int i = 0; i < Mathf.Min(objectsToPool.Length, quantityToPool.Length); i++)
+        {
+            if (objectsToPool[i].CompareTag("CopsFirstWave"))
+            {
+                SpawnFromPool(objectsToPool[i], quantityToPool[i]);
             }
         }
     }

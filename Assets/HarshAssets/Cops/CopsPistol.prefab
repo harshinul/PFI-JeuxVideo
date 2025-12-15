@@ -983,7 +983,7 @@ MonoBehaviour:
   collectableMoneyPrefab: {fileID: 3180745797301891250, guid: 2d8acea726e3517418c27829f081c892, type: 3}
   collectableAmmoPrefab: {fileID: 6370764775388150225, guid: ea99e1f78d567fd43a874e5fceb5fcc2, type: 3}
   chanceToDropMoney: 80
-  chanceToDropAmmo: 10
+  chanceToDropAmmo: 45
 --- !u!1 &1563820380231188246 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1146787047953256, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}

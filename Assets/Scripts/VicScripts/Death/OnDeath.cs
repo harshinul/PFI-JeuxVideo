@@ -13,7 +13,7 @@ public class OnDeath : MonoBehaviour
     [SerializeField] AudioClip deathSound;
     [SerializeField] Image background;
 
-    AudioSource mainAudioSource;
+    [SerializeField] AudioSource mainAudioSource;
 
     private Camera cameraDeath;
     private Camera cameraMain;
@@ -29,7 +29,6 @@ public class OnDeath : MonoBehaviour
         volume = cameraDeath.gameObject.GetComponent<Volume>();
         originalRot = cameraDeath.transform.rotation;
         cameraDeath.gameObject.SetActive(false);
-        mainAudioSource = FindFirstObjectByType<AudioSource>();
     }
 
     private void Update()
@@ -42,7 +41,7 @@ public class OnDeath : MonoBehaviour
 
     public void clickDeath()
     {
-        if (Input.GetKeyDown(KeyCode.M))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             cameraMain.gameObject.SetActive(false);
             cameraDeath.gameObject.SetActive(true);

@@ -8,14 +8,27 @@ public class CopsComponent : MonoBehaviour
     Transform[] targets;
     GameObject[] POI;
 
+    GameObject cop;
+
     Vector3 copsPos;
     GameObject player;
 
     public bool isAfraid;
 
     float distance;
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            if(cop.CompareTag("MallCop"))
+                OnClickAfraid();
+        }
+    }
+
     private void OnEnable()
     {
+        cop = this.gameObject;
         isAfraid = false;
         POI = GameObject.FindGameObjectsWithTag("POI");
         List<Transform> poiList = new List<Transform>();
@@ -38,8 +51,10 @@ public class CopsComponent : MonoBehaviour
 
         if (distance <= 100)
         {
-            GetComponent<Movement>().isWanted = true;
+            FindFirstObjectByType<Movement>().isWanted = true;
+            FindFirstObjectByType<NPCHealthComponent>().wastedCount += 1;
             isAfraid = true;
+            FindFirstObjectByType<ObjectPool>().SpawnFirstWave();
         }
     }
 }
