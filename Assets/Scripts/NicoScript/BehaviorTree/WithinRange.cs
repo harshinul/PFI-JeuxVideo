@@ -16,10 +16,15 @@ public class WithinRange : Conditions
 
     public override bool Evaluate()
     {
-            float distance = Vector3.Distance(self.position, target.transform.position);
-            //Debug.Log("Distance to target: " + distance);
-            bool inRange = distance <= range;
-            return CheckForReverse(inRange);
-        
+        if (!self || !target)
+            return CheckForReverse(false);
+
+        Transform t = target.transform;
+        if (!t)
+            return CheckForReverse(false);
+
+        float distance = Vector3.Distance(self.position, t.position);
+        bool inRange = distance <= range;
+        return CheckForReverse(inRange);
     }
 }

@@ -10,6 +10,11 @@ public class IsAfraid : Conditions
 
     public override bool Evaluate()
     {
-        return npc.GetComponent<NpcComponent>().isAfraidNpc;
+        if (!npc) return false;
+
+        var npcAfterDisable = npc.GetComponent<NpcComponent>();
+        if (!npcAfterDisable) return false;
+
+        return npcAfterDisable.isAfraidNpc;
     }
 }

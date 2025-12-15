@@ -109,9 +109,9 @@ public class GameManager : MonoBehaviour
         {
             if (wastedCount >= 1)
                 ObjectPool.objectPoolInstance.ActivateFromPool(meleeCop, 1);
-            if (wastedCount >= 10)
+            if (wastedCount >= 75)
                 ObjectPool.objectPoolInstance.ActivateFromPool(pistolCop, 1);
-            if (wastedCount >= 20)
+            if (wastedCount >= 150)
                 ObjectPool.objectPoolInstance.ActivateFromPool(rifleCop, 1);
             //if (wastedCount >= 1 && wastedCount < 10)
             //    ObjectPool.objectPoolInstance.ActivateFromPool(pistolCop, 5);

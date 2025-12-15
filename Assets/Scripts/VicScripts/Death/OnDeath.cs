@@ -14,6 +14,8 @@ public class OnDeath : MonoBehaviour
     [SerializeField] Image background;
     [SerializeField] Camera deathCam;
 
+    bool isDead = false;
+
     AudioSource mainAudioSource;
 
     public static OnDeath Instance;
@@ -31,8 +33,17 @@ public class OnDeath : MonoBehaviour
         mainAudioSource = FindFirstObjectByType<AudioSource>();
     }
 
+    private void Update()
+    {
+        if (!isDead)
+            return;
+
+        Wobble();
+    }
+
     public void clickDeath()
     {
+        isDead = true;
         cameraMain.gameObject.SetActive(false);
         deathCam.gameObject.SetActive(true);
          StartCoroutine(DeathIn());
@@ -40,17 +51,6 @@ public class OnDeath : MonoBehaviour
         StartCoroutine(SlowMo());
         startDeathMusic();
         Wobble();
-    }
-
-    void Wobble()
-    {
-        float t = Time.unscaledTime;
-
-        float x = (Mathf.PerlinNoise(t * wobbleSpeed, 0.0f) - 0.5f) * 2f * wobbleAmount;
-
-        Quaternion targetRot = originalRot * Quaternion.Euler(x, 0f, 15f);
-
-        deathCam.transform.rotation = Quaternion.Lerp(deathCam.transform.rotation, targetRot, Time.deltaTime * 2f);
     }
 
     void startDeathMusic()
@@ -70,6 +70,17 @@ public class OnDeath : MonoBehaviour
         }
 
         volume.weight = 1f;
+    }
+
+    void Wobble()
+    {
+        float t = Time.unscaledTime;
+
+        float x = (Mathf.PerlinNoise(t * wobbleSpeed, 0.0f) - 0.5f) * 2f * wobbleAmount;
+
+        Quaternion targetRot = originalRot * Quaternion.Euler(x, 0f, 15f);
+
+        deathCam.transform.rotation = Quaternion.Lerp(deathCam.transform.rotation, targetRot, Time.deltaTime * 2f);
     }
 
     IEnumerator WastedImage()

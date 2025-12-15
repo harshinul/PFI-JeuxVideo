@@ -10,6 +10,11 @@ public class IsAfraidSecurity : Conditions
 
     public override bool Evaluate()
     {
-        return cops.GetComponent<CopsComponent>().isAfraidCops;
+        if (!cops) return false;
+
+        var copsAfterDisable = cops.GetComponent<CopsComponent>();
+        if (!copsAfterDisable) return false;
+
+        return copsAfterDisable.isAfraidCops;
     }
 }
