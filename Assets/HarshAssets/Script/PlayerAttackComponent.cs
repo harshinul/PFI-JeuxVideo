@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerAttackComponent : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class PlayerAttackComponent : MonoBehaviour
 
     //UI
     public TextMeshProUGUI ammoDisplay;
+    [SerializeField] Image[] weaponIcons;
 
     // Current Weapon
     public int currentWeaponIndex = 0; //public pour debug
@@ -21,6 +23,7 @@ public class PlayerAttackComponent : MonoBehaviour
     //Components
     PlayerAnimationComponent playerAnimationComponent;
     Movement movement;
+    public ReloadUiScript reloadUiScript;
 
     // bool
     public bool canAttack;
@@ -37,6 +40,7 @@ public class PlayerAttackComponent : MonoBehaviour
         // Get Components
         playerAnimationComponent = GetComponent<PlayerAnimationComponent>();
         movement = GetComponent<Movement>();
+        reloadUiScript = GetComponent<ReloadUiScript>();
     }
 
     void Start()
@@ -70,7 +74,7 @@ public class PlayerAttackComponent : MonoBehaviour
 
     void Reload()
     {
-        if(!canReload) return;
+        if (!canReload) return;
         if (currentWeapon != null)
         {
             currentWeapon.Reload();
@@ -104,10 +108,13 @@ public class PlayerAttackComponent : MonoBehaviour
                 }
                 else
                 {
+                    weapon.isEquipped = false;
                     weapon.gameObject.SetActive(false);
                 }
             }
         }
+
+        ChangeWeaponIcon();
 
     }
 
@@ -132,17 +139,47 @@ public class PlayerAttackComponent : MonoBehaviour
         }
     }
 
+    void ChangeWeaponIcon()
+    {
+        for (int i = 0; i < weaponIcons.Length; i++)
+        {
+            if (i == currentWeaponIndex - 1) // -1 because index 0 is None
+            {
+                weaponIcons[i].enabled = true; // Show current weapon icon
+            }
+            else
+            {
+                weaponIcons[i].enabled = false; // Hide other weapon icons
+            }
+        }
+
+    }
+
     public void FirstWeaponsAction()
     {
         currentWeaponIndex = 0;
         playerAnimationComponent.EquipNone();
 
-        foreach (var weapon in weapons) 
+        foreach (var weapon in weapons)
         {
             weapon.gameObject.SetActive(false); // Hide all weapons
         }
+
+        foreach (var icon in weaponIcons)
+        {
+            icon.enabled = false; // Hide all weapon icons
+        }
     }
 
+    public void AddAmmo()
+    {
+        foreach (var weapon in weapons)
+        {
+
+                weapon.AddAmmo();
+            
+        }
+    }
 
     public void InputChangeWeapon(InputAction.CallbackContext context)
     {

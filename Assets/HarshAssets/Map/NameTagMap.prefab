@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8882647281132405457}
   - component: {fileID: 7031665488966779349}
   - component: {fileID: 1633330884485850055}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: NameTagMap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 81489621439538073}
   - component: {fileID: 1406670642045288296}
   - component: {fileID: 8262935853391292806}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Text (TMP)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -203,8 +203,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0

@@ -38,10 +38,21 @@ public class Riffle : Weapon
 
     }
 
+    public override void AddAmmo()
+    {
+        ammoBank += magazineSize;
+
+        if(isEquipped)
+        {
+            playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
+        }
+    }
+
     IEnumerator ReloadCouroutine()
     {
         playerAttackComponent.canReload = false; // Lock player actions
         movement.canRun = false;
+        StartCoroutine(playerAttackComponent.reloadUiScript.FillReloadBar(2f));
         yield return new WaitForSeconds(2f);
 
         if (ammoBank >= 12) // full reload
