@@ -44,7 +44,7 @@ public class PoliceSecurity : BehaviorTree
 
         //*************************************** Sequences *************************************//
         Sequence patrolSequence = new Sequence(new Node[] { goTo, wait },null, this);
-        Sequence panicSequence = new Sequence(new Node[] { panic }, new Conditions[] {isPanicking}, this);
+        Sequence panicSequence = new Sequence(new Node[] { panic }, new Conditions[] { isPanicking }, this);
         //*************************************** Root Node *************************************//
         root = new Selector(new Node[] { panicSequence, patrolSequence}, null, this);
     }
