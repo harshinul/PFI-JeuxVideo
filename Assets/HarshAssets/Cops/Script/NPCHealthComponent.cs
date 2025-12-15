@@ -22,6 +22,11 @@ public class NPCHealthComponent : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         behaviorTree = GetComponent<BehaviorTree>();
     }
+
+    private void OnEnable()
+    {
+        currentHealth = startHealth;
+    }
     void Start()
     {
         currentHealth = startHealth;
@@ -71,7 +76,7 @@ public class NPCHealthComponent : MonoBehaviour
             objectTodrop.SetActive(true);
         }
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
     }
 
