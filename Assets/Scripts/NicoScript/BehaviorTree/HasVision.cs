@@ -23,18 +23,32 @@ public class HasVision : Conditions
 
         if (angleToTarget > angleView)
         {
+            Debug.Log("No Vision: Angle too wide");
             return CheckForReverse(false);
 
         }
 
-        if (Physics.Raycast(self.position, directionToTarget, out RaycastHit hit, 10000, mask))
+        if (Physics.SphereCast(self.position, 0.6f, directionToTarget, out RaycastHit hit)) // spherecast to have a wider vision
         {
+
             if (hit.collider.gameObject != target)
             {
+                Debug.Log("No Vision: Obstacle in the way");
+
                 return CheckForReverse(false);
 
             }
         }
+
+
+        //if (Physics.Raycast(self.position, directionToTarget, out RaycastHit hit, 10000))
+        //{
+        //    if (hit.collider.gameObject != target)
+        //    {
+        //        return CheckForReverse(false);
+
+        //    }
+        //}
 
         return CheckForReverse(true);
     }

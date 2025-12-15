@@ -8,11 +8,13 @@ public class PoliceRanged : BehaviorTree
 
     [SerializeField] Transform firePoint;
 
+    GameObject player;
     GameObject centerOfBodyPlayer;
 
     float angleVision = 150f;
     protected override void InitializeTree()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
         centerOfBodyPlayer = GameObject.FindGameObjectWithTag("CenterOfBodyPlayer");
 
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
@@ -23,7 +25,7 @@ public class PoliceRanged : BehaviorTree
         Conditions shootingCondition = new WithinRange(agent.transform, centerOfBodyPlayer, 15);
         Conditions rangedConditionInversed = new WithinRange(agent.transform, centerOfBodyPlayer, 15,true);
         Conditions chaseInterruptCondition = new WithinRange(agent.transform, centerOfBodyPlayer, 10);
-        Conditions hasVision = new HasVision(agent.transform, centerOfBodyPlayer, angleVision, mask);
+        Conditions hasVision = new HasVision(agent.transform, player, angleVision, mask);
 
         //************************************* Interrupt *************************************//
         Interrupt interrupt = new Interrupt(new Conditions[] {rangedConditionInversed,chaseInterruptCondition, hasVision }, this);
