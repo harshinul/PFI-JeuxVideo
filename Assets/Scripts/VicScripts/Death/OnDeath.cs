@@ -76,9 +76,9 @@ public class OnDeath : MonoBehaviour
     {
         float t = Time.unscaledTime;
 
-        float x = (Mathf.PerlinNoise(t * wobbleSpeed, 0.0f) - 0.5f) * 2f * wobbleAmount;
+        float y = (Mathf.PerlinNoise(t * wobbleSpeed, 0.0f) - 0.5f) * 2f * wobbleAmount;
 
-        Quaternion targetRot = originalRot * Quaternion.Euler(x, 0f, 15f);
+        Quaternion targetRot = originalRot * Quaternion.Euler(0f, y, 15f);
 
         deathCam.transform.rotation = Quaternion.Lerp(deathCam.transform.rotation, targetRot, Time.deltaTime * 2f);
     }
