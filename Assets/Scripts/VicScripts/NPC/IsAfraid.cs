@@ -12,9 +12,9 @@ public class IsAfraid : Conditions
     {
         if (!npc) return false;
 
-        var npcAfterDisable = npc.GetComponent<NpcComponent>();
+        var npcAfterDisable = GameManager.Instance.isAfraidNpc;
         if (!npcAfterDisable) return false;
 
-        return npcAfterDisable.isAfraidNpc;
+        return npcAfterDisable;
     }
 }

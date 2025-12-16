@@ -12,7 +12,6 @@ public class BaseballBat : Weapon
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] float attackDamage = 100f;
     [SerializeField] float attackForce = 500f;
-    [SerializeField] AudioClip[] audiosBat;
 
     [SerializeField] Collider playerCollider;
     Collider weaponCollider;
@@ -84,8 +83,6 @@ public class BaseballBat : Weapon
             Vector3 direction = (hit.transform.position - transform.position).normalized;
             hit.gameObject.GetComponent<NPCHealthComponent>()?.TakeDamage(attackDamage, direction * attackForce);
             Debug.Log("Baseball Bat hit NPC via OverlapSphere");
-            Debug.Log(audiosBat[0]);
-            SFXManager.Instance.PlaySFX(audiosBat[0], transform, 5);
         }
     }
 

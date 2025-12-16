@@ -69,6 +69,8 @@ public class PlayerAttackComponent : MonoBehaviour
         {
             elapsedTime = 0f;
             currentWeapon.Attack();
+
+            GameManager.Instance.AfraidEveryone();
         }
     }
 
@@ -112,6 +114,8 @@ public class PlayerAttackComponent : MonoBehaviour
                     weapon.gameObject.SetActive(false);
                 }
             }
+
+            GameManager.Instance.AfraidEveryone();
         }
 
         ChangeWeaponIcon();

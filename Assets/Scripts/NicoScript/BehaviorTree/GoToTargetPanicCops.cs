@@ -63,7 +63,7 @@ public class GoToTargetPanicCops : Node
 
     public override void FinishAction(bool result)
     {
-        BT.GetComponent<CopsComponent>().isAfraidCops = false;
+        GameManager.Instance.isAfraidCops = false;
         agent.speed = agent.speed / 2;
         agent.angularSpeed = agent.angularSpeed / 2;
         agent.SetDestination(agent.transform.position);
@@ -73,7 +73,7 @@ public class GoToTargetPanicCops : Node
 
     public override void Interrupt()
     {
-        BT.GetComponent<CopsComponent>().isAfraidCops = false;
+        GameManager.Instance.isAfraidCops = false;
         agent.speed = agent.speed / 2;
         agent.angularSpeed = agent.angularSpeed / 2;
         agent.SetDestination(agent.transform.position);

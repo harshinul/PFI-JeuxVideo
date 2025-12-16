@@ -1,6 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class GameManager : MonoBehaviour
 {
@@ -8,20 +10,24 @@ public class GameManager : MonoBehaviour
 
     public float wastedCount;
     public static GameManager Instance;
-    public GameObject meleeCop;
-    public GameObject pistolCop;
-    public GameObject rifleCop;
 
+    [SerializeField] GameObject npc;
+    [SerializeField] GameObject mallCop;
+    [SerializeField] GameObject meleeCop;
+    [SerializeField] GameObject pistolCop;
+    [SerializeField] GameObject rifleCop;
+
+    Transform[] targets;
+    GameObject[] POI;
+
+    public bool isAfraidCops;
+    public bool isAfraidNpc;
     bool doOnce = true;
 
     Vector3 copsPos;
     Vector3 npcPos;
 
     GameObject player;
-
-    int posMelee;
-    int posPistol;
-    int posRifle;
 
     float distance;
 
@@ -31,42 +37,52 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
-        posMelee = 5;
-        posPistol = 6;
-        posRifle = 7;
-        StartCoroutine(loopSpawn());
-    }
+        POI = GameObject.FindGameObjectsWithTag("POI");
+        List<Transform> poiList = new List<Transform>();
 
-    private void Update()
-    {
-        if (Input.GetMouseButtonDown(0))
+        foreach (GameObject poi in POI)
         {
-            foreach (var npc in GameObject.FindGameObjectsWithTag("NPC"))
-                AfraidNpc(npc);
+            poiList.Add(poi.transform);
+        }
+        targets = poiList.ToArray();
 
-            foreach (var cop in GameObject.FindGameObjectsWithTag("MallCop"))
-                AfraidCops(cop);
+        player = GameObject.FindGameObjectWithTag("Player");
+        StartCoroutine(loopSpawn());
+
+        for (int i = 0; i < 20; i++)
+        {
+            GameObject npcInstance = ObjectPool.objectPoolInstance.GetPooledObject(npc);
+            npcInstance.SetActive(true);
+            npcInstance.transform.position = GenerateRandomPos();
+            Debug.Log(npcInstance.transform.position);
+        }
+
+        for(int i = 0; i < 3; i++)
+        {
+            GameObject mallCopInstance = ObjectPool.objectPoolInstance.GetPooledObject(mallCop);
+            mallCopInstance.SetActive(true);
+            mallCopInstance.transform.position = GenerateRandomPos();
         }
     }
+
     public void WantedLevel(GameObject npc)
     {
         Debug.Log(wastedCount);
         if (npc.CompareTag("NPC"))
         {
-            wastedCount += 2;
+            wastedCount += 1;
         }
         else if (npc.CompareTag("MallCop"))
         {
-            wastedCount += 5;
+            wastedCount += 3;
         }
         else if (npc.CompareTag("CopsFirstWave"))
         {
-            wastedCount += 10;
+            wastedCount += 8;
         }
         else if (npc.CompareTag("CopsSecondWave"))
         {
-            wastedCount += 15;
+            wastedCount += 10;
         }
     }
 
@@ -76,7 +92,6 @@ public class GameManager : MonoBehaviour
         copsPos = cop.transform.position;
         distance = Vector3.Distance(copsPos, player.transform.position);
 
-        //Fix pour la scale
         if (distance <= 25)
         {
             if (doOnce)
@@ -86,8 +101,17 @@ public class GameManager : MonoBehaviour
                 doOnce = false;
             }
             Debug.Log(wastedCount);
-            cop.GetComponent<CopsComponent>().isAfraidCops = true;
+            isAfraidCops = true;
         }
+    }
+
+    public void AfraidEveryone()
+    {
+        foreach (var npc in GameObject.FindGameObjectsWithTag("NPC"))
+            AfraidNpc(npc);
+
+        foreach (var cop in GameObject.FindGameObjectsWithTag("MallCop"))
+            AfraidCops(cop);
     }
 
     public void AfraidNpc(GameObject npc)
@@ -96,11 +120,15 @@ public class GameManager : MonoBehaviour
         npcPos = npc.transform.position;
         distance = Vector3.Distance(npcPos, player.transform.position);
 
-        //Fix pour la scale
         if (distance <= 25)
         {
-            npc.GetComponent<NpcComponent>().isAfraidNpc = true;
+            isAfraidNpc = true;
         }
+    }
+
+    Vector3 GenerateRandomPos()
+    {
+        return targets[Random.Range(0, targets.Length)].transform.position;
     }
 
     IEnumerator loopSpawn()
@@ -108,21 +136,32 @@ public class GameManager : MonoBehaviour
         while (true)
         {
             if (wastedCount >= 1)
-                ObjectPool.objectPoolInstance.ActivateFromPool(meleeCop, 1);
+            {
+                for(int i = 0; i < 1; i++)
+                {
+                    GameObject copsMeleeInstance = ObjectPool.objectPoolInstance.GetPooledObject(meleeCop);
+                    copsMeleeInstance.SetActive(true);
+                    copsMeleeInstance.transform.position = GenerateRandomPos();
+                }
+            }
             if (wastedCount >= 75)
-                ObjectPool.objectPoolInstance.ActivateFromPool(pistolCop, 1);
+            {
+                for (int i = 0; i < 3; i++)
+                {
+                    GameObject copsPistolInstance = ObjectPool.objectPoolInstance.GetPooledObject(pistolCop);
+                    copsPistolInstance.SetActive(true);
+                    copsPistolInstance.transform.position = GenerateRandomPos();
+                }
+            }
             if (wastedCount >= 150)
-                ObjectPool.objectPoolInstance.ActivateFromPool(rifleCop, 1);
-            //if (wastedCount >= 1 && wastedCount < 10)
-            //    ObjectPool.objectPoolInstance.ActivateFromPool(pistolCop, 5);
-            //if (wastedCount >= 1 && wastedCount < 10)
-            //    ObjectPool.objectPoolInstance.ActivateFromPool(meleeCop, 1);
-            //if (wastedCount >= 10)
-            //    ObjectPool.objectPoolInstance.ActivateFromPool(meleeCop, ObjectPool.objectPoolInstance.quantityToPool[posMelee]);
-            //if (wastedCount >= 20)
-            //    ObjectPool.objectPoolInstance.ActivateFromPool(pistolCop, ObjectPool.objectPoolInstance.quantityToPool[posPistol]);
-            //if (wastedCount >= 50)
-            //    ObjectPool.objectPoolInstance.ActivateFromPool(rifleCop, ObjectPool.objectPoolInstance.quantityToPool[posRifle]);
+            {
+                for (int i = 0; i < 1; i++)
+                {
+                    GameObject copsRifleInstance = ObjectPool.objectPoolInstance.GetPooledObject(rifleCop);
+                    copsRifleInstance.SetActive(true);
+                    copsRifleInstance.transform.position = GenerateRandomPos();
+                }
+            }
 
             yield return new WaitForSeconds(checkInterval);
         }

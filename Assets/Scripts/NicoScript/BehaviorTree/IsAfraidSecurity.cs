@@ -12,9 +12,9 @@ public class IsAfraidSecurity : Conditions
     {
         if (!cops) return false;
 
-        var copsAfterDisable = cops.GetComponent<CopsComponent>();
+        var copsAfterDisable = GameManager.Instance.isAfraidCops;
         if (!copsAfterDisable) return false;
 
-        return copsAfterDisable.isAfraidCops;
+        return copsAfterDisable;
     }
 }
