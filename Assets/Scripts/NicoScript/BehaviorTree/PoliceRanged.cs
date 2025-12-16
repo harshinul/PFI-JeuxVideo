@@ -5,7 +5,8 @@ public class PoliceRanged : BehaviorTree
 {
 
     [SerializeField] GameObject bulletPrefab;
-
+    [SerializeField] AudioClip shootSound;
+    [SerializeField] float shootVolume = 1.0f;
     [SerializeField] Transform firePoint;
 
     GameObject player;
@@ -34,7 +35,7 @@ public class PoliceRanged : BehaviorTree
         //GoToPlayer chasePlayer = new GoToPlayer(agent, player.transform, 50f, null, this);
         //ShootingNode rangedAttack = new ShootingNode( player.transform, transform.Find("FirePoint"), 200f, 20f, new Conditions[] {shootingCondition}, this);
         GoToPlayer chasePlayer = new GoToPlayer(agent, centerOfBodyPlayer.transform, 3f, null, this);
-        ShootingNode rangedAttack = new ShootingNode(bulletPrefab,this.gameObject, centerOfBodyPlayer.transform,firePoint, new Conditions[] {shootingCondition,hasVision}, this);
+        ShootingNode rangedAttack = new ShootingNode(shootSound,shootVolume,bulletPrefab,this.gameObject, centerOfBodyPlayer.transform,firePoint, new Conditions[] {shootingCondition,hasVision}, this);
 
         //*************************************** Sequences *************************************//
         //*************************************** Root Node *************************************//

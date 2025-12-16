@@ -10,6 +10,8 @@ public class NPCHealthComponent : MonoBehaviour
     [SerializeField] GameObject collectableAmmoPrefab;
     [SerializeField] int chanceToDropMoney;
     [SerializeField] int chanceToDropAmmo;
+    [SerializeField] AudioClip deathSound;
+    [SerializeField] float deathVolume;
     float currentHealth;
 
     RagdollController ragdollController;
@@ -40,7 +42,6 @@ public class NPCHealthComponent : MonoBehaviour
     public void TakeDamage(float damage, Vector3 force)
     {
         currentHealth -= damage;
-        Debug.Log(currentHealth);
         if (currentHealth <= 0)
         {
             GameManager.Instance.WantedLevel(this.gameObject);
@@ -60,7 +61,9 @@ public class NPCHealthComponent : MonoBehaviour
         agent.enabled = false;
         behaviorTree.enabled = false;
         ragdollController.EnableRagdoll(force);
+        SFXManager.Instance.PlaySFX(deathSound, transform, deathVolume);
 
+        Debug.Log("Random Number: " + randomNumber);
         if (randomNumber > chanceToDropMoney && canDropCollectables)
         {
             if (randomNumber > chanceToDropAmmo)

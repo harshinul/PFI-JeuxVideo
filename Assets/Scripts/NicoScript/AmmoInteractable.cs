@@ -3,6 +3,8 @@ using UnityEngine;
 public class AmmoInteractable : MonoBehaviour
 {
     [SerializeField] GameObject ammoPrefab;
+    [SerializeField] AudioClip pickupSound;
+    [SerializeField] float pickupVolume = 1.0f;
 
     float time = 0;
     float height;
@@ -30,6 +32,7 @@ public class AmmoInteractable : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            SFXManager.Instance.PlaySFX(pickupSound,transform, pickupVolume);
             other.GetComponent<PlayerAttackComponent>().AddAmmo();
             gameObject.SetActive(false);
         }

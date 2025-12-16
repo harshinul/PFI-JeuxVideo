@@ -12,6 +12,11 @@ public class BaseballBat : Weapon
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] float attackDamage = 100f;
     [SerializeField] float attackForce = 500f;
+<<<<<<< HEAD
+=======
+    [SerializeField] AudioClip hitSound;
+    [SerializeField] float hitSoundVolume = 1.0f;
+>>>>>>> 70034d0b539d4209e1ae0a8e7c049df67bd7a14d
 
     [SerializeField] Collider playerCollider;
     Collider weaponCollider;
@@ -38,6 +43,7 @@ public class BaseballBat : Weapon
         base.Equip();
         playerAnimationComponent.EquipBaseballBat();
         playerAttackComponent.ammoDisplay.enabled = false;
+        SFXManager.Instance.PlaySFX(equipAudioClip, transform, equipAudioVolume);
     }
 
     public override void Reload()
@@ -55,6 +61,7 @@ public class BaseballBat : Weapon
     IEnumerator StopAttackAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delayBeforeCanDealDamage);
+        SFXManager.Instance.PlaySFX(attackAudioClip, transform, attackAudioVolume);
         AttackHit();
         yield return new WaitForSeconds(delay - delayBeforeCanDealDamage);
         playerAnimationComponent.StopAttack(attackParameterName);
@@ -78,8 +85,14 @@ public class BaseballBat : Weapon
             hits.AddRange(pointHits);
         }
 
+        if(hits.Count != 0)
+        {
+            
+        }
+
         foreach (Collider hit in hits)
         {
+            SFXManager.Instance.PlaySFX(hitSound, transform, hitSoundVolume);
             Vector3 direction = (hit.transform.position - transform.position).normalized;
             hit.gameObject.GetComponent<NPCHealthComponent>()?.TakeDamage(attackDamage, direction * attackForce);
             Debug.Log("Baseball Bat hit NPC via OverlapSphere");

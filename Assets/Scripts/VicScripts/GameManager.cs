@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
 
     public void WantedLevel(GameObject npc)
     {
-        Debug.Log(wastedCount);
+        //Debug.Log(wastedCount);
         if (npc.CompareTag("NPC"))
         {
             wastedCount += 1;

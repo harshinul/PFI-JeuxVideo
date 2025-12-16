@@ -80,12 +80,14 @@ public class RagdollController : MonoBehaviour
 
     void DisableRagdoll()
     {
-        animator.enabled = true;
-        bodyCollider.enabled = true;
+
         foreach (var rb in rigidbodies)
             rb.isKinematic = true;
 
         foreach (var col in colliders)
             col.enabled = false;
+
+        animator.enabled = true;
+        bodyCollider.enabled = true;
     }
 }

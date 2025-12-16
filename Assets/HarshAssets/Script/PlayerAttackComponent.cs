@@ -65,6 +65,8 @@ public class PlayerAttackComponent : MonoBehaviour
     void Attack()
     {
         elapsedTime += Time.deltaTime;
+        if (!wantsToAttack)
+            return;
         if (currentWeapon != null && movement.movementState != MovementState.Running && wantsToAttack && canAttack && !isReloading && elapsedTime > attackDelay)
         {
             elapsedTime = 0f;
@@ -76,7 +78,7 @@ public class PlayerAttackComponent : MonoBehaviour
 
     void Reload()
     {
-        if (!canReload) return;
+        if (!canReload || movement.movementState == MovementState.Running) return;
         if (currentWeapon != null)
         {
             currentWeapon.Reload();

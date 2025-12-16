@@ -884,6 +884,8 @@ MonoBehaviour:
   collectableAmmoPrefab: {fileID: 6370764775388150225, guid: ea99e1f78d567fd43a874e5fceb5fcc2, type: 3}
   chanceToDropMoney: 80
   chanceToDropAmmo: 5
+  deathSound: {fileID: 8300000, guid: 0c04373aadea8f849bfe09c2906fccbd, type: 3}
+  deathVolume: 0
 --- !u!114 &-780514026075071585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -897,6 +899,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedToWalk: 3
+  attackSound: {fileID: 8300000, guid: e63d7a9a7d5e0e74084545f58731cdde, type: 3}
+  attackVolume: 1
 --- !u!114 &4110692877758860608
 MonoBehaviour:
   m_ObjectHideFlags: 0

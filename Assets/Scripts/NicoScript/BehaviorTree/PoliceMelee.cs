@@ -14,6 +14,8 @@ public class PoliceMelee : BehaviorTree
     HealthComponent playerhealthComponent;
 
     CopsAnimationComponent animComp;
+    [SerializeField] AudioClip meleeHitSound;
+    [SerializeField] float meleeHitVolume = 1f;
 
     // transformer les 3 en 15
 
@@ -26,7 +28,7 @@ public class PoliceMelee : BehaviorTree
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
 
         //************************************* Conditions *************************************//
-        Conditions meleeConditionCloseEnough = new WithinRange(agent.transform, player, 3);
+        Conditions meleeConditionCloseEnough = new WithinRange(agent.transform, player, 2);
 
 
         Conditions chaseConditionInversed = new WithinRange(agent.transform, player, 200f, true);
@@ -35,10 +37,10 @@ public class PoliceMelee : BehaviorTree
         interrupt = new Interrupt(new Conditions[] { meleeConditionCloseEnough }, this);
 
         //************************************* Nodes *************************************//
-        GoToPlayer chasePlayer = new GoToPlayer(agent, player.transform, 3, null, this);
+        GoToPlayer chasePlayer = new GoToPlayer(agent, player.transform, 2, null, this);
         Wait wait = new Wait(1, null, this);
 
-        MeleeAttack meleeAttack = new MeleeAttack(animComp, this.gameObject, meleeObject, player.transform, 3, agent, new Conditions[] { meleeConditionCloseEnough }, this);
+        MeleeAttack meleeAttack = new MeleeAttack(animComp, this.gameObject, meleeObject, player.transform, 2, agent, new Conditions[] { meleeConditionCloseEnough }, this);
 
         //*************************************** Root Node *************************************//
         root = new Selector(new Node[] { meleeAttack, chasePlayer }, null, this);
@@ -46,8 +48,12 @@ public class PoliceMelee : BehaviorTree
 
     void AttackPlayer() // animation event
     {
-        if(Vector3.Distance(transform.position, player.transform.position) < 4f)
+        if(Vector3.Distance(transform.position, player.transform.position) < 3f)
+        {
             playerhealthComponent.TakeDamage(damageAmount);
+            SFXManager.Instance.PlaySFX(meleeHitSound, transform, meleeHitVolume);
+        }
+            
     }
     private void OnDisable()
     {

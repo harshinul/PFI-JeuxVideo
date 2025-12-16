@@ -107,6 +107,7 @@ MonoBehaviour:
   speed: 100
   damage: 10
   addBulletSpread: 1
+  hitSound: {fileID: 8300000, guid: 795c1d49e14e1654e89ed9c7ffb1e3f1, type: 3}
   BulletSpread: {x: 0.05, y: 0, z: 0.05}
 --- !u!114 &1802943098189201870
 MonoBehaviour:

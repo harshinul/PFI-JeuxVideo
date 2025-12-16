@@ -19,6 +19,17 @@ public class HealthComponent : MonoBehaviour
     private float regenRate;
     private Coroutine backBarCoroutine;
 
+    PlayerAnimationComponent playerAnimationComponent;
+    PlayerAttackComponent playerAttackComponent;
+    Movement movement;
+
+    void Awake()
+    {
+        playerAnimationComponent = GetComponent<PlayerAnimationComponent>();
+        playerAttackComponent = GetComponent<PlayerAttackComponent>();
+        movement = GetComponent<Movement>();
+    }
+
     void Start()
     {
         health = maxHealth;
@@ -52,6 +63,9 @@ public class HealthComponent : MonoBehaviour
         if (health <= 0)
         {
             isDead = true;
+            playerAnimationComponent.PlayDeathAnimation();
+            playerAttackComponent.HideWeapon();
+            movement.canMove = false;
             GetComponent<OnDeath>().clickDeath();
             Debug.Log("Player is Dead!");
             HighScoreScript.Instance.SetHighScore(MoneyScript.Instance.moneyAmount);

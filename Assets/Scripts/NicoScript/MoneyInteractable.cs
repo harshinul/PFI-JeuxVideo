@@ -5,6 +5,8 @@ public class MoneyInteractable : MonoBehaviour
 {
 
     [SerializeField] GameObject moneyPrefab;
+    [SerializeField] AudioClip collectSound;
+    [SerializeField] float collectVolume = 1.0f;
 
     float time = 0;
     float height;
@@ -32,6 +34,7 @@ public class MoneyInteractable : MonoBehaviour
         randomMoneyAmount = Random.Range(20, 101);
         if (other.gameObject.CompareTag("Player"))
         {
+            SFXManager.Instance.PlaySFX(collectSound,transform, collectVolume);
             MoneyScript.Instance.AddMoney(randomMoneyAmount);
             gameObject.SetActive(false);
         }

@@ -52,6 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moneyPrefab: {fileID: 3180745797301891250}
+  collectSound: {fileID: 8300000, guid: 71b9271c656eebd4c8e4d5890404ebf2, type: 3}
+  collectVolume: 1
 --- !u!65 &3626817766204834748
 BoxCollider:
   m_ObjectHideFlags: 0

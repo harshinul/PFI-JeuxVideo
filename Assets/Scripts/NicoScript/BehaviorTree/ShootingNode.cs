@@ -15,6 +15,9 @@ public class ShootingNode : Node
 
     Transform firePoint;
 
+    AudioClip shootSound;
+    float shootVolume = 1.0f;
+
 
     private float shootingDelay = .5f;
 
@@ -24,8 +27,10 @@ public class ShootingNode : Node
 
 
 
-    public ShootingNode(GameObject bulletPrefab, GameObject owner, Transform target, Transform firePoint, Conditions[] conditions, BehaviorTree tree) : base(conditions, tree)
+    public ShootingNode(AudioClip shootSound, float shootVolume, GameObject bulletPrefab, GameObject owner, Transform target, Transform firePoint, Conditions[] conditions, BehaviorTree tree) : base(conditions, tree)
     {
+        this.shootSound = shootSound;
+        this.shootVolume = shootVolume;
         this.bulletPrefab = bulletPrefab;
         this.owner = owner;
         this.target = target;
@@ -68,6 +73,7 @@ public class ShootingNode : Node
 
         if (lastShootTime <= 0f)
         {
+            SFXManager.Instance.PlaySFX(shootSound,owner.transform, shootVolume);
             var projectile = ObjectPool.objectPoolInstance.GetPooledObject(bulletPrefab);
             projectile.transform.position = firePoint.position;
             projectile.transform.rotation = Quaternion.LookRotation(dirToTarget);

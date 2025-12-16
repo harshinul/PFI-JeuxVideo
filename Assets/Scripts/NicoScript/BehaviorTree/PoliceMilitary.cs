@@ -4,8 +4,11 @@ using UnityEngine.AI;
 public class PoliceMilitary : BehaviorTree
 {
     [SerializeField] GameObject bulletPrefab;
-
+    [SerializeField] AudioClip shootSound;
+    [SerializeField] float shootVolume = 1.0f;
     [SerializeField] Transform firePoint;
+    [SerializeField] AudioClip fireSound;
+    [SerializeField] float fireVolume = 1.0f;
 
     GameObject player;
 
@@ -29,7 +32,7 @@ public class PoliceMilitary : BehaviorTree
 
         //************************************* Nodes *************************************//
         GoToPlayer chasePlayer = new GoToPlayer(agent, player.transform, 10f, null, this);
-        RangedAttackBurst rangedAttack = new RangedAttackBurst(bulletPrefab, this.gameObject, player.transform, firePoint, 3, new Conditions[] { shootingCondition, hasVision }, this);
+        RangedAttackBurst rangedAttack = new RangedAttackBurst(fireSound,fireVolume, bulletPrefab, this.gameObject, player.transform, firePoint, 3, new Conditions[] { shootingCondition, hasVision }, this);
 
         //*************************************** Sequences *************************************//
         //*************************************** Root Node *************************************//
