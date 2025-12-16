@@ -2,18 +2,20 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class Riffle : Weapon
+public class Pistol : Weapon
 {
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firePoint;
 
+
     int ammoInMagazine; 
-    public int ammoBank = 72; //public pour debug
-    public int magazineSize = 24; //public pour debug
-    public Riffle()
+    int ammoBank = 36;
+    int magazineSize = 12;
+
+    public Pistol()
     {
-        weaponName = WeaponName.Riffle;
-        attackParameterName = "isRiffleShooting";
+        weaponName = WeaponName.Pistol;
+        attackParameterName = "isPistolShooting";
         ammoInMagazine = magazineSize;
     }
 
@@ -25,7 +27,7 @@ public class Riffle : Weapon
     public override void Equip()
     {
         base.Equip();
-        playerAnimationComponent.EquipRiffle();
+        playerAnimationComponent.EquipPistol();
         playerAttackComponent.ammoDisplay.enabled = true;
         playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
         SFXManager.Instance.PlaySFX(equipAudioClip, transform, equipAudioVolume);
@@ -33,7 +35,7 @@ public class Riffle : Weapon
 
     public override void Reload()
     {
-        if (ammoInMagazine == magazineSize) return;
+        if(ammoInMagazine == magazineSize) return;
 
         StartCoroutine(ReloadCouroutine());
 
@@ -43,7 +45,7 @@ public class Riffle : Weapon
     {
         ammoBank += magazineSize;
 
-        if(isEquipped)
+        if (isEquipped)
         {
             playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
         }
@@ -51,8 +53,7 @@ public class Riffle : Weapon
 
     IEnumerator ReloadCouroutine()
     {
-
-        playerAttackComponent.canReload = false; // Lock player actions
+        playerAttackComponent.canReload = false;
         movement.canRun = false;
         playerAttackComponent.canSwitchWeapon = false;
         playerAttackComponent.isReloading = true;
@@ -73,7 +74,7 @@ public class Riffle : Weapon
         }
 
         playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
-        playerAttackComponent.canReload = true; // Unlock player actions
+        playerAttackComponent.canReload = true;
         movement.canRun = true;
         playerAttackComponent.canSwitchWeapon = true;
         playerAttackComponent.isReloading = false;
@@ -91,5 +92,7 @@ public class Riffle : Weapon
         projectile.SetActive(true);
         ammoInMagazine--;
         playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
+
     }
+
 }

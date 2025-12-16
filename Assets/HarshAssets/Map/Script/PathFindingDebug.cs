@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class PathFindingDebug : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     int[,] matriceDadjacente = new int[,]
     {
         {0,1,0,1,0,0,0,0 },
@@ -27,7 +26,6 @@ public class PathFindingDebug : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
 

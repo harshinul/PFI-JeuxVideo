@@ -10,7 +10,6 @@ public class PlayerComponent : MonoBehaviour
 
     CharacterController characterController;
     [SerializeField] Transform bulletSpawnPoint; // Point de spawn de la balle
-    //[SerializeField] ObjectPoolComponent objectPool; // Pool d'objets pour les balles
     [SerializeField] float shootingSpeed = 1f; // Préfab de la balle
     Vector2 lastLookDirection = Vector2.zero; // Dernière direction de la caméra
     Vector2 direction = Vector2.zero;
@@ -30,11 +29,6 @@ public class PlayerComponent : MonoBehaviour
 
     void Update()
     {
-        //       Debug.Log(Vector3.SignedAngle(
-        //new Vector3(lookDirection.x, 0, lookDirection.y),
-        //new Vector3(direction.x, 0, direction.y),
-        //Vector3.up
-        //));
         elapseTime += Time.deltaTime;
         if (isMoving || isLooking)
         {
@@ -51,16 +45,7 @@ public class PlayerComponent : MonoBehaviour
             isWanted = true;
             Debug.Log("ATTENTION: Player is now WANTED!");
         }
-        //ChangeAnimationForDirection();
     }
-    //public void Shoot()
-    //{
-    //    GameObject projectile = objectPool.GetObject();
-    //    projectile.SetActive(true);
-    //    projectile.transform.position = bulletSpawnPoint.position;
-    //    projectile.transform.rotation = bulletSpawnPoint.rotation;
-
-    //}
 
     public void Movement()
     {
@@ -78,7 +63,7 @@ public class PlayerComponent : MonoBehaviour
 
     }
 
-    public void ChangeAnimationForDirection()//Vector3 lookOrientation)
+    public void ChangeAnimationForDirection()
     {
         if (lookDirection.y == 0 && lookDirection.x == 0)
         {

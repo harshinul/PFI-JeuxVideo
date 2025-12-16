@@ -22,12 +22,6 @@ public class HighScoreScript : MonoBehaviour
         ShowHighScore();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void ShowHighScore()
     {
         int score = PlayerPrefs.GetInt(highScoreKey, 0);

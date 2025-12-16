@@ -17,7 +17,6 @@ public class CopsAnimationComponent : MonoBehaviour
     private void Update()
     {
         float speed = agent.velocity.magnitude;
-        //Debug.Log("Cops Speed: " + speed);
 
         if (speed >= speedToWalk)
         {
@@ -49,11 +48,6 @@ public class CopsAnimationComponent : MonoBehaviour
     {
         animator.SetTrigger("Attack");
     }
-
-    //public void StopAttacking()
-    //{
-    //    animator.SetBool("isAttacking", false);
-    //}
 
     public void StartWalking()
     {

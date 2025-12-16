@@ -81,7 +81,6 @@ public class GoToTargetPanic : Node
         GameManager.Instance.isAfraidNpc = false;
         agent.speed = agent.speed / 2;
         agent.angularSpeed = agent.angularSpeed / 2;
-        agent.SetDestination(agent.transform.position);
         base.Interrupt();
     }
 }

@@ -10,20 +10,15 @@ public class MapManager : MonoBehaviour
 
     [SerializeField] Transform playerTransform;
 
-    // Cameras
     [SerializeField] Camera mainCamera;
     [SerializeField] Camera mapCamera;
 
-    // Canvases
     [SerializeField] Canvas mapCanvas;
     [SerializeField] Canvas miniMapCanvas;
 
-    //Line Renderer
     [SerializeField] LineRenderer navigationLine;
     [SerializeField] float lineWidth = 0.2f;
 
-    //Components
-    //LocationComponent[] locations;
     [SerializeField] List<LocationNode> matrix;
     GraphHarsh graph;
     NavigateMapComponent navigateMapComponent;
@@ -35,14 +30,12 @@ public class MapManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            //DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
 
-        // Get Components
         navigateMapComponent = GetComponent<NavigateMapComponent>();
 
     }
@@ -55,12 +48,6 @@ public class MapManager : MonoBehaviour
         graph = new(adjacencyMatrix, matrix);
         navigationLine.startWidth = lineWidth;
         navigationLine.endWidth = lineWidth;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //CreateNavigation();
     }
 
     private int[,] CreateMatrix()
@@ -80,8 +67,6 @@ public class MapManager : MonoBehaviour
 
     public void test(Vector3 position)
     {
-        //ResetColor();
-
         matrix[FindClosestLositionOnMap(position)].gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
     }
 
@@ -127,7 +112,6 @@ public class MapManager : MonoBehaviour
 
     public void SetDestination(Vector3 destinationPosition)
     {
-        //ResetColor();
         CreateNavigation(FindClosestLositionOnMap(playerTransform.position), FindClosestLositionOnMap(destinationPosition));
     }
 

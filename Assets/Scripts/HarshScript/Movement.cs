@@ -7,7 +7,7 @@ public class Movement : MonoBehaviour
     [SerializeField] float baseWalkSpeed;
     float walkSpeed; //public pour changer la vitesse en fontion de l'arme
     [SerializeField] float baseRunSpeed;
-    public float currentSpeed; //public pour debug
+    float currentSpeed; //public pour debug
     [SerializeField] float rotationSpeed = 10f;
 
     // gravity

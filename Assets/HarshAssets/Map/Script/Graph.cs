@@ -22,7 +22,6 @@ namespace Pathfinding
 
             AExplorer.Push((départ, -1));
 
-            //////
             while (AExplorer.Count != 0)
             {
                 (int enExploration, int origine) actif = AExplorer.Pop();
@@ -50,7 +49,6 @@ namespace Pathfinding
 
             AExplorer.Enqueue((départ, -1));
 
-            //////
             while (AExplorer.Count != 0)
             {
                 (int enExploration, int origine) actif = AExplorer.Dequeue();
@@ -71,14 +69,13 @@ namespace Pathfinding
             return invert(ConstruireChemin(DéjaVu, arrivé));
 
         }
-        public List<int> DijkstraSearch(int départ, int arrivé) // recherche pour le moins couteux chemin (le plus rapide)
+        public List<int> DijkstraSearch(int départ, int arrivé) // recherche pour le moins couteux chemin
         {
             CustomQueue AExplorer = new CustomQueue();
             List<(int, float, int)> DéjaVu = new List<(int, float, int)>();
 
             AExplorer.Ajouter((départ, 0, -1));
 
-            //////
             while (AExplorer.Count != 0)
             {
                 (int index, float cout, int origine) actif = AExplorer.Retirer();
@@ -110,7 +107,6 @@ namespace Pathfinding
 
             AExplorer.Ajouter((départ, 0, -1));
 
-            //////
             while (AExplorer.Count != 0)
             {
                 (int index, float cout, int origine) actif = AExplorer.Retirer();
@@ -152,8 +148,6 @@ namespace Pathfinding
                     chemin.AddRange(ConstruireChemin(déjaVu, i.origine));
                 }
             }
-            //exclure -1
-            //inverse
             return chemin;
         }
 
@@ -168,8 +162,6 @@ namespace Pathfinding
                     chemin.AddRange(ConstruireChemin(déjaVu, i.origine));
                 }
             }
-            //exclure -1
-            //inverse
             return chemin;
         }
 

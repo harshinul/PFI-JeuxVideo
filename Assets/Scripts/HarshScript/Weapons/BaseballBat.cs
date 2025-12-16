@@ -17,7 +17,7 @@ public class BaseballBat : Weapon
 
     [SerializeField] Collider playerCollider;
     Collider weaponCollider;
-    public bool canDealDamage = false; //public pour debug
+    bool canDealDamage = false;
     [SerializeField] float delayBeforeCanDealDamage = 1.0f;
     [SerializeField] float attackDuration = 2.2f;
 
@@ -95,14 +95,4 @@ public class BaseballBat : Weapon
             Debug.Log("Baseball Bat hit NPC via OverlapSphere");
         }
     }
-
-    //void OnDrawGizmosSelected()
-    //{
-    //    if (attackPoint == null) return;
-
-    //    Gizmos.color = Color.red;
-    //    //Gizmos.DrawWireSphere(attackPoint.position, attackRadius);
-    //}
-
-
 }

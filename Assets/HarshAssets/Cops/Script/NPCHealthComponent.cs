@@ -83,13 +83,4 @@ public class NPCHealthComponent : MonoBehaviour
         yield return new WaitForSeconds(2f);
         gameObject.SetActive(false);
     }
-
-    //private void OnTriggerEnter(Collider other)
-    //{ 
-    //    Debug.Log("Trigger entered");
-    //    if (other.CompareTag("Bullet"))
-    //    {
-    //        Debug.Log("Hit by bullet");
-    //    }
-    //}
 }

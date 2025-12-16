@@ -75,7 +75,6 @@ public class RagdollController : MonoBehaviour
             force = Vector3.zero;
         Rigidbody rb = centerOfBody;
         rb.AddForce(force, ForceMode.Impulse);
-        //bodyCollider.enabled = false;
     }
 
     void DisableRagdoll()

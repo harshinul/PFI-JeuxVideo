@@ -8,15 +8,12 @@ public class GraphMap : MonoBehaviour
     [SerializeField] List<CubeNode> matrix;
     GraphHarsh graph;
     [SerializeField] int startIndex;
-    //[SerializeField] int endIndex;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -28,7 +25,6 @@ public class GraphMap : MonoBehaviour
     void Start()
     {
         int[,] adjacencyMatrix = CreateMatrix();
-        //graph = new(adjacencyMatrix, matrix);
 
         ResetColor();
 
@@ -86,7 +82,6 @@ public class GraphHarsh // seulement AStar et list de HexNode pour heuristic
 
         AExplorer.Ajouter((départ, 0, -1));
 
-        //////
         while (AExplorer.Count != 0)
         {
             (int index, float cout, int origine) actif = AExplorer.Retirer();
@@ -128,8 +123,6 @@ public class GraphHarsh // seulement AStar et list de HexNode pour heuristic
                 chemin.AddRange(ConstruireChemin(déjaVu, i.origine));
             }
         }
-        //exclure -1
-        //inverse
         return chemin;
     }
 

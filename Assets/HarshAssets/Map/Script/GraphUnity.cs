@@ -11,7 +11,6 @@ public class GraphUnity : MonoBehaviour
     Graph graph;
     [SerializeField] int startIndex;
     [SerializeField] int endIndex;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         int[,] adjacencyMatrix = CreateMatrix();

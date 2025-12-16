@@ -23,7 +23,6 @@ public class NavigateMapComponent : MonoBehaviour
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, groundMask))
             {
                 MapManager.Instance.SetDestination(hit.point);
-                //MapManager.Instance.test(hit.point);
             }
         }
     }

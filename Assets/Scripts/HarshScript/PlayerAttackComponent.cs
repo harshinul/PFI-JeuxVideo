@@ -14,7 +14,7 @@ public class PlayerAttackComponent : MonoBehaviour
     [SerializeField] Image[] weaponIcons;
 
     // Current Weapon
-    public int currentWeaponIndex = 0; //public pour debug
+    int currentWeaponIndex = 0; //public pour debug
     public List<WeaponName> weaponList = new List<WeaponName> { WeaponName.None, WeaponName.BaseballBat, WeaponName.Pistol, WeaponName.Riffle };
     Weapon currentWeapon;
     float elapsedTime;
@@ -32,8 +32,6 @@ public class PlayerAttackComponent : MonoBehaviour
     public bool canReload;
     public bool isReloading;
 
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
 
     void Awake()
     {
@@ -56,7 +54,6 @@ public class PlayerAttackComponent : MonoBehaviour
         FirstWeaponsAction();
     }
 
-    // Update is called once per frame
     void Update()
     {
         Attack();
@@ -149,7 +146,7 @@ public class PlayerAttackComponent : MonoBehaviour
     {
         for (int i = 0; i < weaponIcons.Length; i++)
         {
-            if (i == currentWeaponIndex - 1) // -1 because index 0 is None
+            if (i == currentWeaponIndex - 1)
             {
                 weaponIcons[i].enabled = true; // Show current weapon icon
             }

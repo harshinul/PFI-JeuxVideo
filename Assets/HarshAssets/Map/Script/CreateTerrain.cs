@@ -6,10 +6,8 @@ public class CreateTerrain : MonoBehaviour
     [SerializeField] GameObject defaultTile;
     [SerializeField] int mapWidth = 4;
     [SerializeField] int mapHeight = 4;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        //HexTile[,] terrain = BuildTerrain();
         int[,] matrix = CreateMatrix();
     }
 
@@ -91,24 +89,4 @@ public class CreateTerrain : MonoBehaviour
         }
         return matrix;
     }
-
-    //private class HexTile 
-    //{
-    //    [,] BuildTerrain()
-    //    {
-    //        HexTile[,] terrain = new HexTile[mapHeight, mapWidth];
-    //        Vector3 basePosition = transform.position;
-
-    //        for (int row = 0; row < mapWidth; ++row)
-    //        {
-    //            for (int column = 0; column < mapHeight; ++column)
-    //            {
-    //                GameObject tile = GameObject.Instantiate(defaultTile, new Vector3(basePosition.x + column, basePosition.y, basePosition.z + row - (column % 2 * 0.5f)), Quaternion.identity, transform);
-    //                terrain[row, column] = tile.GetComponent<HexTile>();
-    //            }
-    //        }
-    //        return terrain;
-    //    }
-    //}
-    
 }

@@ -2,20 +2,18 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class Pistol : Weapon
+public class Riffle : Weapon
 {
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] Transform firePoint;
 
-
     int ammoInMagazine; 
-    public int ammoBank = 36; //public pour debug
-    public int magazineSize = 12; //public pour debug
-
-    public Pistol()
+    int ammoBank = 72;
+    int magazineSize = 24;
+    public Riffle()
     {
-        weaponName = WeaponName.Pistol;
-        attackParameterName = "isPistolShooting";
+        weaponName = WeaponName.Riffle;
+        attackParameterName = "isRiffleShooting";
         ammoInMagazine = magazineSize;
     }
 
@@ -27,7 +25,7 @@ public class Pistol : Weapon
     public override void Equip()
     {
         base.Equip();
-        playerAnimationComponent.EquipPistol();
+        playerAnimationComponent.EquipRiffle();
         playerAttackComponent.ammoDisplay.enabled = true;
         playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
         SFXManager.Instance.PlaySFX(equipAudioClip, transform, equipAudioVolume);
@@ -35,7 +33,7 @@ public class Pistol : Weapon
 
     public override void Reload()
     {
-        if(ammoInMagazine == magazineSize) return;
+        if (ammoInMagazine == magazineSize) return;
 
         StartCoroutine(ReloadCouroutine());
 
@@ -45,7 +43,7 @@ public class Pistol : Weapon
     {
         ammoBank += magazineSize;
 
-        if (isEquipped)
+        if(isEquipped)
         {
             playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
         }
@@ -53,6 +51,7 @@ public class Pistol : Weapon
 
     IEnumerator ReloadCouroutine()
     {
+
         playerAttackComponent.canReload = false;
         movement.canRun = false;
         playerAttackComponent.canSwitchWeapon = false;
@@ -92,7 +91,5 @@ public class Pistol : Weapon
         projectile.SetActive(true);
         ammoInMagazine--;
         playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
-
     }
-
 }
