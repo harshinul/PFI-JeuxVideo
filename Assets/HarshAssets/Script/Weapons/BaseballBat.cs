@@ -12,11 +12,8 @@ public class BaseballBat : Weapon
     [SerializeField] LayerMask enemyLayer;
     [SerializeField] float attackDamage = 100f;
     [SerializeField] float attackForce = 500f;
-<<<<<<< HEAD
-=======
     [SerializeField] AudioClip hitSound;
     [SerializeField] float hitSoundVolume = 1.0f;
->>>>>>> 70034d0b539d4209e1ae0a8e7c049df67bd7a14d
 
     [SerializeField] Collider playerCollider;
     Collider weaponCollider;
