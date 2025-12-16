@@ -1,5 +1,160 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1176123747749298254
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1594942248337088211}
+  - component: {fileID: 5063964390835049918}
+  - component: {fileID: 732386387073429913}
+  - component: {fileID: 1686524648775046348}
+  - component: {fileID: 5074849369378658032}
+  m_Layer: 0
+  m_Name: DeathCam
+  m_TagString: DeathCam
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1594942248337088211
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176123747749298254}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0.40492916, z: -0, w: 0.9143481}
+  m_LocalPosition: {x: 2.2, y: 1.136, z: -1.96}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1478315110527394343}
+  m_LocalEulerAnglesHint: {x: 0, y: -47.773, z: 0}
+--- !u!20 &5063964390835049918
+Camera:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176123747749298254}
+  m_Enabled: 1
+  serializedVersion: 2
+  m_ClearFlags: 1
+  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_projectionMatrixMode: 1
+  m_GateFitMode: 2
+  m_FOVAxisMode: 0
+  m_Iso: 200
+  m_ShutterSpeed: 0.005
+  m_Aperture: 16
+  m_FocusDistance: 10
+  m_FocalLength: 50
+  m_BladeCount: 5
+  m_Curvature: {x: 2, y: 11}
+  m_BarrelClipping: 0.25
+  m_Anamorphism: 0
+  m_SensorSize: {x: 36, y: 24}
+  m_LensShift: {x: 0, y: 0}
+  m_NormalizedViewPortRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 60
+  orthographic: 0
+  orthographic size: 5
+  m_Depth: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingPath: -1
+  m_TargetTexture: {fileID: 0}
+  m_TargetDisplay: 0
+  m_TargetEye: 3
+  m_HDR: 1
+  m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
+  m_ForceIntoRT: 0
+  m_OcclusionCulling: 1
+  m_StereoConvergence: 10
+  m_StereoSeparation: 0.022
+--- !u!81 &732386387073429913
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176123747749298254}
+  m_Enabled: 1
+--- !u!114 &1686524648775046348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176123747749298254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 1
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
+--- !u!114 &5074849369378658032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1176123747749298254}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 0
+  sharedProfile: {fileID: 11400000, guid: b7e7a2c4511916e469005586a44a818b, type: 2}
 --- !u!1 &1924452469669308651
 GameObject:
   m_ObjectHideFlags: 0
@@ -147,6 +302,7 @@ Transform:
   - {fileID: 2314806140688752396}
   - {fileID: 6441372068537611094}
   - {fileID: 4291803171486094691}
+  - {fileID: 1594942248337088211}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!143 &8113441467756585794
@@ -472,6 +628,7 @@ MonoBehaviour:
   ground:
     serializedVersion: 2
     m_Bits: 8
+  canMove: 1
   canRun: 1
   isWanted: 0
   movementState: 0
@@ -1074,8 +1231,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4be27f9e757a4d44790e9bcbeb846089, type: 2}
-  m_sharedMaterial: {fileID: -6990041978205760542, guid: 4be27f9e757a4d44790e9bcbeb846089, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1210,8 +1367,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: New Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4be27f9e757a4d44790e9bcbeb846089, type: 2}
-  m_sharedMaterial: {fileID: -6990041978205760542, guid: 4be27f9e757a4d44790e9bcbeb846089, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1488,8 +1645,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: new text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4be27f9e757a4d44790e9bcbeb846089, type: 2}
-  m_sharedMaterial: {fileID: -6990041978205760542, guid: 4be27f9e757a4d44790e9bcbeb846089, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1571,7 +1728,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hourText: {fileID: 7658719776595584811}
   cycleJour: {fileID: 0}
-  flashLight: {fileID: 0}
 --- !u!1 &7487691710137449570
 GameObject:
   m_ObjectHideFlags: 0
@@ -2006,13 +2162,29 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5251450319907661778}
     - target: {fileID: 1802194314157483396, guid: 1b84a0cbe873e9d42a3bdd555f13a072, type: 3}
+      propertyPath: reloadTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1802194314157483396, guid: 1b84a0cbe873e9d42a3bdd555f13a072, type: 3}
       propertyPath: attackDelay
       value: 0.3
       objectReference: {fileID: 0}
     - target: {fileID: 1802194314157483396, guid: 1b84a0cbe873e9d42a3bdd555f13a072, type: 3}
       propertyPath: walkingSpeed
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 1802194314157483396, guid: 1b84a0cbe873e9d42a3bdd555f13a072, type: 3}
+      propertyPath: equipAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2f9e54db459923d428cd7c35d13a6543, type: 3}
+    - target: {fileID: 1802194314157483396, guid: 1b84a0cbe873e9d42a3bdd555f13a072, type: 3}
+      propertyPath: attackAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5a0d13bde5643a7458797eeacded4c4c, type: 3}
+    - target: {fileID: 1802194314157483396, guid: 1b84a0cbe873e9d42a3bdd555f13a072, type: 3}
+      propertyPath: reloadAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: dcd4de3505dca724c8f72aebe179ef90, type: 3}
     - target: {fileID: 2596070845518121659, guid: 1b84a0cbe873e9d42a3bdd555f13a072, type: 3}
       propertyPath: m_Layer
       value: 12
@@ -4362,6 +4534,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 2302407875952376072}
     m_Modifications:
     - target: {fileID: 1875049811766537129, guid: 3498af632195ed34e814538b66ef3ea7, type: 3}
+      propertyPath: hitSound
+      value: 
+      objectReference: {fileID: 8300000, guid: f14f9d2dcf98fad43894e94e3283e8f1, type: 3}
+    - target: {fileID: 1875049811766537129, guid: 3498af632195ed34e814538b66ef3ea7, type: 3}
       propertyPath: attackDelay
       value: 1
       objectReference: {fileID: 0}
@@ -4382,9 +4558,17 @@ PrefabInstance:
       value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 1875049811766537129, guid: 3498af632195ed34e814538b66ef3ea7, type: 3}
+      propertyPath: equipAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2f9e54db459923d428cd7c35d13a6543, type: 3}
+    - target: {fileID: 1875049811766537129, guid: 3498af632195ed34e814538b66ef3ea7, type: 3}
       propertyPath: playerCollider
       value: 
       objectReference: {fileID: 8113441467756585794}
+    - target: {fileID: 1875049811766537129, guid: 3498af632195ed34e814538b66ef3ea7, type: 3}
+      propertyPath: attackAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: e63d7a9a7d5e0e74084545f58731cdde, type: 3}
     - target: {fileID: 1875049811766537129, guid: 3498af632195ed34e814538b66ef3ea7, type: 3}
       propertyPath: enemyLayer.m_Bits
       value: 64
@@ -4497,6 +4681,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8874597135245608186}
     - target: {fileID: 282521498590925979, guid: ef59ca093d524964bbc01c36a7d0b3ca, type: 3}
+      propertyPath: reloadTime
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 282521498590925979, guid: ef59ca093d524964bbc01c36a7d0b3ca, type: 3}
       propertyPath: attackDelay
       value: 0.1
       objectReference: {fileID: 0}
@@ -4508,6 +4696,18 @@ PrefabInstance:
       propertyPath: walkingSpeed
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 282521498590925979, guid: ef59ca093d524964bbc01c36a7d0b3ca, type: 3}
+      propertyPath: equipAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2f9e54db459923d428cd7c35d13a6543, type: 3}
+    - target: {fileID: 282521498590925979, guid: ef59ca093d524964bbc01c36a7d0b3ca, type: 3}
+      propertyPath: attackAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: a0b61539b91c4a74f9dc9dd81d66c72f, type: 3}
+    - target: {fileID: 282521498590925979, guid: ef59ca093d524964bbc01c36a7d0b3ca, type: 3}
+      propertyPath: reloadAudioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 0bea40f3d9e0cb94eb308255167e8415, type: 3}
     - target: {fileID: 836961457537073014, guid: ef59ca093d524964bbc01c36a7d0b3ca, type: 3}
       propertyPath: m_Layer
       value: 12

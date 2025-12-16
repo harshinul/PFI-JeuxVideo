@@ -38,9 +38,4 @@ public class GoToTargetNPC : Node
         base.FinishAction(result);
     }
 
-    public override void Interrupt()
-    {
-        agent.SetDestination(agent.transform.position);
-        base.Interrupt();
-    }
 }

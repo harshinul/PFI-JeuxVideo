@@ -14,6 +14,9 @@ public class RangedAttackBurst : Node
 
     private int bulletsPerBurst = 3;
 
+    AudioClip shootSound;
+    float shootSoundVolume = 1.0f;
+
 
 
     //*******************Not in constructor*****************//
@@ -26,8 +29,10 @@ public class RangedAttackBurst : Node
     private float burstCooldownTimer = 0f;
     private bool isBursting;
 
-    public RangedAttackBurst(GameObject bulletPrefab, GameObject owner, Transform target, Transform firePoint, int bulletPerBurst, Conditions[] conditions, BehaviorTree tree) : base(conditions, tree)
+    public RangedAttackBurst(AudioClip shootSound, float shootSoundVolume, GameObject bulletPrefab, GameObject owner, Transform target, Transform firePoint, int bulletPerBurst, Conditions[] conditions, BehaviorTree tree) : base(conditions, tree)
     {
+        this.shootSound = shootSound;
+        this.shootSoundVolume = shootSoundVolume;
         this.bulletPrefab = bulletPrefab;
         this.owner = owner;
         this.target = target;
@@ -92,7 +97,7 @@ public class RangedAttackBurst : Node
     {
         Vector3 dirToTarget = (target.position - firePoint.position).normalized;
         dirToTarget.y += 0.05f;
-
+        SFXManager.Instance.PlaySFX(shootSound,owner.transform, shootSoundVolume);
         var projectile = ObjectPool.objectPoolInstance.GetPooledObject(bulletPrefab);
         projectile.transform.position = firePoint.position;
         projectile.transform.rotation = Quaternion.LookRotation(dirToTarget);

@@ -30,6 +30,7 @@ public class Pistol : Weapon
         playerAnimationComponent.EquipPistol();
         playerAttackComponent.ammoDisplay.enabled = true;
         playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
+        SFXManager.Instance.PlaySFX(equipAudioClip, transform, equipAudioVolume);
     }
 
     public override void Reload()
@@ -54,9 +55,11 @@ public class Pistol : Weapon
     {
         playerAttackComponent.canReload = false;
         movement.canRun = false;
-        StartCoroutine(playerAttackComponent.reloadUiScript.FillReloadBar(2f));
-
-        yield return new WaitForSeconds(2f);
+        playerAttackComponent.canSwitchWeapon = false;
+        playerAttackComponent.isReloading = true;
+        StartCoroutine(playerAttackComponent.reloadUiScript.FillReloadBar(reloadTime));
+        SFXManager.Instance.PlaySFX(reloadAudioClip, transform, reloadAudioVolume);
+        yield return new WaitForSeconds(reloadTime);
 
         if (ammoBank >= 12) // full reload
         {
@@ -73,6 +76,8 @@ public class Pistol : Weapon
         playerAttackComponent.ammoDisplay.text = ammoInMagazine + " / " + ammoBank;
         playerAttackComponent.canReload = true;
         movement.canRun = true;
+        playerAttackComponent.canSwitchWeapon = true;
+        playerAttackComponent.isReloading = false;
 
     }
 
@@ -80,7 +85,7 @@ public class Pistol : Weapon
     {
         if (ammoInMagazine <= 0)
             return;
-        Debug.Log("Pistol Attack");
+        SFXManager.Instance.PlaySFX(attackAudioClip, transform, attackAudioVolume);
         var projectile = ObjectPool.objectPoolInstance.GetPooledObject(bulletPrefab);
         projectile.transform.position = firePoint.position;
         projectile.transform.rotation = firePoint.rotation;

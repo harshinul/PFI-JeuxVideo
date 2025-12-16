@@ -894,7 +894,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -933,7 +933,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 1066657660462757561, guid: 51b0dde5e7f07824f8d5c7b82d74ee86, type: 3}
+  shootSound: {fileID: 8300000, guid: a0b61539b91c4a74f9dc9dd81d66c72f, type: 3}
+  shootVolume: 0.5
   firePoint: {fileID: 7823315314393941460}
+  fireSound: {fileID: 8300000, guid: a0b61539b91c4a74f9dc9dd81d66c72f, type: 3}
+  fireVolume: 1
 --- !u!114 &7373102273179977884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -965,6 +969,8 @@ MonoBehaviour:
   collectableAmmoPrefab: {fileID: 6370764775388150225, guid: ea99e1f78d567fd43a874e5fceb5fcc2, type: 3}
   chanceToDropMoney: 80
   chanceToDropAmmo: 10
+  deathSound: {fileID: 8300000, guid: 0c04373aadea8f849bfe09c2906fccbd, type: 3}
+  deathVolume: 0
 --- !u!1 &1563820380231188246 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1146787047953256, guid: 1d3e21374171a4335a8a51ecb8bf2d17, type: 3}

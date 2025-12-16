@@ -25,6 +25,7 @@ public class Movement : MonoBehaviour
     PlayerAttackComponent attackComp;
 
     //bool
+    public bool canMove = true;
     bool wantsToRun = false;
     public bool canRun = true;
     public bool isWanted = false;
@@ -166,6 +167,11 @@ public class Movement : MonoBehaviour
 
     public void InputMove(InputAction.CallbackContext context)
     {
+        if (!canMove)
+        {
+            move = Vector2.zero;
+            return;
+        }
         move = context.ReadValue<Vector2>();
     }
 

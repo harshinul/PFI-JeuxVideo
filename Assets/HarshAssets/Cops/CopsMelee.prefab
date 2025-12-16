@@ -898,7 +898,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.32
-  m_Speed: 3.5
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
@@ -938,6 +938,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeObject: {fileID: 5140712735656851505}
   damageAmount: 10
+  meleeHitSound: {fileID: 8300000, guid: 795c1d49e14e1654e89ed9c7ffb1e3f1, type: 3}
+  meleeHitVolume: 1
 --- !u!114 &-6304327833169068842
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -969,6 +971,8 @@ MonoBehaviour:
   collectableAmmoPrefab: {fileID: 6370764775388150225, guid: ea99e1f78d567fd43a874e5fceb5fcc2, type: 3}
   chanceToDropMoney: 80
   chanceToDropAmmo: 10
+  deathSound: {fileID: 8300000, guid: 0c04373aadea8f849bfe09c2906fccbd, type: 3}
+  deathVolume: 0
 --- !u!114 &1905035004986074891
 MonoBehaviour:
   m_ObjectHideFlags: 0

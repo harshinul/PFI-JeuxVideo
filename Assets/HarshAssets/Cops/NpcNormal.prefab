@@ -1066,6 +1066,8 @@ MonoBehaviour:
   collectableAmmoPrefab: {fileID: 6370764775388150225, guid: ea99e1f78d567fd43a874e5fceb5fcc2, type: 3}
   chanceToDropMoney: 20
   chanceToDropAmmo: 0
+  deathSound: {fileID: 8300000, guid: 0c04373aadea8f849bfe09c2906fccbd, type: 3}
+  deathVolume: 0
 --- !u!136 &1681102847876789567
 CapsuleCollider:
   m_ObjectHideFlags: 0

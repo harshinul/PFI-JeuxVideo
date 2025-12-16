@@ -101,6 +101,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ammoPrefab: {fileID: 6370764775388150225}
+  pickupSound: {fileID: 8300000, guid: dcd4de3505dca724c8f72aebe179ef90, type: 3}
+  pickupVolume: 1
 --- !u!65 &2909518273267693009
 BoxCollider:
   m_ObjectHideFlags: 0
