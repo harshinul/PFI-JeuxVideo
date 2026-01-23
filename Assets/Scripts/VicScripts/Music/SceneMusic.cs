@@ -8,6 +8,7 @@ public class SceneMusic : MonoBehaviour
     [SerializeField] private AudioClip casualCopMusic;
     [SerializeField] private float fadeDuration = 1.5f;
     [SerializeField] private float volume;
+    [SerializeField] private float tenseVolume;
 
     bool doOnceMusicPistol = true;
     bool doOnceMusicRifle = true;
@@ -33,7 +34,7 @@ public class SceneMusic : MonoBehaviour
         {
             if (doOnceMusicRifle)
             {
-                ScriptMusic.Instance.PlayMusic(volume, tenseMusic, fadeDuration);
+                ScriptMusic.Instance.PlayMusic(tenseVolume, tenseMusic, fadeDuration);
                 doOnceMusicRifle = false;
             }
         }
