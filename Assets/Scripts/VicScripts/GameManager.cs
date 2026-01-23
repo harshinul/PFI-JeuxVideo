@@ -52,16 +52,22 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < 20; i++)
         {
             GameObject npcInstance = ObjectPool.objectPoolInstance.GetPooledObject(npc);
-            npcInstance.SetActive(true);
-            npcInstance.transform.position = GenerateRandomPos();
+            if(npcInstance != null)
+            {
+                npcInstance.SetActive(true);
+                npcInstance.transform.position = GenerateRandomPos();
+            }
             Debug.Log(npcInstance.transform.position);
         }
 
         for(int i = 0; i < 3; i++)
         {
             GameObject mallCopInstance = ObjectPool.objectPoolInstance.GetPooledObject(mallCop);
-            mallCopInstance.SetActive(true);
-            mallCopInstance.transform.position = GenerateRandomPos();
+            if(mallCopInstance != null)
+            {
+                mallCopInstance.SetActive(true);
+                mallCopInstance.transform.position = GenerateRandomPos();
+            }
         }
     }
 
@@ -140,8 +146,11 @@ public class GameManager : MonoBehaviour
                 for(int i = 0; i < 1; i++)
                 {
                     GameObject copsMeleeInstance = ObjectPool.objectPoolInstance.GetPooledObject(meleeCop);
-                    copsMeleeInstance.SetActive(true);
-                    copsMeleeInstance.transform.position = GenerateRandomPos();
+                    if(copsMeleeInstance != null)
+                    {
+                        copsMeleeInstance.SetActive(true);
+                        copsMeleeInstance.transform.position = GenerateRandomPos();
+                    }
                 }
             }
             if (wastedCount >= 75)
@@ -149,8 +158,11 @@ public class GameManager : MonoBehaviour
                 for (int i = 0; i < 3; i++)
                 {
                     GameObject copsPistolInstance = ObjectPool.objectPoolInstance.GetPooledObject(pistolCop);
-                    copsPistolInstance.SetActive(true);
-                    copsPistolInstance.transform.position = GenerateRandomPos();
+                    if(copsPistolInstance != null)
+                    {
+                        copsPistolInstance.SetActive(true);
+                        copsPistolInstance.transform.position = GenerateRandomPos();
+                    }
                 }
             }
             if (wastedCount >= 150)
@@ -158,8 +170,11 @@ public class GameManager : MonoBehaviour
                 for (int i = 0; i < 1; i++)
                 {
                     GameObject copsRifleInstance = ObjectPool.objectPoolInstance.GetPooledObject(rifleCop);
-                    copsRifleInstance.SetActive(true);
-                    copsRifleInstance.transform.position = GenerateRandomPos();
+                    if(copsRifleInstance != null)
+                    {
+                        copsRifleInstance.SetActive(true);
+                        copsRifleInstance.transform.position = GenerateRandomPos();
+                    }
                 }
             }
 
